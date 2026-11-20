@@ -4,6 +4,10 @@
 
 CIDcoder-B continúa el proyecto **CIDcoder-A** para la **CID 201-B**. Conserva el editor y el lenguaje LEAL, pero compila a **LEN-B** y ejecuta sobre la memoria de **8 campos**, el direccionamiento de 15 bits y el teletipo de papel **Ricoh 3000**. No hay instalación ni dependencias: se abre en el navegador.
 
+<p align="center"><img width="1280" src="https://raw.githubusercontent.com/maikelsz/CIDcoder-B/main/CIDcoder-B.png" /></p>
+
+
+
 ## Estado actual (0.1.5)
 
 | Área | Estado |
