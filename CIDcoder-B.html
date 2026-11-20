@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CIDcoder-B (0.1.5)</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CIDcoder-B (0.1.7)</title>
 <style>
 :root{--bg:#0d1117;--panel:#171d24;--border:#2c3946;--text:#d7e6d7;--green:#58d878;--amber:#ffb64d;--lg:#e9ffe9;--lw:#fff;--kw:#00469F;--num:#4C4CC8;--cm:#007000;--er:#ff5c5c;--bt:#43505c;--bb:#212a33;--mn:Consolas,"Cascadia Mono","Courier New",monospace;--lh:20px;--tb:#d9cfb8}
 *{box-sizing:border-box}
@@ -20,14 +20,14 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
 .spacer{flex:1}
 .mode-badge{min-width:120px;text-align:center;padding:6px 10px;background:#0d1a24;border:1px solid var(--border);border-radius:4px;color:#b8d0e8;font-size:11px;font-weight:700;white-space:nowrap}
 .mode-badge.leal{color:#ffd8a8;background:#1a0e05;border-color:#5c3a10}
-#main{flex:1;display:grid;grid-template-columns:minmax(0,1.07fr) minmax(0,1.07fr) minmax(0,0.31fr);gap:8px;padding:8px;min-height:0}
+#main{flex:1;display:grid;grid-template-columns:minmax(0,1.07fr) minmax(0,1.07fr) minmax(0,0.45fr);gap:8px;padding:8px;min-height:0}
 #main.mode-leal{grid-template-columns:minmax(0,1.25fr) minmax(0,0.86fr) minmax(0,0.81fr) minmax(0,0.53fr)}
     #main.show-about.mode-leal {
-        grid-template-columns: minmax(0,1.25fr) minmax(0,0.86fr) minmax(0,0.81fr) minmax(0,0.95fr)
+        grid-template-columns: minmax(0,1.25fr) minmax(0,0.86fr) minmax(0,0.95fr)
     }
 
     #main.show-about:not(.mode-leal) {
-        grid-template-columns: minmax(0,1fr) minmax(0,1fr) minmax(0,0.65fr)
+        grid-template-columns: minmax(0,1fr) minmax(0,0.95fr)
     }
 .pane{min-width:0;min-height:0;display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--border);border-radius:8px;box-shadow:0 4px 14px rgba(0,0,0,.35);overflow:hidden}
 .pane-header{height:34px;min-height:34px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;background:linear-gradient(180deg,#202933,#151b22);border-bottom:1px solid var(--border);color:var(--green);font-weight:700;letter-spacing:.4px}
@@ -146,7 +146,7 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
 #tapeStrip{width:max-content;margin:0 auto;padding:12px 10px;background:var(--tb);border:1px solid #6c6252;border-radius:4px;box-shadow:inset 0 0 18px rgba(0,0,0,.18),0 3px 10px rgba(0,0,0,.35)}
 .tape-inside-info{color:#000;background:transparent;border:0;margin:0 0 6px 0;padding:0 2px;font-size:12px;line-height:16px;white-space:pre;font-weight:bold}
 .tape-separator{border-top:2px solid #000;margin:0 0 4px 0}
-.tape-row{display:grid;grid-template-columns:16px 16px 12px 16px 16px 16px;align-items:center;height:14px}
+.tape-row{display:grid;grid-template-columns:16px 16px 16px 16px 12px 16px 16px 16px 16px;align-items:center;height:14px}
 .hole{display:block;border-radius:50%;margin:0 auto}
 .hole.on{width:10px;height:10px;background:#181818}
 .hole.off{width:10px;height:10px;background:var(--tb);border:none}
@@ -167,6 +167,7 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
         display: none
     }
 
+
     #main.show-about #aboutPane {
         display: flex
     }
@@ -178,6 +179,7 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
     #main.show-about #tapePane {
         display: none
     }
+
 .helpBody{flex:1;min-height:0;overflow:auto;padding:14px 16px;background:#0e131a;color:#cfe6d6;font-size:13px;line-height:1.55}
 .helpBody h2{margin:0 0 10px 0;color:var(--amber);font-size:19px;border-bottom:1px solid var(--border);padding-bottom:4px}
 .helpBody h3{margin:18px 0 6px 0;color:var(--green);font-size:15px;border-bottom:1px solid var(--border);padding-bottom:2px}
@@ -349,7 +351,7 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
         color: #ffd8a8;
     }
 
-.run-regs{display:flex;gap:12px;align-items:center;padding:5px 10px;background:#0d141a;border-bottom:1px solid var(--border);font-size:13px;color:#b8d0e8;flex-wrap:wrap;min-height:28px}
+.run-regs{display:flex;gap:12px;align-items:center;padding:5px 10px;background:#0d141a;border-bottom:1px solid var(--border);font-size:13px;color:#b8d0e8;flex-wrap:wrap;flex:0 0 auto;min-height:28px}
 .run-regs .reg-field{display:inline-flex;gap:5px;align-items:center}
 .run-regs .reg-field .lbl{color:#8fd0ff;font-weight:700}
 .run-regs .reg-field .val{color:#e9ffe9;font-weight:700;font-family:var(--mn)}
@@ -367,11 +369,6 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
         font-size: 11px;
         letter-spacing: .5px
     }
-
-        .run-regs .tt-mode-badge.figs {
-            background: #4a3060;
-            color: #d8b0ff
-        }
 
     .run-regs .kbd-badge {
         margin-left: auto;
@@ -618,8 +615,8 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
         <div id="toolbar">
             <div class="brand" id="brandLabel">CIDcoder-B</div>
             <div class="tb-btns">
-                <button id="btnNewLen" title="Nuevo programa LEN-B">📄 New LEN</button>
-                <button id="btnNewLeal" title="Nuevo programa LEAL">📄 New LEAL</button>
+                <button id="btnNewLen" title="Nuevo programa LEN-B">📄 LEN</button>
+                <button id="btnNewLeal" title="Nuevo programa LEAL">📄 LEAL</button>
                 <button id="btnLoad" title="Cargar archivo (Ctrl+O)">📂 Load</button>
                 <button id="btnSave" title="Guardar (Ctrl+S)">💾 Save</button>
                 <button id="btnSaveAs" title="Guardar como (Ctrl+Shift+S)">💾 Save as</button>
@@ -634,7 +631,7 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
                 <span class="tb-div"></span>
                 <button id="btnToggleLst" class="toggle active" aria-pressed="true" title="Mostrar/ocultar listado LST">☰ LST</button>
                 <button id="btnToggleExec" class="toggle" aria-pressed="false" title="Mostrar/ocultar ejecutor">⚡ Exec</button>
-                <button id="btnToggleTape" class="toggle active" aria-pressed="true" title="Mostrar/ocultar cinta perforada">🎞 Tape</button>
+                <button id="btnToggleTape" class="toggle active" aria-pressed="true" title="Mostrar/ocultar cinta perforada de 8 canales">🎞 Tape</button>
                 <span class="tb-div"></span>
                 <button id="btnHelp" class="toggle" aria-pressed="false" title="Ayuda del lenguaje">Help</button>
                 <button id="btnAbout" class="toggle" aria-pressed="false" title="Acerca de CIDcoder-B">About…</button>
@@ -670,7 +667,7 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
                 <div class="statusbar"><div class="status-left" id="compileStatus">0 palabras</div><div class="status-right"><button id="btnSaveLst" disabled>Save .lstb</button></div></div>
             </section>
             <section class="pane" id="tapePane">
-                <div class="pane-header"><span id="tapeTitle">Cinta perforada</span><span class="file-name" id="ribFileName" style="display:none"></span></div>
+                <div class="pane-header"><span id="tapeTitle">Cinta perforada · 8 canales</span><span class="file-name" id="ribFileName" style="display:none"></span></div>
                 <div id="tapeArea"><div id="tapeStrip"></div></div>
                 <div class="statusbar"><div class="status-left" id="tapeStatus">0 caracteres · ~0.0 cm</div><div class="status-right"><button id="btnSaveRib" disabled>Save .rib</button></div></div>
             </section>
@@ -696,8 +693,8 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
                     <span class="reg-field" id="runFieldWrap" style="display:none" title="Campo de instrucción / campo de datos (RCI/RCD)"><span class="lbl">CAMPO:</span><span class="val" id="runFIELD">0/0</span></span>
                     <span class="sep"></span>
                     <span class="cycle-badge" id="runCycle">—</span>
-                    <span class="kbd-badge" id="runKBD" title="Teclado del teletipo: activo o inactivo">KBD:INAC</span>
-                    <span class="tt-mode-badge" id="runTTMode" title="Modo del teletipo: LTRS/FIGS en la 201-A; Ricoh 3000 siempre en modo computadora en la 201-B">LTRS</span>
+                    <span class="kbd-badge" id="runKBD" title="Papel del Ricoh 3000: recibe el foco del teclado">PAPEL:INAC</span>
+                    <span class="tt-mode-badge" id="runTTMode" title="Ricoh 3000: siempre en modo computadora en la CID 201-B">R3000</span>
                 </div>
                 <div class="run-regs run-regs-rt" id="runRegsRt" style="display:none">
                     <span class="reg-field compact"><span class="lbl">PARM:</span><span class="val" id="runPARM">0000</span></span>
@@ -844,7 +841,7 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
             return out;
         }
 
-        /* ═══ HELPERS DE STRINGS EN LEN-1 ═══ */
+        /* ═══ HELPERS DE STRINGS EN LEN-B ═══ */
         let _stringWarnings = [];
 
         function encodeStringWithWarnings(text) {
@@ -972,7 +969,7 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
             return { text: out2.join("\n"), removed, combined }
         }
 
-        /* ═══ ENSAMBLADOR LEN-1 ═══ */
+        /* ═══ ENSAMBLADOR LEN-B ═══ */
         function isInstrStarter(t) { const u = String(t).toUpperCase(); return OP_ST.has(u) || ROT_RE.test(u) }
         function looksNum(t) { const s = String(t).trim().replace(/,$/, ""); return /^[+\-]?(0[odxODX]?|[0-9])/.test(s) }
         function parseRaw(t, l = 0, c = "número") { let s = String(t).trim().replace(/,$/, ""); if (!s) throw new Len1Error(`${c} vacío`, l, t); let neg = false; if (s[0] === "-" || s[0] === "+") { neg = s[0] === "-"; s = s.slice(1) } if (!s) throw new Len1Error(`${c} vacío tras signo`, l, t); const up = s.toUpperCase(); let body = s, base = 8; if (up.startsWith("0D")) { body = s.slice(2); base = 10; if (!/^\d+$/.test(body)) throw new Len1Error(`${c} decimal ilegal: ${t}`, l, t) } else if (up.startsWith("0X")) { body = s.slice(2); base = 16; if (!/^[0-9A-Fa-f]+$/.test(body)) throw new Len1Error(`${c} hex ilegal: ${t}`, l, t) } else if (up.startsWith("0O")) { body = s.slice(2); base = 8; if (!/^[0-7]+$/.test(body)) throw new Len1Error(`${c} octal ilegal: ${t}`, l, t) } else { body = s; base = 8; if (!/^[0-7]+$/.test(body)) throw new Len1Error(`${c} octal inválido: ${t}`, l, t) } const v = parseInt(body, base); if (!Number.isFinite(v)) throw new Len1Error(`${c} ilegal: ${t}`, l, t); return neg ? -v : v }
@@ -1014,496 +1011,14 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
             return { label: null, rest: s, ok: true, reason: null, token: null };
         }
 
-        function microGrp(n) { if (G0.has(n)) return 0; if (G1.has(n)) return 1; if (G2.has(n)) return 2; if (G3.has(n)) return 3; return -1 }
-        function ioSub(n) { return (MICRO[n] >> 6) & 7 }
-        function valG2(names, l) { const s = new Set(names); const uo = [...s].filter(n => SALTOS_OR.has(n)); const ua = [...s].filter(n => SALTOS_AND.has(n)); if (uo.length && ua.length) throw new Len1Error("no mezclar OR y AND", l); if (s.has("SLT") && (uo.length || ua.length || s.has("ALT") || s.has("ORI"))) throw new Len1Error("SLT no se combina", l, "SLT"); if (s.has("ORI") && (ua.length || s.has("ALT") || s.has("SLT"))) throw new Len1Error("ORI solo con OR", l, "ORI"); if (s.has("ALT") && (s.has("ORI") || s.has("SLT"))) throw new Len1Error("ALT no con ORI ni SLT", l, "ALT") }
-        function valMicro(names, l) { if (!names.length) return; const s = new Set(names); for (const n of s) if (!(n in MICRO)) throw new Len1Error(`micro desconocida: ${n}`, l, n); const gs = new Set([...s].map(microGrp)); if (gs.size === 1) { const g = [...gs][0]; if (g === 1 && [...s].filter(n => G1.has(n)).length > 1) throw new Len1Error("no combinar rotaciones", l); if (g === 2) valG2([...s], l); if (g === 3) { const sb = new Set([...s].map(ioSub)); if (sb.size > 1) throw new Len1Error("no combinar E/S de periféricos distintos", l) } return } if (gs.size === 2) { if (gs.has(0) && gs.has(1)) { const g0 = [...s].filter(n => G0.has(n)); const g1 = [...s].filter(n => G1.has(n)); if (g1.length !== 1 || g0.some(n => n !== "LEN")) throw new Len1Error("sólo LEN con rotación", l); const rot = g1[0]; if ((MICRO[rot] & MICRO.LEN) !== MICRO.LEN) throw new Len1Error(`rotación incompatible con LEN: ${rot}`, l, rot); return } if (gs.has(0) && gs.has(2)) { const g0 = [...s].filter(n => G0.has(n)); const g2 = [...s].filter(n => G2.has(n)); if (g0.some(n => n !== "LAC")) throw new Len1Error("sólo LAC con saltos", l); valG2(g2, l); return } } throw new Len1Error("no combinar grupos distintos", l) }
         function resolveOp(t, labels, l = 0) { const s = String(t).trim().replace(/,$/, ""); const m = /^([A-Za-z_][A-Za-z0-9_]*)\s*([+\-])\s*(0[odxODX][0-9A-Fa-f]+|[0-9]+)$/.exec(s); if (m) { const name = m[1].toUpperCase(); if (!(name in labels)) throw new Len1Error(`etiqueta no definida: ${m[1]}`, l, t); const base = labels[name]; const sg = m[2] === "-" ? -1 : 1; const nt = m[3]; const up = nt.toUpperCase(); let off; if (up.startsWith("0D")) off = parseInt(nt.slice(2), 10); else if (up.startsWith("0X")) off = parseInt(nt.slice(2), 16); else if (up.startsWith("0O")) off = parseInt(nt.slice(2), 8); else off = parseInt(nt, 10); const val = base + sg * off; if (val < 0 || val > WORD) throw new Len1Error(`dirección fuera de 12 bits: ${t}`, l, t); return val } const up = s.toUpperCase(); if (up in labels) return labels[up]; return null }
 
-        /* parseLine usa _splitLineComment y detecta strings */
-        function parseLine(raw, l) {
-            const [rawCode, cm] = _splitLineComment(raw);
-            const s = rawCode.trim();
-            if (!s) return { label: null, tokens: [], comment: cm };
-            const syn = splitLabel(s);
-            if (!syn.ok) {
-                if (syn.reason === "reserved-label") throw new Len1Error(`etiqueta no puede coincidir con palabra clave: ${syn.token}`, l, syn.token);
-                throw new Len1Error("etiqueta inválida o falta coma", l, syn.token || s);
-            }
-            const label = syn.label;
-            const rest = syn.rest;
-            if (!rest) return { label, tokens: [], comment: cm };
-            if (rest === "$") return { label, tokens: ["$"], comment: cm };
-            /* string */
-            if (rest[0] === '"' || rest[0] === "'") {
-                const q = rest[0];
-                const end = rest.indexOf(q, 1);
-                if (end < 0) throw new Len1Error("cadena sin cerrar: falta " + q, l, rest);
-                const inner = rest.slice(1, end);
-                const after = rest.slice(end + 1).trim();
-                if (after) throw new Len1Error("la cadena debe ser el único dato de la línea", l, rest);
-                return { label, tokens: [{ isStr: true, packed: q === "'", text: inner }], comment: cm };
-            }
-            if (rest.startsWith("*")) {
-                const o = rest.slice(1).replace(/,/g, " ").trim();
-                const ts = o.split(/\s+/).filter(Boolean);
-                if (ts.length !== 1) throw new Len1Error("directiva de origen inválida", l, rest);
-                return { label, tokens: ["*" + ts[0]], comment: cm };
-            }
-            const tokens = tok(rest);
-            if (!tokens.length) return { label, tokens: [], comment: cm };
-            const first = tokens[0].toUpperCase();
-            if (OP_ST.has(first)) return { label, tokens, comment: cm };
-            if (!label && tokens.length >= 2 && LABEL_RE.test(tokens[0]) && OP_ST.has(tokens[1].toUpperCase())) throw new Len1Error("falta coma tras etiqueta", l, tokens[0]);
-            if (ROT_RE.test(first)) throw new Len1Error(`rotación inválida: ${tokens[0]}`, l, tokens[0]);
-            if (tokens.every(isWordOp)) return { label, tokens, comment: cm };
-            throw new Len1Error("no se puede ensamblar", l, tokens[0]);
-        }
-
-        function parseMicro(tokens, l) { const names = []; for (const t of tokens) { const up = t.toUpperCase(); if (up in MICRO) { names.push(up); continue } if (up === "RD" || up === "RI") throw new Len1Error("rotaciones sin espacio", l, t); if (ROT_RE.test(up)) throw new Len1Error(`rotación inválida: ${t}`, l, t); return null } return names }
-
-        /* classify reconoce STRING */
-        function classify(tokens, l) {
-            if (!tokens.length) return { kind: "LABEL", data: [] };
-            if (tokens.some(t => t && t.isStr)) {
-                if (tokens.length !== 1) throw new Len1Error("la cadena debe ser el único dato de la línea", l, "");
-                return { kind: "STRING", data: tokens };
-            }
-            const first = tokens[0].toUpperCase();
-            if (first in IRM) return { kind: "IRM", data: tokens };
-            if (first in MICRO || ROT_RE.test(first)) { const n = parseMicro(tokens, l); if (n !== null) { valMicro(n, l); return { kind: "MICRO", data: n } } throw new Len1Error("secuencia inválida", l, tokens[0]) }
-            if (ROT_RE.test(first)) throw new Len1Error(`rotación inválida: ${tokens[0]}`, l, tokens[0]);
-            if (tokens.every(isWordOp)) return { kind: "WORDS", data: tokens };
-            throw new Len1Error("no se puede ensamblar", l, tokens[0])
-        }
-
-        /* firstPass resetea _stringWarnings y maneja STRING */
-        function firstPass(lines) {
-            _stringWarnings = [];
-            const entries = []; const labels = Object.create(null); let pc = 0;
-            function addL(name, addr, l) { const up = name.toUpperCase(); if (isInstrStarter(up)) throw new Len1Error(`etiqueta no puede ser palabra clave: ${name}`, l, name); if (up in labels) throw new Len1Error(`etiqueta duplicada: ${name}`, l, name); labels[up] = addr }
-            for (let i = 0; i < lines.length; i++) {
-                const ln = i + 1; const { label, tokens, comment } = parseLine(lines[i], ln);
-                if (label === null && tokens.length === 0) continue;
-                if (tokens.length && tokens[0] === "$") { if (label) { if (pc > WORD) throw new Len1Error("fuera de 12 bits", ln); addL(label, pc, ln) } entries.push({ kind: "END", data: [], pc, comment, line: ln, label: label || null }); break }
-                if (tokens.length && typeof tokens[0] === "string" && tokens[0].startsWith("*")) { const ot = tokens[0].slice(1); let np; try { np = parseAddr(ot, ln) } catch{ throw new Len1Error(`origen ilegal: ${ot}`, ln, tokens[0]) } if (label) addL(label, np, ln); entries.push({ kind: "ORG", data: [np], pc: np, comment, line: ln, label: label || null }); pc = np; continue }
-                if (label) { if (pc > WORD) throw new Len1Error("fuera de 12 bits", ln); addL(label, pc, ln) }
-                if (!tokens.length) { entries.push({ kind: "LABEL", data: [], pc, comment, line: ln, label: label || null }); continue }
-                const { kind, data } = classify(tokens, ln);
-                if (kind === "IRM" || kind === "MICRO") { if (pc > WORD) throw new Len1Error("fuera de 12 bits", ln); entries.push({ kind, data, pc, comment, line: ln, label: label || null }); pc += 1 }
-                else if (kind === "WORDS") { if (pc + data.length - 1 > WORD) throw new Len1Error("datos fuera de 12 bits", ln); entries.push({ kind, data, pc, comment, line: ln, label: label || null }); pc += data.length }
-                else if (kind === "STRING") {
-                    const strTok = data[0];
-                    const { words, chars, warnings } = expandStringToWords(strTok.text, strTok.packed);
-                    for (const w of warnings) _stringWarnings.push({ line: ln, message: w });
-                    if (pc + words.length - 1 > WORD) throw new Len1Error("la cadena supera la memoria de 12 bits", ln);
-                    entries.push({ kind: "STRING", data, pc, comment, line: ln, label: label || null, words, chars });
-                    pc += words.length;
-                }
-                else { entries.push({ kind: "LABEL", data: [], pc, comment, line: ln, label: label || null }) }
-            }
-            return { entries, labels }
-        }
-
-        function resolveWord(t, labels, l, src) { if (isInstrStarter(t)) throw new Len1Error(`datos no pueden usar palabra clave: ${t}`, l, t); const r = resolveOp(t, labels, l); if (r !== null) return r & WORD; if (looksNum(t)) return parseNum(t, l); throw new Len1Error(`palabra de datos no reconocida: ${t}`, l, t) }
-        function encodeIRM(tokens, pc, labels, l, src) { const mn = tokens[0].toUpperCase(); const op = IRM[mn]; let args = tokens.slice(1); let ind = false; if (args.length > 1 && ["I", "@"].includes(args[0].toUpperCase())) { ind = true; args = args.slice(1) } else if (args.length && args[0].startsWith("@")) { ind = true; args = [args[0].slice(1)].concat(args.slice(1)) } if (!args.length) throw new Len1Error(`falta operando en: ${src}`, l, tokens[0]); if (args.length > 1) throw new Len1Error(`operandos extra en: ${src}`, l, args[1]); let t = args[0]; if (!t) throw new Len1Error("falta operando tras indirección", l, tokens[0]); const up = t.toUpperCase(); const supRel = mn === "VEA" || mn === "VAS"; const isSg = /^[+-]/.test(t) && looksNum(t); if (ind && isSg) throw new Len1Error("indirección no se combina con relativo", l, t); let addr; if (supRel && isSg) { const off = parseSigned(t, l); const tgt = pc + off; if (tgt < 0 || tgt > WORD) throw new Len1Error(`salto relativo fuera de memoria: ${t}`, l, t); addr = tgt } else if (isInstrStarter(t)) { throw new Len1Error(`operando no puede ser palabra clave: ${t}`, l, t) } else { const r = resolveOp(t, labels, l); if (r !== null) addr = r; else if (looksNum(t)) addr = parseAddr(t, l); else throw new Len1Error(`etiqueta o dirección no reconocida: ${t}`, l, t) } if (addr & ~WORD) throw new Len1Error("dirección fuera de 12 bits", l, t); let pgC, rel; if ((addr & PAGE_MASK) === (pc & PAGE_MASK)) { pgC = true; rel = addr & 0o177 } else if (addr < PAGE_SIZE) { pgC = false; rel = addr } else throw new Len1Error(`dirección fuera de alcance directo desde PC=${oct(pc)}: ${t} → ${oct(addr)}`, l, t); const hi = (rel & HIGH) ? 1 : 0; const md = (ind ? 4 : 0) + (pgC ? 2 : 0) + hi; const lo = rel & LOW6; return ((op << 9) | (md << 6) | lo) & WORD }
-        function fmtIrmMn(tokens, labels, pc = 0) { const parts = []; const mn = tokens[0].toUpperCase(); const supRel = mn === "VEA" || mn === "VAS"; const hasInd = tokens.slice(1).some(t => { const u = t.toUpperCase(); return u === "I" || t.startsWith("@") }); tokens.forEach((t, i) => { if (i === 0) { parts.push(t.toUpperCase()); return } const up = t.toUpperCase(); if (up === "I" || up === "@") { parts.push(up); return } if (t.startsWith("@")) { const inn = t.slice(1); const iu = inn.toUpperCase(); if (iu in labels) parts.push(`@${inn} [${oct(labels[iu])}]`); else if (looksNum(inn)) { try { parts.push(`@${oct(parseAddr(inn))}`) } catch{ parts.push(t) } } else parts.push(t); return } if (supRel && !hasInd && /^[+-]/.test(t) && looksNum(t)) { try { const off = parseSigned(t); const tg = pc + off; if (tg >= 0 && tg <= WORD) parts.push(`${t} [${oct(tg)}]`); else parts.push(t) } catch{ parts.push(t) } return } if (isInstrStarter(t)) { parts.push(t.toUpperCase()); return } try { const r = resolveOp(t, labels); if (r !== null) { parts.push(`${t} [${oct(r)}]`); return } } catch{ } if (looksNum(t)) { try { parts.push(oct(parseAddr(t))) } catch{ parts.push(oct(parseNum(t))) } return } parts.push(t) }); return parts.join(" ") }
         function fmtList(pc, code, mn, cm) { let l = `${oct(pc)}, ${oct(code)}, ${mn}`; if (cm) l += `, ${cm}`; return l }
 
-        /* compileLen1 emite STRING */
 
-        function _dedupeKConstants(entries, labels) {
-            // Las constantes K_* son valores puros: dos etiquetas con el mismo valor
-            // resuelto comparten una sola celda. Se reescriben las referencias y se
-            // reasigna el layout antes del análisis de punteros (nunca después: mover
-            // palabras puede cambiar la página de un puntero y romper su alcance).
-            const KRE = /^K_[A-Z0-9_]+$/i;
-            const groups = new Map(), order = new Map();
-            entries.forEach((e, i) => {
-                if (e.kind !== "WORDS" || !e.label || !KRE.test(e.label) || e.data.length !== 1) return;
-                const tok = String(e.data[0] || "").trim();
-                let val;
-                try {
-                    const up = tok.toUpperCase();
-                    if (up in labels) val = labels[up] & WORD;
-                    else if (looksNum(tok)) val = parseNum(tok, e.line) & WORD;
-                    else return;
-                } catch { return; }
-                if (!groups.has(val)) groups.set(val, []);
-                if (!order.has(e.label.toUpperCase())) order.set(e.label.toUpperCase(), i);
-                groups.get(val).push(e.label.toUpperCase());
-            });
-            const alias = new Map();
-            for (const list of groups.values()) {
-                if (list.length < 2) continue;
-                list.sort((a, b) => order.get(a) - order.get(b));
-                for (let i = 1; i < list.length; i++) alias.set(list[i], list[0]);
-            }
-            if (alias.size === 0) return { entries, labels, removed: 0 };
-            const rewrite = (tok) => {
-                if (typeof tok !== "string") return tok;
-                const m = /^([A-Za-z_][A-Za-z0-9_]*)(.*)$/.exec(tok.trim());
-                if (!m) return tok;
-                const up = m[1].toUpperCase();
-                return alias.has(up) ? alias.get(up) + m[2] : tok;
-            };
-            const out = [];
-            for (const e of entries) {
-                if (e.kind === "WORDS" && e.label && alias.has(e.label.toUpperCase())) continue;
-                if ((e.kind === "IRM" || e.kind === "WORDS") && Array.isArray(e.data)) out.push(Object.assign({}, e, { data: e.data.map(rewrite) }));
-                else out.push(Object.assign({}, e));
-            }
-            let pc = 0;
-            const outLabels = Object.create(null);
-            for (const e of out) {
-                if (e.kind === "END") { e.pc = pc; break; }
-                else if (e.kind === "ORG") { pc = e.data[0]; e.pc = pc; }
-                else if (e.kind === "LABEL") { e.pc = pc; }
-                else if (e.kind === "WORDS") { e.pc = pc; pc += e.data.length; }
-                else if (e.kind === "STRING") { e.pc = pc; pc += e.words.length; }
-                else { e.pc = pc; pc += 1; }
-                if (e.label) outLabels[e.label.toUpperCase()] = e.pc;
-            }
-            return { entries: out, labels: outLabels, removed: alias.size };
-        }
-
-        function _optimizeJptrVEAs(entries, labels) {
-            // Optimización de punteros: (1) VEA en-página → directo por uso; (2) purga de punteros sin uso;
-            // (3) punteros al mismo destino comparten palabra; (4) puntero usado desde una sola página
-            // se reubica al hueco al final de esa página (solo en frontera de sección: nunca en medio
-            // del flujo de código). El listado resultante se revalida; si algo falla se conserva el original.
-            const _kded = _dedupeKConstants(entries, labels);
-            entries = _kded.entries; labels = _kded.labels;
-            const kDeduped = _kded.removed;
-            const JP = /^JPTR_\d+$/i;
-            const PTR = /^PTR_RT_[A-Z0-9_]+$/i;
-            const isPtr = s => JP.test(s) || PTR.test(s);
-            const jptrEntries = new Map(); const jptrOrder = new Map();
-            entries.forEach((e, i) => { if (e.kind === "WORDS" && e.label && isPtr(e.label)) { jptrEntries.set(e.label.toUpperCase(), e); jptrOrder.set(e.label.toUpperCase(), i); } });
-            const wordsOf = e => e.kind === "WORDS" ? e.data.length : (e.kind === "STRING" ? e.words.length : (e.kind === "ORG" || e.kind === "LABEL" || e.kind === "END" ? 0 : 1));
-            const page0End = list => { let m = 0; for (const e of list) { const w = wordsOf(e); if (w > 0 && e.pc < 0o200) m = Math.max(m, e.pc + w); } return m; };
-            if (jptrEntries.size === 0) return { entries, labels, optimized: 0, orphansRemoved: 0, zeroUseRemoved: 0, deduped: 0, relocated: 0, keptPage0: 0, totalPtrs: 0, p0Used: page0End(entries), ptrOutPage0: 0, kDeduped };
-            const totalPtrs = jptrEntries.size;
-
-            // 1) usos indirectos: cualquier IRM con operando "I PTR" (VEA I, VAS I, SUM I, …) = liveness completo.
-            //    Sólo VEA/VAS admiten conversión directa si el destino está en la misma página.
-            const uses = [];
-            for (const e of entries) {
-                if (e.kind !== "IRM" || !e.data || e.data.length < 3 || String(e.data[1]).toUpperCase() !== "I") continue;
-                const jp = String(e.data[2]).toUpperCase();
-                if (!jptrEntries.has(jp)) continue;
-                const op = String(e.data[0]).toUpperCase();
-                const ta = labels[String(jptrEntries.get(jp).data[0]).toUpperCase()];
-                const samePage = ta !== undefined && (e.pc >> 7) === (ta >> 7);
-                uses.push({ e, jp, op, directable: (op === "VEA" || op === "VAS") && samePage });
-            }
-            const remOf = jp => uses.filter(u => { if (u.directable) return false; return (redirect.get(u.jp) || u.jp) === jp; });
-
-            // 2) dedupe: punteros con el mismo destino comparten palabra (los usos se redirigen)
-            const byTarget = new Map();
-            for (const [jp, e] of jptrEntries) { const t = String(e.data[0] || "").trim().toUpperCase(); if (!t) continue; if (!byTarget.has(t)) byTarget.set(t, []); byTarget.get(t).push(jp); }
-            const redirect = new Map();
-            for (const lst of byTarget.values()) {
-                if (lst.length < 2) continue;
-                const alive = lst.map(j => ({ j, n: uses.filter(u => { if (u.directable) return false; return u.jp === j; }).length })).filter(x => x.n > 0);
-                if (alive.length < 2) continue;
-                alive.sort((a, b) => (b.n - a.n) || (jptrOrder.get(a.j) - jptrOrder.get(b.j)));
-                for (let k = 1; k < alive.length; k++) redirect.set(alive[k].j, alive[0].j);
-            }
-
-            // 3) destino: purgar lo no usado · page 0 · reubicar al hueco al final de la página de uso
-            const pageLast = new Map();
-            for (let i = 0; i < entries.length; i++) { const e = entries[i], w = wordsOf(e); if (w > 0) { const end = e.pc + w, p = e.pc >> 7, ps = pageLast.get(p); if (!ps || end > ps.end) pageLast.set(p, { idx: i, end }); } }
-            const deleted = new Set(); const kept0 = new Set(); const reloPlan = new Map(); const anchorUsed = new Map();
-            for (const jp of jptrEntries.keys()) {
-                const rem = remOf(jp);
-                if (rem.length === 0) { deleted.add(jp); continue; }
-                const P = rem[0].e.pc >> 7;
-                if (!rem.every(u => (u.e.pc >> 7) === P)) { kept0.add(jp); continue; }
-                const last = pageLast.get(P), nxt = last ? entries[last.idx + 1] : null;
-                if (!nxt || (nxt.kind !== "ORG" && nxt.kind !== "END")) { kept0.add(jp); continue; }
-                const lim = Math.min(nxt.kind === "ORG" ? nxt.data[0] : WORD, (P + 1) << 7);
-                const used = anchorUsed.get(last.idx) || 0;
-                if (last.end + used >= lim) { kept0.add(jp); continue; }
-                anchorUsed.set(last.idx, used + 1);
-                const plan = reloPlan.get(last.idx + 1) || [];
-                plan.push({ jp, prio: jptrOrder.get(jp) });
-                reloPlan.set(last.idx + 1, plan);
-            }
-            const reloSet = new Set(); for (const plan of reloPlan.values()) for (const it of plan) reloSet.add(it.jp);
-
-            // 3b) ancla blanda de la tabla de punteros de salto: el generador la emite en
-            //     _jptrStart (calculado antes de purgar/reubicar). Si el post-pass libera
-            //     palabras antes de la tabla, el ORG deja un hueco muerto en página 0. Se
-            //     elimina ese ORG para que la tabla siga a los datos supervivientes; todas
-            //     las referencias son simbólicas y se reasignan en el relayout.
-            let jptrOrgIdx = -1;
-            {
-                let firstJ = -1;
-                for (let i = 0; i < entries.length; i++) {
-                    const e = entries[i];
-                    if (e.kind === "WORDS" && e.label && JP.test(e.label)) { firstJ = i; break; }
-                }
-                if (firstJ >= 0 && entries[firstJ].pc < 0o200) {
-                    for (let i = firstJ - 1; i >= 0; i--) {
-                        const e = entries[i];
-                        if (e.kind === "ORG") { if (e.data[0] === entries[firstJ].pc) jptrOrgIdx = i; break; }
-                        if (e.kind !== "LABEL") break;
-                    }
-                }
-            }
-
-            // 4) reconstruir listado (clonando entradas: nunca se muta el original)
-            const candMap = new Map();
-            for (const u of uses) if (u.directable) candMap.set(u.e, String(jptrEntries.get(u.jp).data[0]));
-            const directNew = [];
-            const out = [];
-            for (let i = 0; i < entries.length; i++) {
-                const plan = reloPlan.get(i);
-                if (plan) { plan.sort((a, b) => a.prio - b.prio); for (const it of plan) out.push(Object.assign({}, jptrEntries.get(it.jp))); }
-                if (i === jptrOrgIdx) continue;
-                const e = entries[i];
-                if (e.kind === "WORDS" && e.label && isPtr(e.label)) { const jp = e.label.toUpperCase(); if (deleted.has(jp) || reloSet.has(jp)) continue; }
-                const c = candMap.get(e);
-                if (c !== undefined) { const ne = Object.assign({}, e, { data: [String(e.data[0]).toUpperCase(), c] }); directNew.push([ne, c]); out.push(ne); continue; }
-                if (e.kind === "IRM" && e.data && e.data.length >= 3) {
-                    const jp = String(e.data[2]).toUpperCase();
-                    if (redirect.has(jp)) { out.push(Object.assign({}, e, { data: [e.data[0], e.data[1], redirect.get(jp)] })); continue; }
-                }
-                out.push(Object.assign({}, e));
-            }
-            // 5) relayout: reasigna pc y etiquetas sobre el listado reconstruido
-            let pc = 0;
-            const outLabels = Object.create(null);
-            for (const e of out) {
-                if (e.kind === "ORG") { pc = e.data[0]; e.pc = pc; }
-                else if (e.kind === "END") { e.pc = pc; break; }
-                else if (e.kind === "LABEL") { e.pc = pc; }
-                else if (e.kind === "WORDS") { e.pc = pc; pc += e.data.length; }
-                else if (e.kind === "STRING") { e.pc = pc; pc += e.words.length; }
-                else { e.pc = pc; pc += 1; }
-                if (e.label) outLabels[e.label.toUpperCase()] = e.pc;
-            }
-            // 6) validación: cada uso indirecto debe alcanzar su puntero y cada VEA directo seguir
-            //    en página; ante cualquier incongruencia se devuelve el listado sin tocar
-            const _fail = () => {
-                console.warn("Optimización de punteros: validación falló, se conserva el listado original.");
-                let outPage0 = 0;
-                for (const e of entries) if (e.kind === "WORDS" && e.label && isPtr(e.label) && e.pc >= 0o200) outPage0++;
-                return { entries, labels, optimized: 0, orphansRemoved: 0, zeroUseRemoved: 0, deduped: 0, relocated: 0, keptPage0: totalPtrs - outPage0, totalPtrs, p0Used: page0End(entries), ptrOutPage0: outPage0, kDeduped };
-            };
-            for (const [ne, tg] of directNew) { const ta = outLabels[String(tg).toUpperCase()]; if (ta === undefined || (ne.pc >> 7) !== (ta >> 7)) return _fail(); }
-            for (const e of out) {
-                if (e.kind !== "IRM" || !e.data || e.data.length < 3 || String(e.data[1]).toUpperCase() !== "I") continue;
-                const jp = String(e.data[2]).toUpperCase();
-                if (!jptrEntries.has(jp)) continue;
-                const pa = outLabels[jp];
-                if (pa === undefined || ((pa >> 7) !== 0 && (pa >> 7) !== (e.pc >> 7))) return _fail();
-            }
-            let orphans = 0, zeroUse = 0;
-            for (const jp of deleted) { if (uses.some(u => u.jp === jp)) orphans++; else zeroUse++; }
-            let keptPage0 = 0, ptrOutPage0 = 0;
-            for (const e of out) {
-                if (e.kind === "WORDS" && e.label && isPtr(e.label)) { if (e.pc < 0o200) keptPage0++; else ptrOutPage0++; }
-            }
-            return { entries: out, labels: outLabels, optimized: candMap.size, orphansRemoved: orphans, zeroUseRemoved: zeroUse, deduped: redirect.size, relocated: reloSet.size, keptPage0, totalPtrs, p0Used: page0End(out), ptrOutPage0, kDeduped };
-        }
-
-        function compileLen1(text, opts = {}) {
-            text = _normalizeWS(text);
-            const lines = text.split(/\r?\n/);
-            let pass = firstPass(lines);
-            let entries = pass.entries;
-            let labels = pass.labels;
-            let optInfo = { optimized: 0, orphansRemoved: 0, zeroUseRemoved: 0, deduped: 0, relocated: 0, keptPage0: 0, totalPtrs: 0, p0Used: null, ptrOutPage0: 0, kDeduped: 0 };
-            if (opts.optimizeJptrVEAs) {
-                try {
-                    const opt = _optimizeJptrVEAs(entries, labels);
-                    if (opt.entries !== entries) { entries = opt.entries; labels = opt.labels; }
-                    optInfo = { optimized: opt.optimized, orphansRemoved: opt.orphansRemoved, zeroUseRemoved: opt.zeroUseRemoved, deduped: opt.deduped, relocated: opt.relocated, keptPage0: opt.keptPage0, totalPtrs: opt.totalPtrs, p0Used: opt.p0Used, ptrOutPage0: opt.ptrOutPage0, kDeduped: opt.kDeduped || 0 };
-                } catch (e) {
-                    console.warn("Optimización de punteros falló: " + e.message + ". Continuando sin optimización.");
-                }
-            }
-            const _wOf = e => e.kind === "WORDS" ? e.data.length : (e.kind === "STRING" ? e.words.length : (e.kind === "ORG" || e.kind === "LABEL" || e.kind === "END" ? 0 : 1));
-            if (optInfo.p0Used == null) {
-                let m = 0;
-                for (const e of entries) { const w = _wOf(e); if (w > 0 && e.pc < 0o200) m = Math.max(m, e.pc + w); }
-                optInfo.p0Used = m;
-            }
-            if (opts.optimizeJptrVEAs) {
-                let bad = 0, badLine = 0;
-                for (const e of entries) {
-                    if (e.kind !== "IRM" || !e.data || e.data.length < 3 || String(e.data[1]).toUpperCase() !== "I") continue;
-                    const pn = String(e.data[2]).toUpperCase();
-                    if (!/^(?:JPTR_\d+|PTR_RT_[A-Z0-9_]+)$/i.test(pn)) continue;
-                    const pa = labels[pn];
-                    if (pa === undefined || ((pa >> 7) !== 0 && (pa >> 7) !== (e.pc >> 7))) { bad++; if (!badLine) badLine = e.line || 0; }
-                }
-                if (bad > 0) throw new Len1Error(
-                    `Página 0 sin espacio: ${bad} uso(s) de puntero no alcanzable(s) tras la optimización. ` +
-                    `Reduzca variables escalares, subrutinas anidadas o el número de llamadas indirectas.`,
-                    badLine, "PTR");
-                if (optInfo.p0Used > 0o200) throw new Len1Error(
-                    `Página 0 desborda tras la optimización: última palabra en ${oct(optInfo.p0Used - 1)}; la página 0 termina en 0177. ` +
-                    `Reduzca variables escalares o datos runtime.`,
-                    badLine, "P0");
-            }
-            const rows = [], lstL = [], vals = [];
-            let wc = 0, lastPg = null;
-            const addrToLen1Line = new Map();
-            const addrToRowIndex = new Map();
-            const strictOverlap = !text.includes('@@overlap-ok@@');
-            const written = new Map();
-            let entryPoint = 0, entrySet = false;
-            function addR(pc, val, src, cm, lineNum) {
-                if (strictOverlap && written.has(pc)) {
-                    const prev = written.get(pc);
-                    throw new Len1Error(
-                        `Solapamiento en ${oct(pc)}: "${prev.src}" (fuente L${prev.lineNum}) ` +
-                        `sería sobrescrito por "${src}" (fuente L${lineNum})`,
-                        lineNum, src
-                    );
-                }
-                written.set(pc, { lineNum, src });
-                const pg = pc >> 7, rl = pc & 0o177;
-                const ps = (pg !== lastPg) ? oct(pg, 2) : "";
-                lastPg = pg;
-                rows.push({ page: ps, rel: oct(rl, 3), abs: pc, content: oct(val, 4), value: val, source: src, comment: cm });
-                vals.push(val); lstL.push(fmtList(pc, val, src, cm)); wc++;
-                addrToLen1Line.set(pc, lineNum);
-                addrToRowIndex.set(pc, rows.length - 1);
-            }
-            for (const e of entries) { if (e.kind === 'ORG' && !entrySet) { entryPoint = e.data[0] || 0; entrySet = true; } }
-            for (const e of entries) {
-                if (e.kind === "END" || e.kind === "ORG" || e.kind === "LABEL") continue;
-                const src = Array.isArray(e.data) ? e.data.join(" ") : "";
-                if (e.kind === "WORDS") {
-                    let lpc = e.pc;
-                    e.data.forEach((t, i) => {
-                        const val = resolveWord(t, labels, e.line, src);
-                        const up = t.toUpperCase();
-                        let s;
-                        if (i === 0 && e.label) s = `${e.label} [${oct(val)}]`;
-                        else if (up in labels) s = `${t} [${oct(val)}]`;
-                        else s = `${oct(val)} [${t}]`;
-                        addR(lpc, val, s, e.comment, e.line);
-                        lpc++;
-                    });
-                } else if (e.kind === "STRING") {
-                    const strTok = e.data[0];
-                    const quote = strTok.packed ? "'" : '"';
-                    const prefix = `${quote}${strTok.text}${quote}`;
-                    let lpc = e.pc;
-                    for (let i = 0; i < e.words.length; i++) {
-                        const srcRow = i === 0 ? prefix : "";
-                        const charComment = e.chars[i] || '';
-                        let cmRow;
-                        if (i === 0 && e.comment) {
-                            cmRow = e.comment + ' / ' + charComment;
-                        } else {
-                            cmRow = charComment;
-                        }
-                        addR(lpc, e.words[i], srcRow, cmRow, e.line);
-                        lpc++;
-                    }
-                } else if (e.kind === "IRM") {
-                    const c = encodeIRM(e.data, e.pc, labels, e.line, src);
-                    addR(e.pc, c, fmtIrmMn(e.data, labels, e.pc), e.comment, e.line);
-                } else if (e.kind === "MICRO") {
-                    let c = 0;
-                    for (const n of e.data) c |= MICRO[n];
-                    addR(e.pc, c, e.data.join(" "), e.comment, e.line);
-                }
-            }
-            return Object.assign({ rows, lstLines: lstL, values: vals, wordCount: wc, entryPoint, addrToLen1Line, addrToRowIndex, stats: optInfo }, optInfo);
-        }
-
-        function analyzeLen1(text) {
-            text = _normalizeWS(text);
-            const errs = [];
-            const lines = text.split(/\r?\n/);
-            const definedLabels = new Set();
-            for (let i = 0; i < lines.length; i++) {
-                const [rawCode] = _splitLineComment(lines[i]);
-                const code = rawCode.trim();
-                if (!code) continue;
-                const comma = code.indexOf(",");
-                if (comma > 0) {
-                    const lbl = code.slice(0, comma).trim();
-                    if (LABEL_RE.test(lbl)) definedLabels.add(lbl.toUpperCase());
-                }
-            }
-            let lastNonEmpty = -1;
-            for (let i = lines.length - 1; i >= 0; i--) {
-                if (lines[i].trim()) { lastNonEmpty = i; break; }
-            }
-            for (let i = 0; i < lines.length; i++) {
-                const ln = i + 1;
-                const [rawCode] = _splitLineComment(lines[i]);
-                const code = rawCode.trim();
-                if (/^(?:[A-Za-z_][A-Za-z0-9_]*,\s*)?(?:RD|RI)$/i.test(code)) continue;
-                try {
-                    const { label, tokens } = parseLine(lines[i], ln);
-                    if (!tokens.length) continue;
-                    if (tokens[0] === "$") continue;
-                    if (typeof tokens[0] === "string" && tokens[0].startsWith("*")) {
-                        parseAddr(tokens[0].slice(1), ln);
-                        continue;
-                    }
-                    const { kind, data } = classify(tokens, ln);
-                    if (kind === "IRM") _validateIrmOperands(data, ln);
-                    if (i !== lastNonEmpty && kind === "WORDS" && !label && data.length === 1) {
-                        const t = data[0];
-                        if (!looksNum(t) && LABEL_RE.test(t) && !definedLabels.has(t.toUpperCase())) {
-                            throw new Len1Error(
-                                `'${t}': palabra sola. ¿Falta la coma para declarar la etiqueta '${t},'? ¿O es una referencia a etiqueta no definida?`,
-                                ln, t
-                            );
-                        }
-                    }
-                } catch (x) {
-                    if (x instanceof Len1Error) {
-                        errs.push({ line: ln, message: x.message, token: x.token || "" });
-                    } else {
-                        errs.push({ line: ln, message: String((x && x.message) || x), token: "" });
-                    }
-                }
-            }
-            return errs;
-        }
-
-        function _validateIrmOperands(tokens, ln) {
-            const mn = tokens[0].toUpperCase();
-            let args = tokens.slice(1);
-            let ind = false;
-            if (args.length > 1 && ["I", "@"].includes(args[0].toUpperCase())) {
-                ind = true;
-                args = args.slice(1);
-            } else if (args.length && args[0].startsWith("@")) {
-                ind = true;
-                const inner = args[0].slice(1);
-                if (!inner) throw new Len1Error("falta operando tras @", ln, "@");
-                args = [inner].concat(args.slice(1));
-            }
-            if (args.length === 1 && (args[0].toUpperCase() === "I" || args[0] === "@")) {
-                throw new Len1Error(`falta operando tras ${args[0].toUpperCase()}`, ln, args[0]);
-            }
-            if (!args.length) throw new Len1Error(`falta operando en: ${tokens.join(" ")}`, ln, mn);
-            if (args.length > 1) throw new Len1Error(`operandos extra en: ${tokens.join(" ")}`, ln, args[1]);
-            const t = args[0];
-            const supRel = mn === "VEA" || mn === "VAS";
-            const isSg = /^[+-]/.test(t) && looksNum(t);
-            if (ind && isSg) throw new Len1Error("indirección no se combina con relativo", ln, t);
-            if (isInstrStarter(t)) throw new Len1Error(`operando no puede ser palabra clave: ${t}`, ln, t);
-            if (supRel && isSg) { parseSigned(t, ln); return; }
-            if (looksNum(t)) { parseAddr(t, ln); return; }
-            if (LABEL_RE.test(t) || LABEL_OFF_RE.test(t)) return;
-            throw new Len1Error(`operando no reconocido: ${t}`, ln, t);
-        }
 
         /* ═══ ENSAMBLADOR LEN-B (CID 201-B) ═══
-           Dialecto independiente del ensamblador LEN-1 heredado. Codifica la
+           Dialecto independiente del ensamblador de CIDcoder-A. Codifica la
            palabra de 12 bits de la 201-B: IRM (3+1+1+7), microinstrucciones
            (grupos 0 y 1), control de campo/interrupción y E/S 6xxx.
            Solo codifica el campo 0; el visor y el ejecutor manejan los 8 campos. */
@@ -3453,12 +2968,11 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
                 // sin LAC previo: RT_PUTSTR limpia el AC en su propia cabecera
                 this.emit("        VAS I   PTR_RT_PUTSTR");
                 if (this.targetB) {
-                    // LEAL-B: CI de 6 bits; TIT añade LF+CR antes del terminador CI 36.
+                    // LEAL-B: CI de 6 bits; TIT solo imprime el texto, como en
+                    // LEAL-A. Para pasar a otra línea se usa LIN después.
                     const skipped = [];
                     const codes = encodeCiText(t, ch => skipped.push(ch));
                     for (const ch of skipped) this.warn(this.curLn, `TIT: carácter '${ch}' no representable en CI; se omite`);
-                    codes.push({ code: CI_LF, char: "LF" });
-                    codes.push({ code: CI_CR, char: "CR" });
                     codes.push({ code: CI_END, char: "<END>" });
                     this.titSavings += this.strPacked ? Math.ceil(codes.length / 2) : codes.length;
                     if (this.strPacked) {
@@ -3829,11 +3343,11 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
                     );
                 }
                 for (const [sym] of Object.entries(this.intPtrs)) { const m = /^L(\d+)$/.exec(sym); if (m && !this.userLabels.has(sym)) throw new LEALCompileError(`Número de referencia (${m[1]}) usado en el programa pero nunca definido como (${m[1]}) en el cuerpo`, this.intPtrFirstLine[sym] || this.curLn) }
-                // Los punteros de salto se emiten siempre; el post-pass de compileLen1 los purga,
-                // deduplica y reubica. Si tras optimizar aún no alcanzan, compileLen1 falla con
-                // el número real de usos no alcanzables (aquí no se puede decidir: pcEstimate es
-                // pre-peephole y todavía no se conocen las páginas definitivas).
-                this.emit("/ " + "=".repeat(58)); this.emit("/ Generado por LEALCompiler - CIDcoder-B (fase 0: LEN-1/201-A)"); this.emit("/ " + "=".repeat(58)); this.emit("");
+                // Los punteros de salto se emiten siempre; _optimizeBPage0Ptrs convierte
+                // los saltos lejanos a directos si la tabla de punteros desborda la página 0.
+                // Aquí no se puede decidir: pcEstimate es pre-peephole y aún no se conocen
+                // las páginas definitivas.
+                this.emit("/ " + "=".repeat(58)); this.emit("/ Generado por LEALCompiler - CIDcoder-B (LEN-B/201-B)"); this.emit("/ " + "=".repeat(58)); this.emit("");
                 this.emit("/ --- Bootstrap: reset vector en 0o000 ---");
                 this.emit(`        *0`);
                 this.emit("        VEA I   0001");
@@ -3897,8 +3411,8 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
                 this.emit("");
                 this.emit("$");
                 // Check de desbordamiento de página 0. La tabla de punteros se excluye del
-                // chequeo duro: el post-pass puede purgarla, deduplicarla o reubicarla; su
-                // validación definitiva vive en compileLen1 (alcanzabilidad real de cada uso).
+                // chequeo duro: _optimizeBPage0Ptrs puede convertir saltos lejanos en
+                // directos; su validación definitiva la hace el ensamblador LEN-B.
                 let _cursor = 0, _inP0 = false, _maxP0 = -1, _maxP0All = -1, _inPtrTbl = false;
                 for (const _line of this.lines) {
                     const _t = _line.trim();
@@ -9507,13 +9021,6 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
             return (u in IRM) || (u in MICRO) || u === "I" || u === "@";
         }
         function tokCls(t, lineErr, labDef, sgRel = false) { const c = []; const u = t.toUpperCase(); const uu = u.replace(/\s+/g, " "); if (isKw(t)) c.push("kw"); if (looksNum(t)) c.push("num"); if (labDef && t === labDef) c.push("labeldef"); if (lineErr.some(e => e.token && e.token.toUpperCase() === u)) c.push("error-token"); if (looksNum(t)) { try { if (sgRel) parseSigned(t, 0); else parseNum(t, 0) } catch{ c.push("error-token") } } return c }
-        function highLen1(line, lineErr) {
-            const si = line.indexOf("/"); const cp = si >= 0 ? line.slice(0, si) : line; const cm = si >= 0 ? line.slice(si) : "";
-            let ld = null; const tr = cp.trim(); if (tr) { const s = splitLabel(tr); if (s.ok && s.label) ld = s.label }
-            let h = ""; const re = /(\s+|,|[^,\s]+)/g; let m, pt = null, si2 = false;
-            while ((m = re.exec(cp)) !== null) { const p = m[0]; if (/^\s+$/.test(p) || p === ",") { h += esc(p); continue } const up = p.toUpperCase(); const sr = (pt === "VEA" || pt === "VAS") && !si2 && /^[+-]/.test(p) && looksNum(p); if (up === "I" || up === "@" || p.startsWith("@")) si2 = true; const c = tokCls(p, lineErr, ld, sr); h += c.length ? `<span class="${c.join(" ")}">${esc(p)}</span>` : esc(p); pt = up }
-            if (cm) h += `<span class="comment">${esc(cm)}</span>`; return h
-        }
         /* Resaltador del dialecto LEN-B: tablas propias de la 201-B. */
         const LENB_KW = new Set([
             ...Object.keys(LENB.tables.MEM_OPS), ...Object.keys(LENB.tables.GROUP0),
@@ -9641,14 +9148,91 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
             }).join("\n")
         }
 
-        /* ═══ CINTA MURRAY ═══ */
-        const SP = "●", SG = "•", SB = " ";
-        function frame5(w) { const f1 = [], f2 = []; for (let i = 0; i < 5; i++)f1.push((w >> i) & 1); for (let i = 5; i < 10; i++)f2.push((w >> i) & 1); return [f1, f2, [(w >> 10) & 1, (w >> 11) & 1, 0, 0, 0]] }
-        function f2line(b) { return [b[0] ? SP : SB, b[1] ? SP : SB, SG, b[2] ? SP : SB, b[3] ? SP : SB, b[4] ? SP : SB].join("") }
-        function shortN(n) { const b = (n || "PROGRAMA").replace(/\.[^.]+$/, "").toUpperCase(); return b.slice(0, 13) || "PROGRAMA" }
-        function ribBin(vals, n) { const s = shortN(n); const h = ["/ " + "=".repeat(60), "/ LEN-1", `/${s}`, `/ PALAB: ${vals.length}`, "/ CANAL: 5", "/ COD: MURRAY", "/ Orden: LSB arriba", "/ " + "=".repeat(60), ""]; const r = []; for (const v of vals) for (const f of frame5(v)) r.push(f2line(f)); return h.concat(r) }
-        function encMurray(text) { const fr = []; let md = "LTRS"; for (const ch of text) { if (ch === "\r") { fr.push(MURR_L["\r"] || 0o10); continue } if (ch === "\n") { fr.push(MURR_L["\n"] || 2); continue } const up = ch.toUpperCase(); const iL = up in MURR_L; const iF = ch in MURR_F; const cm = (ch === " "); let tg; if (cm) tg = md; else if (iL && !iF) tg = "LTRS"; else if (iF && !iL) tg = "FIGS"; else if (iL && iF) tg = /[A-Z]/.test(up) ? "LTRS" : "FIGS"; else continue; if (tg !== md) { fr.push(tg === "LTRS" ? CODE_LTRS : CODE_FIGS); md = tg } const c = md === "LTRS" ? MURR_L[up] : MURR_F[ch]; if (c !== undefined) fr.push(c) } return fr }
-        function ribSrc(text, n) { const s = shortN(n); const fr = encMurray(text); const h = ["/ " + "=".repeat(60), "/ LEAL source", `/${s}`, `/ CHARS: ${text.length} (${fr.length} marcos Murray)`, "/ CANAL: 5", "/ COD: MURRAY", "/ Orden: LSB arriba", "/ " + "=".repeat(60), ""]; const r = []; for (const f of fr) r.push(f2line(frame5(f)[0])); return { header: h, rows: r } }
+
+        /* ═══ CINTA PERFORADA 201-B (8 CANALES) ═══
+           Una palabra de 12 bits ocupa 2 marcos: 8 bits bajos y 5 bits
+           (4 datos altos + enlace). El enlace es el 5.º bit del segundo
+           marco y marca palabra completa en el algoritmo de lectura.
+           Un carácter ISO-8 ocupa 1 marco. */
+        const TAPE_ON = "●", TAPE_GUIDE = "•", TAPE_OFF = " ";
+        function frame8(w) {
+            const lo = [], hi = [];
+            for (let i = 0; i < 8; i++) lo.push((w >> i) & 1);
+            for (let i = 8; i < 12; i++) hi.push((w >> i) & 1);
+            hi.push(1, 0, 0, 0);   // enlace (bit 13) + canales 6-8 vacíos
+            return [lo, hi];
+        }
+        function frame8Char(code) { const f = []; for (let i = 0; i < 8; i++) f.push((code >> i) & 1); return f }
+        function f8line(b) { return [b[0] ? TAPE_ON : TAPE_OFF, b[1] ? TAPE_ON : TAPE_OFF, b[2] ? TAPE_ON : TAPE_OFF, b[3] ? TAPE_ON : TAPE_OFF, TAPE_GUIDE, b[4] ? TAPE_ON : TAPE_OFF, b[5] ? TAPE_ON : TAPE_OFF, b[6] ? TAPE_ON : TAPE_OFF, b[7] ? TAPE_ON : TAPE_OFF].join("") }
+        function tapeShortName(n) { const b = (n || "PROGRAMA").replace(/\.[^.]+$/, "").toUpperCase(); return b.slice(0, 13) || "PROGRAMA" }
+        function ribBin(vals, n) {
+            const s = tapeShortName(n);
+            const h = ["/ " + "=".repeat(60), "/ LEN-B", `/${s}`, `/ PALAB: ${vals.length}`, "/ CANAL: 8", "/ COD: BINARIO (8 bits + 5 bits con enlace)", "/ Orden: LSB arriba", "/ " + "=".repeat(60), ""];
+            const r = [];
+            for (const v of vals) for (const f of frame8(v)) r.push(f8line(f));
+            return h.concat(r);
+        }
+        function ribSrc(text, n) {
+            const s = tapeShortName(n);
+            const h = ["/ " + "=".repeat(60), "/ LEAL-B source", `/${s}`, `/ CHARS: ${text.length}`, "/ CANAL: 8", "/ COD: ISO-8 (1 marco por carácter)", "/ Orden: LSB arriba", "/ " + "=".repeat(60), ""];
+            const r = [];
+            for (const ch of text) r.push(f8line(frame8Char(ch.codePointAt(0) & 0xFF)));
+            return { header: h, rows: r };
+        }
+        function addTapeRow(c, b) {
+            const r = document.createElement("div"); r.className = "tape-row";
+            const sq = b ? [b[0], b[1], b[2], b[3], "G", b[4], b[5], b[6], b[7]] : [0, 0, 0, 0, "G", 0, 0, 0, 0];
+            for (const it of sq) {
+                const h = document.createElement("span");
+                if (it === "G") h.className = "hole guide";
+                else if (it === 1) h.className = "hole on";
+                else h.className = "hole off";
+                r.appendChild(h);
+            }
+            c.appendChild(r);
+        }
+        function renderTape(res) {
+            DOM.tapeStrip.innerHTML = "";
+            state.ribLines = [];
+            if (!res || (!res.values && !res.sourceText)) {
+                DOM.tapeStatus.textContent = "0 caracteres · ~0.0 cm";
+                const e = document.createElement("div");
+                e.className = "tape-inside-info";
+                e.textContent = "SIN DATOS";
+                DOM.tapeStrip.appendChild(e);
+                DOM.btnSaveRib.disabled = true;
+                return;
+            }
+            const s = !!res.sourceText;
+            const n13 = tapeShortName(state.fileName);
+            const info = s
+                ? ["LEAL-B", n13, `CHARS: ${res.sourceText.length}`, "CANAL: 8", "COD: ISO-8"].join("\n")
+                : ["LEN-B", n13, `PALAB: ${res.values.length}`, "CANAL: 8", "COD: BINARIO"].join("\n");
+            const i = document.createElement("div");
+            i.className = "tape-inside-info";
+            i.textContent = info;
+            DOM.tapeStrip.appendChild(i);
+            const sp = document.createElement("div");
+            sp.className = "tape-separator";
+            DOM.tapeStrip.appendChild(sp);
+            for (let k = 0; k < 3; k++) addTapeRow(DOM.tapeStrip, null);
+            if (s) {
+                let fr = 0;
+                for (const ch of res.sourceText) { addTapeRow(DOM.tapeStrip, frame8Char(ch.codePointAt(0) & 0xFF)); fr++; }
+                const cm = ((fr + 6) * 0.254).toFixed(1);
+                DOM.tapeStatus.textContent = `${fr} caracteres · ~${cm} cm`;
+                const rr = ribSrc(res.sourceText, state.fileName);
+                state.ribLines = rr.header.concat(rr.rows);
+            } else {
+                let fr = 0;
+                for (const v of res.values) for (const f of frame8(v)) { addTapeRow(DOM.tapeStrip, f); fr++; }
+                const cm = ((fr + 6) * 0.254).toFixed(1);
+                DOM.tapeStatus.textContent = `${fr} marcos (${res.values.length} palabras) · ~${cm} cm`;
+                state.ribLines = ribBin(res.values, state.fileName);
+            }
+            for (let k = 0; k < 3; k++) addTapeRow(DOM.tapeStrip, null);
+            DOM.btnSaveRib.disabled = !state.ribLines.length;
+        }
 
         /* ═══ MODOS ═══ */
         const MODES = { LEN1: { id: "LEN1", name: "LEN-B", ext: ".lenb", machine: "CID 201-B", highlight: highLenB, analyze: analyzeLenB, estimate: estimateLenB, format: fmtLen1, hasLabels: true }, LEAL: { id: "LEAL", name: "LEAL-B", ext: ".leal", machine: "CID 201-B", highlight: highLEAL, analyze: analyzeLEAL, format: fmtLEAL, hasLabels: false } };
@@ -9658,7 +9242,8 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
             brandLabel: document.getElementById("brandLabel"), btnNewLen: document.getElementById("btnNewLen"), btnNewLeal: document.getElementById("btnNewLeal"), btnLoad: document.getElementById("btnLoad"), btnSave: document.getElementById("btnSave"), btnSaveAs: document.getElementById("btnSaveAs"), btnCompile: document.getElementById("btnCompile"), btnStrPk: document.getElementById("btnStrPk"), btnRun: document.getElementById("btnRun"), modeBadge: document.getElementById("modeBadge"), btnAutoAlign: document.getElementById("btnAutoAlign"), btnClearBp: document.getElementById("btnClearBp"),
             btnToggleLst: document.getElementById("btnToggleLst"),
             btnToggleExec: document.getElementById("btnToggleExec"),
-            btnToggleTape: document.getElementById("btnToggleTape"), autoAlignStatus: document.getElementById("autoAlignStatus"),
+            btnToggleTape: document.getElementById("btnToggleTape"),
+            autoAlignStatus: document.getElementById("autoAlignStatus"),
             btnHelp: document.getElementById("btnHelp"),
             btnAbout: document.getElementById("btnAbout"),
             aboutBody: document.getElementById("aboutBody"),
@@ -9685,7 +9270,7 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
         };
 
         /* ═══ ESTADO ═══ */
-        const state = { mode: MODES.LEN1, currentErrors: [], currentWarnings: [], wordEstimate: 0, dirty: true, autoAlign: true, modified: false, fileName: "", lstModified: false, ribModified: false, result: null, ribLines: [], strPacked: false };
+        const state = { mode: MODES.LEN1, currentErrors: [], currentWarnings: [], wordEstimate: 0, dirty: true, autoAlign: true, modified: false, fileName: "", lstModified: false, result: null, strPacked: false, ribLines: [] };
 
         /* ═══ RENDER EDITOR ═══ */
         function renderEditor() {
@@ -9838,7 +9423,7 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
             d.textContent = text;
             if (line) {
                 d.style.cursor = "pointer";
-                d.title = "Ir a la línea " + line + " en LEN-1 y LST";
+                d.title = "Ir a la línea " + line + " en LEN-B y LST";
                 d.onclick = () => { goLenLineOrEditor(line); goLstLine(line); };
             }
             DOM.lstMessages.appendChild(d);
@@ -9874,9 +9459,6 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
             if (DOM.lstGutter) DOM.lstGutter.scrollTop = body.scrollTop;
         }
 
-        /* ═══ RENDER CINTA ═══ */
-        function addTapeRow(c, b) { const r = document.createElement("div"); r.className = "tape-row"; const sq = b ? [b[0], b[1], "G", b[2], b[3], b[4]] : [0, 0, "G", 0, 0, 0]; for (const it of sq) { const h = document.createElement("span"); if (it === "G") h.className = "hole guide"; else if (it === 1) h.className = "hole on"; else h.className = "hole off"; r.appendChild(h) } c.appendChild(r) }
-        function renderTape(res) { DOM.tapeStrip.innerHTML = ""; state.ribLines = []; if (!res || (!res.values && !res.sourceText)) { DOM.tapeStatus.textContent = "0 caracteres · ~0.0 cm"; const e = document.createElement("div"); e.className = "tape-inside-info"; e.textContent = "SIN DATOS"; DOM.tapeStrip.appendChild(e); return } const s = !!res.sourceText; const n13 = shortN(state.fileName); const info = s ? ["LEAL", n13, `CHARS: ${res.sourceText.length}`, "CANAL: 5", "COD: BINARIO"].join("\n") : ["LEN-1", n13, `PALAB: ${res.values.length}`, "CANAL: 5", "COD: BINARIO"].join("\n"); const i = document.createElement("div"); i.className = "tape-inside-info"; i.textContent = info; DOM.tapeStrip.appendChild(i); const sp = document.createElement("div"); sp.className = "tape-separator"; DOM.tapeStrip.appendChild(sp); for (let k = 0; k < 3; k++)addTapeRow(DOM.tapeStrip, null); if (s) { const fr = encMurray(res.sourceText); for (const f of fr) addTapeRow(DOM.tapeStrip, frame5(f)[0]); const cm = ((fr.length + 6) * 0.5).toFixed(1); DOM.tapeStatus.textContent = `${fr.length} caracteres · ~${cm} cm`; const rr = ribSrc(res.sourceText, state.fileName); state.ribLines = rr.header.concat(rr.rows) } else { let fr = 0; for (const v of res.values) { for (const f of frame5(v)) { addTapeRow(DOM.tapeStrip, f); fr++ } } const cm = ((fr + 6) * 0.5).toFixed(1); DOM.tapeStatus.textContent = `${fr} marcos (${res.values.length} palabras) · ~${cm} cm`; state.ribLines = ribBin(res.values, state.fileName) } for (let k = 0; k < 3; k++)addTapeRow(DOM.tapeStrip, null) }
 
         /* ═══ MENSAJES EDITOR ═══ */
         function clrMsg() { DOM.messages.innerHTML = "" }
@@ -9902,9 +9484,7 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
             const b = baseOut();
             DOM.lstFileName.textContent = b + ".lstb" + (state.lstModified ? "*" : "");
             DOM.lenFileName.textContent = b + ".lenb";
-            if (DOM.ribFileName) DOM.ribFileName.textContent = b + ".rib" + (state.ribModified ? "*" : "");
             DOM.outputTitle.textContent = "Listado LST" + (state.lstModified ? " (modificado)" : "");
-            if (DOM.tapeTitle) DOM.tapeTitle.textContent = "Cinta perforada" + (state.ribModified ? " (modificado)" : "");
         }
         function updateHelpBody() {
             DOM.helpBody.innerHTML = (state.mode.id === 'LEAL' ? HELP_LEAL : HELP_LEN1);
@@ -9921,14 +9501,6 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
             if (DOM.btnStrPk) DOM.btnStrPk.classList.toggle("hidden", m.id !== "LEAL");
             DOM.outputTitle.textContent = "Listado LST";
             DOM.mainEl.classList.toggle("mode-leal", m.id === "LEAL");
-            /* La cinta perforada ITA2 es una función heredada de la 201-A.
-               CIDcoder-B usa exclusivamente el Ricoh 3000 (papel): la cinta
-               ya no se muestra en ningún modo. */
-            if (DOM.btnToggleTape) {
-                DOM.btnToggleTape.style.display = "none";
-                DOM.btnToggleTape.title = "La cinta ITA2 pertenece a la CID 201-A";
-            }
-            DOM.mainEl.classList.add("hide-tape");
             if (m.id === "LEN1") {
                 DOM.lenSourcePane.classList.add("hidden");
                 renderLenSrc("");
@@ -9957,7 +9529,7 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
                 "LIN ; salto de línea",
                 "VEA (1) ; repite el ciclo",
                 "FIN ; fin del programa"
-            ].join("\n")); else initial = state.mode.format(SAMPLE_LEN1); DOM.code.value = initial; state.fileName = ""; state.result = null; state.ribLines = []; state.currentErrors = []; state.currentWarnings = []; state.wordEstimate = 0; setMod(false); state.lstModified = false; state.ribModified = false; clrMsg(); clrLenMsg(); clrLstMsg(); applyModeUI(); syncAutoAlignUI(); syncStrPkUI(); renderEditor(); renderLst(null); renderLenSrc(""); renderTape(null); updCompStat(); updSaveBtns(); updFileName(); updOutNames(); addMsg(`Nuevo documento ${state.mode.name} creado.`, "ok"); if (typeof RUN !== 'undefined') RUN.fullReset();
+            ].join("\n")); else initial = state.mode.format(SAMPLE_LEN1); DOM.code.value = initial; state.fileName = ""; state.result = null; state.currentErrors = []; state.currentWarnings = []; state.wordEstimate = 0; setMod(false); state.lstModified = false; clrMsg(); clrLenMsg(); clrLstMsg(); applyModeUI(); syncAutoAlignUI(); syncStrPkUI(); renderEditor(); renderLst(null); renderLenSrc(""); renderTape(null); updCompStat(); updSaveBtns(); updFileName(); updOutNames(); addMsg(`Nuevo documento ${state.mode.name} creado.`, "ok"); if (typeof RUN !== 'undefined') RUN.fullReset();
         }
         function updCompStat() { DOM.compileStatus.textContent = state.result ? `${state.result.wordCount} palabras` : "0 palabras" }
         function updSaveBtns() {
@@ -9977,7 +9549,7 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
             clrMsg();
             clrLstMsg();
             runAna(false);
-            if (state.currentErrors.length) { renderMsgs(state.currentErrors, []); if (state.currentErrors[0].line) goLine(state.currentErrors[0].line); return false; }
+            if (state.currentErrors.length) { renderMsgs(state.currentErrors, []); renderTape(null); if (state.currentErrors[0].line) goLine(state.currentErrors[0].line); return false; }
             const wasRunOpen = RUN.isOpen();
             try {
                 if (state.mode.id === "LEAL") {
@@ -9987,7 +9559,7 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
                     if (!r.ok) {
                         const err = r.error || { line: 0, message: "Error LEAL" };
                         state.currentErrors = [err]; renderEditor();
-                        renderMsgs([err], warns); renderLenSrc(""); clrLenMsg();
+                        renderMsgs([err], warns); renderLenSrc(""); clrLenMsg(); renderTape(null);
                         if (err.line) goLine(err.line);
                         state.result = null; updCompStat(); updSaveBtns();
                         if (wasRunOpen) RUN.setState('Error de compilación', 'Error', 'err');
@@ -10006,7 +9578,8 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
                             entryPoint: r.entryPoint, addrToLen1Line: lst.addrToLen1Line, addrToRowIndex: lst.addrToRowIndex,
                             dialect: "LEN-B", machine: "CID 201-B"
                         };
-                        renderLst(lst.rows); renderTape(null);
+                        renderLst(lst.rows);
+                        renderTape({ sourceText: DOM.code.value });
                         setLenWordCount(lst.wordCount);
                         addLenMsg(`LEN-B generado: ${lenLineCount} líneas · ${lst.wordCount} palabras.`, "ok");
                         addLstMsg(`Paso 2 OK: ensamblado 201-B (${lst.wordCount} palabras).`, "ok");
@@ -10023,7 +9596,8 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
                     } catch (e) {
                         const errLine = e.line || 0;
                         renderLenSrc(len1Text, errLine);
-                        renderLst([]); renderTape(null);
+                        renderLst([]);
+                        renderTape(null);
                         state.result = null;
                         addLstMsg(`Línea ${errLine || "?"}: ${e.message}`, "error", errLine);
                         addLstMsg(`El LEN-B se generó correctamente pero el ensamblado falló.`, "warn");
@@ -10045,13 +9619,15 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
                             addrToLen1Line: lst.addrToLen1Line, addrToRowIndex: lst.addrToRowIndex,
                             warnings: lst.warnings || []
                         };
-                        renderLst(lst.rows); renderTape(null);
+                        renderLst(lst.rows);
+                        renderTape({ values: lst.values });
                         addLstMsg(`Ensamblado LEN-B OK: ${lst.wordCount} palabra${lst.wordCount === 1 ? "" : "s"} · campo 0 · inicio ${oct(lst.entryPoint)}.`, "ok");
                         for (const w of (lst.warnings || [])) addMsg(`Línea ${w.line || "?"}: ${w.message}`, "warn", w.line);
                     } catch (e) {
                         const errLine = e.line || 0;
                         state.result = null;
-                        renderLst([]); renderTape(null);
+                        renderLst([]);
+                        renderTape(null);
                         state.currentErrors = [{ line: errLine, message: e.message, token: e.token || "" }];
                         renderEditor();
                         renderMsgs([{ line: errLine, message: e.message }], []);
@@ -10063,7 +9639,7 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
                     }
                 }
                 state.currentErrors = []; renderEditor(); updCompStat(); updSaveBtns();
-                if (mark) { state.lstModified = true; state.ribModified = true; }
+                if (mark) { state.lstModified = true; }
                 updOutNames();
                 if (typeof RUN !== 'undefined') RUN.clearBPSilent();
                 if (wasRunOpen) {
@@ -10073,7 +9649,7 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
                 }
                 return true;
             } catch (e) {
-                state.currentErrors = [e]; renderEditor(); renderMsgs([e], state.currentWarnings);
+                state.currentErrors = [e]; renderEditor(); renderMsgs([e], state.currentWarnings); renderTape(null);
                 addLstMsg(`Línea ${e.line || "?"}: ${e.message}`, "error", e.line);
                 if (e.line) goLine(e.line);
                 if (wasRunOpen) RUN.setState('Error inesperado', 'Error', 'err');
@@ -10085,9 +9661,9 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
         function ensExt(name, ext) { if (!name) name = "programa" + ext; if (!name.toLowerCase().endsWith(ext)) name += ext; return name }
         function saveSrc(force = false) { let name = state.fileName; if (force || !name) { const d = "programa" + state.mode.ext; const a = prompt("Guardar como:", name || d); if (!a) return; name = a } name = ensExt(name, state.mode.ext); state.fileName = name; dl(name, DOM.code.value); setMod(false); updOutNames(); addMsg(`Guardado como ${name}.`, "ok") }
         function loadF(f) {
-            f.text().then(t => { const m = detectMode(f.name, t); state.mode = m; const raw = t.replace(/\r\n/g, "\n").replace(/\u00A0/g, " ").replace(/[\u2000-\u200A\u202F\u205F\u3000]/g, " "); DOM.code.value = state.mode.format(raw); state.fileName = f.name; state.strPacked = false; state.result = null; state.ribLines = []; state.currentErrors = []; state.currentWarnings = []; state.wordEstimate = 0; setMod(false); state.lstModified = false; state.ribModified = false; applyModeUI(); syncAutoAlignUI(); syncStrPkUI(); renderEditor(); renderLst(null); renderLenSrc(""); clrLenMsg(); renderTape(null); clrLstMsg(); updCompStat(); updSaveBtns(); updFileName(); updOutNames(); if (typeof RUN !== 'undefined') RUN.fullReset(); compileCur(false); addMsg(`Cargado: ${f.name} (${m.name})`, "ok"); const ext = ((f.name.match(/\.[^.]+$/) || [""])[0]).toLowerCase(); if (m.id === "LEN1" && (ext === ".len1" || ext === ".len")) addMsg("Aviso: .len1/.len es formato legado de texto; se acepta como fuente y se guardará como .lenb.", "warn") })
+            f.text().then(t => { const m = detectMode(f.name, t); state.mode = m; const raw = t.replace(/\r\n/g, "\n").replace(/\u00A0/g, " ").replace(/[\u2000-\u200A\u202F\u205F\u3000]/g, " "); DOM.code.value = state.mode.format(raw); state.fileName = f.name; state.strPacked = false; state.result = null; state.currentErrors = []; state.currentWarnings = []; state.wordEstimate = 0; setMod(false); state.lstModified = false; applyModeUI(); syncAutoAlignUI(); syncStrPkUI(); renderEditor(); renderLst(null); renderLenSrc(""); renderTape(null); clrLenMsg(); clrLstMsg(); updCompStat(); updSaveBtns(); updFileName(); updOutNames(); if (typeof RUN !== 'undefined') RUN.fullReset(); compileCur(false); addMsg(`Cargado: ${f.name} (${m.name})`, "ok"); const ext = ((f.name.match(/\.[^.]+$/) || [""])[0]).toLowerCase(); if (m.id === "LEN1" && (ext === ".len1" || ext === ".len")) addMsg("Aviso: .len1/.len es formato legado de texto; se acepta como fuente y se guardará como .lenb.", "warn") })
         }
-        function confirmDiscard() { const p = []; if (state.modified) p.push("código"); if (state.lstModified) p.push(".lstb"); if (state.ribModified) p.push(".rib"); if (!p.length) return true; return confirm("Cambios sin guardar:\n- " + p.join("\n- ") + "\n¿Continuar?") }
+        function confirmDiscard() { const p = []; if (state.modified) p.push("código"); if (state.lstModified) p.push(".lstb"); if (!p.length) return true; return confirm("Cambios sin guardar:\n- " + p.join("\n- ") + "\n¿Continuar?") }
 
         /* ═══ MAYÚSCULAS FUERA DE COMENTARIOS ═══ */
         function upperCode() {
@@ -10157,7 +9733,7 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
             DOM.code.setSelectionRange(pos, pos);
         }
 
-    /* ═══ AYUDA DEL EDITOR (compartida por LEAL y LEN-1) ═══ */
+    /* ═══ AYUDA DEL EDITOR (compartida por LEAL y LEN-B) ═══ */
     function helpEditor(num, extra = "") {
         return `<h3>${num}. Listado, ejecutor y depuración</h3>
 <h4>Panel LST</h4>
@@ -10167,9 +9743,9 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
 <tr><td><b>Rel</b></td><td>Dirección relativa dentro de la página (000…177).</td></tr>
 <tr><td><b>Abs</b></td><td>Dirección absoluta de 12 bits (0000…7777).</td></tr>
 <tr><td><b>Cont</b></td><td>Contenido de la palabra en octal (instrucción o dato).</td></tr>
-<tr><td><b>Fuente</b></td><td>Línea LEN-1 que la generó y su comentario. Las filas modificadas por el programa se resaltan en ámbar.</td></tr>
+<tr><td><b>Fuente</b></td><td>Línea LEN-B que la generó y su comentario. Las filas modificadas por el programa se resaltan en ámbar.</td></tr>
 </table>
-<p>La barra de estado del LST muestra el número de palabras ensambladas; <b>Save .lst</b> guarda el listado. Un clic en una fila pone o quita un punto de ruptura en la línea LEN-1 asociada; el gutter izquierdo numera las filas del listado.</p>
+<p>La barra de estado del LST muestra el número de palabras ensambladas; <b>Save .lst</b> guarda el listado. Un clic en una fila pone o quita un punto de ruptura en la línea LEN-B asociada; el gutter izquierdo numera las filas del listado.</p>
 <h4>Ejecutor</h4>
 <table>
 <tr><th>Control</th><th>Acción</th></tr>
@@ -10183,17 +9759,18 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
 <tr><td><b>Ir al CP</b> / <b>Ir a la instr.</b></td><td>Centra el mapa en el CP o en la instrucción en ejecución.</td></tr>
 <tr><td><b>•⇢•</b> (mapa)</td><td>Sigue automáticamente la instrucción en ejecución.</td></tr>
 </table>
-<p>Los registros EN, AC, RM y CP se muestran sobre el teletipo; el ciclo y el estado del teclado (KBD) y del modo ITA2 (LTRS/FIGS) aparecen a la derecha. Los puntos de ruptura detienen la ejecución continua en la dirección asociada; al recompilar se borran, y <b>⊘ BPs</b> los borra todos.</p>
-<div class="helpNote"><b>Teclado del teletipo:</b> con el foco en el papel, escriba normalmente; Enter envía CR. Los caracteres que no existen en ITA2 (5 bits) se avisan y no se envían. Backspace no se usa: el teclado histórico no lo tiene.</div>
+<p>Los registros EN, AC, RM y CP se muestran sobre el teletipo; el ciclo y el estado del papel (PAPEL) y del Ricoh 3000 (R3000) aparecen a la derecha. Los puntos de ruptura detienen la ejecución continua en la dirección asociada; al recompilar se borran, y <b>⊘ BPs</b> los borra todos.</p>
+<div class="helpNote"><b>Teclado del teletipo:</b> con el foco en el papel, escriba normalmente; Enter envía CR. Los caracteres imprimibles ASCII se envían al Ricoh 3000; los de control no válidos se avisan. Backspace no se usa: el teclado histórico no lo tiene.</div>
 ${extra}
 <p>Los botones de la barra superior muestran una ayuda emergente al pasar el ratón.</p>`;
     }
 
-    /* ═══ AYUDA LEN-1 ═══ */
+    /* ═══ AYUDA LEN-B ═══ */
     const HELP_LEN1 = `<h2>Lenguaje LEN-B — CID 201-B</h2>
 <p><b>LEN-B</b> es el ensamblador de la <b>CID 201-B</b>: una minicomputadora cubana de 12 bits con <b>8 campos de 4096 palabras</b>. Cada campo tiene <b>32 páginas de 128 palabras</b>. El ejecutor de CIDcoder-B usa el <b>campo 0</b>; el visor permite inspeccionar los ocho campos. La representación natural es <b>octal</b>.</p>
 <div class="helpNote">En LEN-B tampoco existe una carga directa del acumulador. Para cargar <code>[M]</code> en AC se usa <code>LAC</code> (limpia AC) y luego <code>SUM M</code> (suma M a AC=0). <code>LAC LEN</code> limpia AC y EN en una sola palabra: <code>7140</code>.</div>
-<p><b>Estado de la ayuda:</b> las tablas de esta sección describen la 201-B. Las referencias al compilador LEAL y al runtime siguen siendo heredadas de la 201-A hasta completar la fase 3.</p>
+<p><b>Estado de la ayuda:</b> las tablas de esta sección describen la 201-B. El compilador LEAL-B y su runtime emiten LEN-B para la CID 201-B.</p>
+<div class="helpNote"><b>Cinta perforada de 8 canales:</b> el panel <b>Cinta</b> se genera al compilar. En LEN-B cada palabra de 12 bits ocupa <b>2 marcos</b>: 8 bits bajos y 5 bits (4 datos altos + el <b>enlace</b> en el canal 5, que marca palabra completa). En LEAL-B el fuente se perfora como caracteres <b>ISO-8</b>, un marco por carácter. <b>Save .rib</b> guarda la cinta en texto.</div>
 <h3>1. Sintaxis del fuente</h3>
 <pre>/ comentario
 ETIQUETA, INSTRUCCION      / etiqueta + instrucción (coma obligatoria)
@@ -10227,7 +9804,7 @@ TEXTO2, 'HOLA'             / cadena CI empaquetada (2 caracteres/palabra)</pre>
 <tr><td><code>PARM+0o10</code></td><td>Desplazamiento octal explícito.</td></tr>
 </table>
 <h3>3. Memoria y páginas</h3>
-<div class="helpNote"><b>Detección de solapamientos:</b> el ensamblador rechaza cualquier escritura sobre una dirección ya escrita (por ejemplo, dos <code>*ADDR</code> incompatibles o un array que pisa una instrucción). El error indica la línea LEN-1 de cada lado. Para overlays intencionales (self-modifying code, bootstraps), añadir <code>/ @@overlap-ok@@</code> como comentario en cualquier parte del fuente y el chequeo se desactiva para todo el programa.</div>
+<div class="helpNote"><b>Detección de solapamientos:</b> el ensamblador rechaza cualquier escritura sobre una dirección ya escrita (por ejemplo, dos <code>*ADDR</code> incompatibles o un array que pisa una instrucción). El error indica la línea LEN-B de cada lado. Para overlays intencionales (self-modifying code, bootstraps), añadir <code>/ @@overlap-ok@@</code> como comentario en cualquier parte del fuente y el chequeo se desactiva para todo el programa.</div>
 <p>La 201-B tiene <b>8 campos de 4096 palabras</b> de 12 bits. Una dirección absoluta se escribe en <b>15 bits</b>: <b>3 bits de campo</b> + <b>5 bits de página</b> + <b>7 bits de posición</b>. En octal son cinco dígitos: <code>00000</code>…<code>77777</code>; el primer dígito es el campo (0…7) y los cuatro restantes, la dirección dentro del campo (<code>0000</code>…<code>7777</code>).</p>
 <table>
 <tr><th>Parte</th><th>Bits</th><th>Significado</th></tr>
@@ -10445,15 +10022,15 @@ LAC          / AC = 0
 SUM A        / AC = [A]
 CAC IAC      / AC = -[A]
 SUM B        / AC = [B] - [A]</pre>
-<h3>7. Optimizaciones automáticas (LEAL heredado → LEN-1)</h3>
-<p><b>Estado de la migración:</b> hasta completar la fase 3, el compilador LEAL de CIDcoder-B sigue generando <b>LEN-1 para la 201-A</b> y el ejecutor lo corre en el motor heredado (<code>CORE201</code>/<code>TT51</code>). El modo LEN-B, en cambio, ya usa el ensamblador propio y el motor <code>CORE201B</code>/<code>RICOH3000</code>. Estas optimizaciones se aplican al texto que genera el compilador LEAL, <b>no</b> cuando se abre y ensambla un archivo <code>.lenb</code> escrito a mano: en ese caso el ensamblador respeta el fuente tal cual.</p>
+<h3>7. Optimizaciones automáticas (LEAL → LEN-B)</h3>
+<p><b>Estado:</b> el compilador LEAL de CIDcoder-B genera <b>LEN-B para la 201-B</b> y el ejecutor lo corre en <code>CORE201B</code>/<code>RICOH3000</code>. Estas optimizaciones se aplican al texto que genera el compilador LEAL, <b>no</b> cuando se abre y ensambla un archivo <code>.lenb</code> escrito a mano: en ese caso el ensamblador respeta el fuente tal cual.</p>
 <ol>
 <li><b>Eliminación</b> de <code>LAC</code> redundantes después de <code>DEL</code> o <code>LAC</code> (esas instrucciones ya dejan AC = 0).</li>
 <li><b>Combinación</b> de dos microinstrucciones consecutivas compatibles, respetando las etiquetas: nunca combina si la segunda línea lleva etiqueta.</li>
 <li><b>Página 0:</b> elimina punteros muertos, comparte punteros y constantes equivalentes, mueve al final de su página los punteros usados en una sola página y omite variables runtime y constantes que el programa no usa.</li>
 </ol>
 <p>El panel de mensajes del editor informa: <i>«N eliminadas, M combinadas»</i>. En el LST aparecen los mensajes de página 0: punteros de origen → destino, palabras ahorradas y constantes deduplicadas.</p>
-<div class="helpNote"><b>Consecuencia:</b> el LEN-1 que muestra el panel <b>LEN generado</b> ya es el texto optimizado; sus líneas y palabras deben coincidir con el LST. Si escribe LEN-1 a mano no verá estas transformaciones ni estos mensajes.</div>
+<div class="helpNote"><b>Consecuencia:</b> el LEN-B que muestra el panel <b>LEN generado</b> ya es el texto optimizado; sus líneas y palabras deben coincidir con el LST. Si escribe LEN-B a mano no verá estas transformaciones ni estos mensajes.</div>
 <h3>8. Errores frecuentes</h3>
 <h4>Sintaxis, etiquetas y datos</h4>
 <ul>
@@ -10463,7 +10040,7 @@ SUM B        / AC = [B] - [A]</pre>
 <li><code>RI 1</code> / <code>RD 2</code>: no dan error, pero <b>no son rotaciones</b>; se interpretan como la etiqueta <code>RI</code>/<code>RD</code> con un dato. Escriba <code>RI1</code>, <code>RD2</code>.</li>
 <li>Usar una palabra clave como operando o como etiqueta.</li>
 <li>Creer que <code>$</code> es obligatorio: es opcional; el ensamblador termina al final del archivo. Lo que haya después de <code>$</code> se ignora.</li>
-<li>Usar <code>;</code> como comentario (en LEN-1 el comentario empieza por <code>/</code>).</li>
+<li>Usar <code>;</code> como comentario (en LEN-B el comentario empieza por <code>/</code>).</li>
 </ul>
 <h4>Direcciones y memoria</h4>
 <ul>
@@ -10522,17 +10099,16 @@ $</pre>
 <tr><td><code>Ctrl+O</code></td><td>Abrir un archivo <code>.lenb</code>, <code>.leal</code> o <code>.txt</code> (<code>.len1</code> se acepta como legado).</td></tr>
 <tr><td><code>F9</code></td><td>Compilar y ensamblar.</td></tr>
 </table>
-${helpEditor("12", "<p>En modo LEN-1, el gutter del editor también permite poner y quitar puntos de ruptura.</p>")}`;
+${helpEditor("12", "<p>En modo LEN-B, el gutter del editor también permite poner y quitar puntos de ruptura.</p>")}`;
 
  /* ═══ AYUDA LEAL ═══ */
     const HELP_LEAL = `<h2>Lenguaje LEAL-B — CID 201-B</h2>
-<p><b>Estado de la migración:</b> la ayuda de LEAL-B describe el lenguaje y las decisiones acordadas, pero hasta completar la fase 3 el compilador sigue emitiendo <b>LEN-1 para la 201-A</b> y el ejecutor lo corre en el motor heredado. El modo LEN-B ya es nativo de la 201-B.</p>
+<p><b>Estado:</b> la ayuda de LEAL-B describe el lenguaje y las decisiones acordadas. El compilador emite <b>LEN-B para la 201-B</b> y el ejecutor lo corre en <code>CORE201B</code>/<code>RICOH3000</code>.</p>
 <p>LEAL (<i>LEnguaje ALgorítmico</i>) fue desarrollado en Cuba en el Centro de Investigación Digital entre 1970 y 1971 por el Ing. Víctor M. Llopis Zayas-Bazán con la colaboración de Victor A. Orsini (diseño original y aritmética), Emilio Lino (E/S), Fedor Sierra (subrutinas básicas), María E. Bragado y Miguel Fonfría (funciones trascendentes). Es un lenguaje algebraico pensado para cálculo científico, con notación polaca y simbólica, que sigue algunos conceptos del Autocode de la Elliot 803B Mark III, y orientado a ser utilizado en las minicomputadoras cubanas CID 201/201-A/201-B y CID 300/10. Durante los años 1970 se desarrolló en versiones A, B y F. CIDcoder-A soporta LEAL-A completamente y LEAL-B parcialmente; CIDcoder-B completará LEAL-B para la 201-B.</p>
 <div class="helpWarn">
-<ul>
-    Hasta la fase 3, LEAL se compila para la CID 201-A y se ejecuta con CORE201/TT51.
-</ul>
+<p><b>Estado:</b> LEAL-B se compila a LEN-B y se ejecuta en la CID 201-B con <code>CORE201B</code>/<code>RICOH3000</code>.</p>
 </div>
+<div class="helpNote"><b>Cinta perforada de 8 canales:</b> al compilar, el panel <b>Cinta</b> perfora el fuente LEAL-B como caracteres <b>ISO-8</b> (un marco por carácter). Si cambia al editor LEN-B, la cinta muestra el programa ensamblado: cada palabra de 12 bits ocupa <b>2 marcos</b> (8 bits + 5 bits con enlace en el canal 5). <b>Save .rib</b> guarda la cinta en texto.</div>
 <h3>1. Estructura mínima</h3>
 <pre><code>
 LEAL        ; primera línea obligatoria
@@ -10648,11 +10224,11 @@ J NOR + A = C  ; forma explícita equivalente (sigue siendo válida)</pre>
 <tr><td><code>PCA v</code></td><td>Imprime la cadena del buffer <code>v</code> hasta el terminador. Ver §7b.</td></tr>
 <tr><td><code>DIG m,n</code></td><td>Formato aritmético del <code>PER</code> flotante: <code>n</code> decimales + 3 espacios (implícito 6,3). <code>n</code> se satura a 0..5 con aviso en el listado; <code>m</code> se satura a 0..8 pero es solo <b>declarativo</b>: no rellena la parte entera, que siempre sale completa y sin espacios a la izquierda. Truncación (sin redondeo) sobre el valor almacenado. <b>La forma <code>DIG n</code> (un argumento, exponencial) es ERROR de compilación</b> (<code>E:DIGEXP</code>) — el modo exponencial está pendiente.</td></tr>
 <tr><td><code>DIG n</code></td><td>Formato exponencial base 10 (mantisa de n dígitos + <code>e±dd</code>). <b>ERROR de compilación</b> (<code>E:DIGEXP</code>: «formato exponencial no soportado en esta versión; use DIG m,n»).</b></td></tr>
-<tr><td><code>LIN</code></td><td>Emite CR+LF explícito. Útil entre dos <code>TIT</code> consecutivos.</td></tr>
-<tr><td><code>TIT ...</code></td><td>Imprime un título: primero el texto CI y después <b>LF + CR</b> (antes del terminador CI 36). La Ricoh muestra el par como un solo salto de línea.</td></tr>
+<tr><td><code>LIN</code></td><td>Emite CR+LF explícito. Úselo después de <code>TIT</code> para pasar a otra línea.</td></tr>
+<tr><td><code>TIT ...</code></td><td>Imprime un título: <b>solo el texto CI</b> (sin salto de línea), como en LEAL original. Para pasar a otra línea, use <code>LIN</code> a continuación.</td></tr>
 <tr><td><code>ESP n</code></td><td>n espacios en blanco.</td></tr>
 </table>
-<div class="helpNote"><b>Retorno de línea:</b> <code>PER</code> <b>no</b> emite CR+LF: el papel queda en la misma línea y los PER consecutivos se concatenan. El único salto automático es el de <code>E:DESB</code> (entra en línea nueva). <code>TIT</code> añade <b>LF + CR</b> y deja el cursor al inicio de la línea siguiente; <code>LIN</code> emite <b>CR + LF</b> con el mismo efecto visible. Usa <code>LIN</code> si necesitas una línea en blanco adicional.</div>
+<div class="helpNote"><b>Retorno de línea:</b> <code>PER</code> <b>no</b> emite CR+LF: el papel queda en la misma línea y los PER consecutivos se concatenan. El único salto automático es el de <code>E:DESB</code> (entra en línea nueva). <code>TIT</code> tampoco añade salto: imprime solo el texto; use <code>LIN</code> después para pasar a otra línea. <code>LIN</code> emite <b>CR + LF</b>.</div>
 <div class="helpNote"><b>LEC flotante:</b> <code>LEC v</code> con destino <code>FLO</code> acumula los dígitos (hasta 8 significativos): si la parte entera no cabe (|v| ≥ 2²³) imprime <code>E:DESB</code> y para; si son los decimales los que no caben (>= 9 dígitos significativos), trunca <b>en silencio</b> y sigue. Dual (mezcla de <code>LEC</code> enteras y flotantes en un programa) también funciona.</div>
 
 <h3>7b. Buffers de caracteres (LCA, PCA)</h3>
@@ -10785,25 +10361,25 @@ FRU (n) H(6) H(9)</pre>
 <h3>12c. Paneles y controles</h3>
 <table>
 <tr><th>Control</th><th>Qué hace</th></tr>
-<tr><td><b>New LEAL / New LEN</b></td><td>Crea un fuente nuevo en el modo indicado. <b>Load</b> abre <code>.leal</code>, <code>.lenb</code> o <code>.txt</code> (<code>.len1</code> legado); <b>Save</b> y <b>Save as</b> guardan el fuente.</td></tr>
+<tr><td><b>LEAL / LEN</b></td><td>Crea un fuente nuevo en el modo indicado. <b>Load</b> abre <code>.leal</code>, <code>.lenb</code> o <code>.txt</code> (<code>.len1</code> legado); <b>Save</b> y <b>Save as</b> guardan el fuente.</td></tr>
 <tr><td><b>⯆Autoalign⯆</b></td><td>Indenta automáticamente los cuerpos de <code>CIC</code>/<code>REP</code> (activo por defecto).</td></tr>
 <tr><td><b>STRPK</b></td><td>Activa el modo <i>packed</i> (2 caracteres por palabra) para <code>TIT</code> y los buffers <code>LCA</code>/<code>PCA</code>. Apagado, usa 1 carácter por palabra.</td></tr>
-<tr><td><b>⚙ Compile</b> / <code>F9</code></td><td>Compila LEAL y ensambla el LEN-1. Los mensajes aparecen en el editor, en el panel <b>LEN generado</b> y en el <b>LST</b>.</td></tr>
+<tr><td><b>⚙ Compile</b> / <code>F9</code></td><td>Compila LEAL y ensambla el LEN-B. Los mensajes aparecen en el editor, en el panel <b>LEN generado</b> y en el <b>LST</b>.</td></tr>
 <tr><td><b>▶ Execute</b></td><td>Compila, carga la memoria y abre el ejecutor.</td></tr>
-<tr><td><b>☰ LST / ⚡ Exec / 🎞 Tape</b></td><td>Muestran u ocultan los paneles de listado, ejecutor y cinta perforada.</td></tr>
+<tr><td><b>☰ LST / ⚡ Exec</b></td><td>Muestran u ocultan los paneles de listado y ejecutor.</td></tr>
 <tr><td><b>Gutter del editor</b></td><td>Numera las líneas del editor. En LEAL, los puntos de ruptura se ponen en las filas del LST o en el panel <b>LEN generado</b>.</td></tr>
 </table>
-<p><b>Panel LEN generado:</b> solo aparece en modo LEAL. Muestra el LEN-1 producido, con líneas y palabras en la barra de estado y en el mensaje <i>«LEN generado: N líneas · M palabras»</i>; M debe coincidir con las palabras del LST. <b>Save .lenb</b> guarda el texto generado.</p>
-<p><b>Panel LST:</b> muestra el listado ensamblado; sus mensajes resumen cuerpo, página 0, punteros y constantes. <b>Save .lst</b> guarda el listado. <b>Panel Cinta:</b> representa la cinta perforada y permite guardar el <code>.rib</code>.</p>
-${helpEditor("12d", '<div class="helpNote"><b>En modo LEAL:</b> el LST y el ejecutor trabajan sobre el LEN-1 generado. Los puntos de ruptura se marcan en las líneas de ese LEN-1 (panel <b>LEN generado</b> o filas del LST).</div>')}
+<p><b>Panel LEN generado:</b> solo aparece en modo LEAL. Muestra el LEN-B producido, con líneas y palabras en la barra de estado y en el mensaje <i>«LEN generado: N líneas · M palabras»</i>; M debe coincidir con las palabras del LST. <b>Save .lenb</b> guarda el texto generado.</p>
+<p><b>Panel LST:</b> muestra el listado ensamblado; sus mensajes resumen cuerpo, página 0, punteros y constantes. <b>Save .lst</b> guarda el listado.</p>
+${helpEditor("12d", '<div class="helpNote"><b>En modo LEAL:</b> el LST y el ejecutor trabajan sobre el LEN-B generado. Los puntos de ruptura se marcan en las líneas de ese LEN-B (panel <b>LEN generado</b> o filas del LST).</div>')}
 
-<h3>13. Compilación a LEN-1</h3>
-<p>Dos pasos: compilación LEAL → LEN-1, ensamblado LEN-1 → memoria y listado. Los saltos que no se pueden codificar directamente se resuelven con punteros en página 0 (<code>JPTR_*</code>). El área de parámetros <code>PARM</code> tiene 32 palabras (hasta 16 argumentos por subrutina).</p>
+<h3>13. Compilación a LEN-B</h3>
+<p>Dos pasos: compilación LEAL → LEN-B, ensamblado LEN-B → memoria y listado. Los saltos que no se pueden codificar directamente se resuelven con punteros en página 0 (<code>JPTR_*</code>). El área de parámetros <code>PARM</code> tiene 32 palabras (hasta 16 argumentos por subrutina).</p>
 <p>El panel de mensajes del editor informa: <i>«N eliminadas, M combinadas»</i> (peephole). Si el código de datos runtime excede la página 0, el compilador emite un error claro indicando la dirección de desbordamiento.</p>
 <p>Al compilar desde LEAL, el ensamblador optimiza la página 0: elimina punteros muertos, comparte punteros y constantes equivalentes, mueve al final de su página los punteros usados en una sola página y omite las variables runtime y constantes que el programa no usa. El listado muestra el uso real de página 0, los punteros que quedan y las constantes deduplicadas.</p>
 
 <h3>13b. Uso de memoria: cuánto ocupa un programa LEAL</h3>
-<p>La CID 201-A tiene <b>4096 palabras</b> (32 páginas de 128). El layout compacto coloca los bloques en este orden, cada uno alineado al inicio de una página:</p>
+<p>El compilador LEAL-B coloca el programa en el <b>campo 0</b> de la CID 201-B, con un límite de <b>4096 palabras</b> (32 páginas de 128). El layout compacto coloca los bloques en este orden, cada uno alineado al inicio de una página:</p>
 <pre>página 0:  bootstrap + escalares + datos runtime + tabla de punteros
 subrutinas de usuario (CRU/FRU)
 rutinas runtime y stubs (solo las usadas)
@@ -10871,16 +10447,21 @@ arreglos                     [arrayBase, arrayEnd)</pre>
 
 <h3>14. Ejemplos</h3>
 <h4>Suma de dos números</h4>
-<pre>LEAL
-SUMA DE DOS NUMEROS
-ENT A B C
-FLO
-REF (1)
-LEC A
-LEC B
-A + B = C
-PER C
-FIN</pre>
+<pre>	LEAL
+	SUMA DE DOS NUMEROS	; título del programa
+	ENT A B C			; variables enteras
+	FLO					; sin variables flotantes
+	REF (1)				; declara la referencia máxima usada
+(1)	TIT A?				; pide el primer número
+	LEC A				; lee A del teclado
+	TIT B?				; pide el segundo número
+	LEC B				; lee B del teclado
+	TIT A+B=			; rótulo del resultado
+	A + B = C			; calcula la suma
+	PER C				; imprime C
+	LIN					; salto de línea
+	VEA (1)				; repite el ciclo
+	FIN					; fin del programa</pre>
 <h4>MCD por restas</h4>
 <pre>	LEAL
 	MCD DE DOS NUMEROS
@@ -11035,7 +10616,7 @@ FIN</pre>
 <h2>CIDcoder-B</h2>
 <div class="about-version">Entorno de desarrollo y simulador para la CID 201-B</div>
 <div class="about-row"><span class="about-lbl">Proyecto</span><span class="about-val">CIDcoder-B</span></div>
-<div class="about-row"><span class="about-lbl">Versión</span><span class="about-val">0.1.5</span></div>
+<div class="about-row"><span class="about-lbl">Versión</span><span class="about-val">0.1.7</span></div>
 
 <div class="about-row"><span class="about-lbl">Fecha</span><span class="about-val">19/Noviembre/2026</span></div>
 <div class="about-row"><span class="about-lbl">Autor</span><span class="about-val">MSZ</span></div>
@@ -11045,10 +10626,10 @@ FIN</pre>
 <div class="about-note">
     <b>CIDcoder-B</b> integra en un único entorno el editor LEAL-B, el compilador LEAL-B&nbsp;→&nbsp;LEN-B,
     el ensamblador LEN-B y un simulador funcional de la minicomputadora cubana <b>CID 201-B</b>
-    (ICID, Cuba, 1973), con la teleimpresora <b>Ricoh 3000</b> como salida de papel.
+    (ICID, Cuba, 1973), con la teleimpresora <b>Ricoh 3000</b> como salida de papel y un
+    generador de <b>cinta perforada de 8 canales</b>.
     <br><br>Base: CIDcoder-A <b>_52</b> y núcleo CID201B <b>_17</b>.
-    <br><b>Estado:</b> fase 0 (andamiaje). El ensamblador LEN-B y el compilador LEAL-B se incorporan en las fases 1 y 3.
-    <br>El ejecutor de la interfaz sigue usando el núcleo 201-A hasta la fase 2; el núcleo 201-B ya está operativo
+    <br><b>Estado:</b> compilador LEAL-B, ensamblador LEN-B y ejecutor operativos sobre la 201-B
     (8 campos, 32&nbsp;768 palabras, Ricoh 3000 de papel).
     <div style="margin-top:10px">
         <button id="btnSelfTest201B" type="button">▶ Autoprueba del núcleo 201-B</button>
@@ -11056,276 +10637,12 @@ FIN</pre>
     </div>
 </div>`;
 
-        /* ═══ SAMPLE LEN-1 ═══ */
+        /* ═══ SAMPLE LEN-B ═══ */
         const SAMPLE_LEN1 = "*0200\n/ suma A + B y deja el resultado en RES\n       LAC           / limpia AC y EN\n       SUM A         / AC = [A]\n       SUM B         / AC = [A] + [B]\n       DEL RES       / [RES] = AC\n       ALT           / fin del programa\nA,     0002          / primer sumando\nB,     0003          / segundo sumando\nRES,   0000          / resultado\n$";
 
         /* ══════════════════════════════════════════════════════════════════
-            CORE201, TT51, TRACE, RUN, LAYOUT Y EVENTOS
-            (ver respuesta siguiente — bloque 2c)
+            CORE201B, RICOH3000, TRACE, RUN, LAYOUT Y EVENTOS
             ══════════════════════════════════════════════════════════════════ */
-        /* ══════════════════════════════════════════════════════════════════
-        CORE201 — Núcleo de emulación CID 201-A
-        ══════════════════════════════════════════════════════════════════ */
-        const CORE201 = (function () {
-            const ROTATION_TABLE = {
-                0o7202: 1, 0o7102: 2, 0o7302: 3, 0o7042: 4, 0o7242: 5, 0o7142: 6, 0o7342: 7,
-                0o7322: 8, 0o7062: 9, 0o7262: 10, 0o7162: 11, 0o7362: 12
-            };
-            function m12(v) { return v & 0xFFF }
-            const TELE_CHAR_NS = 1e9 / 100;  // 100 chars/s (impresión) — DOC/REPORT_bug_LEC.md
-            const st = {
-                EN: 0, AC: 0, RM: 0, CP: 0, lastInstr: 0,
-                memory: new Uint16Array(4096),
-                running: false, halted: false, steps: 0, cycle: 5,
-                timeNs: 0, perfReadyAt: 0,
-                indPerfListo: 1,
-                RegistroDigito: 0, RegistroSigno: 0, RegistroNumeros: 0,
-                RegistroTitulos: 0, RegistroFraccion: 0,
-                indFraccion: 0, indAlmacena: 0, indBorrado: 0,
-                indRecupera: 0, indSigno: 0, indDigitos: 0,
-                indOut: 0, indMuestreo: 0,
-                regPerforacion: 0,
-                readReg: 0, readReady: 0, readerEnabled: true, inputQueue: []
-            };
-            const cb = { onPaper: null, onHalt: null };
-
-            function reset() {
-                st.EN = 0; st.AC = 0; st.RM = 0; st.CP = 0; st.lastInstr = 0;
-                st.running = false; st.halted = false; st.steps = 0; st.cycle = 5;
-                st.timeNs = 0; st.perfReadyAt = 0; st.indPerfListo = 1;
-                st.RegistroDigito = 0; st.RegistroSigno = 0; st.RegistroNumeros = 0;
-                st.RegistroTitulos = 0; st.RegistroFraccion = 0;
-                st.indFraccion = 0; st.indAlmacena = 0; st.indBorrado = 0;
-                st.indRecupera = 0; st.indSigno = 0; st.indDigitos = 0;
-                st.indOut = 0; st.indMuestreo = 0;
-                st.regPerforacion = 0;
-                st.readReg = 0; st.readReady = 0; st.readerEnabled = true; st.inputQueue.length = 0;
-            }
-            function loadWords(rows) {
-                for (const r of rows) {
-                    const a = (r.abs !== undefined) ? r.abs : r.addr;
-                    const v = (r.value !== undefined) ? r.value : r.content;
-                    if (typeof a === 'number' && a >= 0 && a < 4096 && typeof v === 'number') {
-                        st.memory[a] = v & 0xFFF;
-                    }
-                }
-            }
-            function setCP(a) { st.CP = a & 0xFFF; }
-            function getSwitchValue() { return 0; }
-
-            function feedInput(code5) {
-                st.inputQueue.push(code5 & 0x1F);
-                _refreshReader();
-            }
-            function _refreshReader() {
-                if (!st.readerEnabled) return;
-                if (st.inputQueue.length > 0) {
-                    st.readReg = st.inputQueue[0];
-                    st.readReady = 1;
-                } else {
-                    st.readReg = 0;
-                    st.readReady = 0;
-                }
-            }
-
-            function executeInstruction() {
-                const fetchAddr = st.CP;
-                st.lastInstr = fetchAddr;
-                const instr = st.memory[fetchAddr] & 0xFFF;
-                st.RM = instr;
-                const opcode = (instr >> 9) & 0x7;
-                const indirect = (instr >> 8) & 1;
-                const page = (instr >> 7) & 1;
-                const addr7 = instr & 0x7F;
-
-                if (opcode === 7) st.cycle = (instr === 0o7404) ? 3 : 1;
-                else if (opcode === 6) st.cycle = 1;
-                else if (opcode === 5) st.cycle = 4;
-                else st.cycle = indirect ? 0 : 5;
-
-                const pageBase = page ? ((st.CP >> 7) << 7) : 0;
-                let effAddr = (pageBase | addr7) & 0xFFF;
-                if (indirect) effAddr = st.memory[effAddr] & 0xFFF;
-
-                switch (opcode) {
-                    case 0: st.AC = m12(st.AC & (st.memory[effAddr] & 0xFFF)); st.CP = m12(st.CP + 1); break;
-                    case 1: {
-                        const s = st.AC + (st.memory[effAddr] & 0xFFF);
-                        st.AC = s & 0xFFF; st.EN = (s >> 12) & 1;
-                        st.CP = m12(st.CP + 1); break;
-                    }
-                    case 2: st.memory[effAddr] = m12(st.memory[effAddr] + 1);
-                        st.CP = (st.memory[effAddr] === 0) ? m12(st.CP + 2) : m12(st.CP + 1); break;
-                    case 3: st.memory[effAddr] = st.AC; st.AC = 0; st.CP = m12(st.CP + 1); break;
-                    case 4: st.memory[effAddr] = m12(st.CP + 1); st.CP = m12(effAddr + 1); break;
-                    case 5: st.CP = effAddr; break;
-                    case 6: _io(instr); st.CP = m12(st.CP + 1); break;
-                    case 7: _micro(instr); st.CP = m12(st.CP + 1); break;
-                }
-
-                st.steps++;
-                if (opcode <= 5) st.timeNs += indirect ? (1e9 / 14000) : (1e9 / 25000);
-                else st.timeNs += 1e9 / 75000;
-            }
-
-            function _io(instr) {
-                const group = (instr >> 6) & 0x7;
-                if (group === 0o1) {
-                    const op = instr & 0x7F;
-                    if (op & 0o010) st.indPerfListo = 0;
-                    if (op & 0o020) {
-                        const c = st.AC & 0x1F;
-                        st.regPerforacion = c; st.AC = 0;
-                        if (cb.onPaper) cb.onPaper(c);
-                        st.indPerfListo = 0;
-                        st.perfReadyAt = st.timeNs + TELE_CHAR_NS;
-                    }
-                    if (op & 0o040) {
-                        if (st.timeNs >= st.perfReadyAt) st.indPerfListo = 1;
-                        if (st.indPerfListo === 1) st.CP = m12(st.CP + 1);
-                    }
-                    return;
-                }
-                if (group === 0o2) {
-                    const op = instr & 0x7F;
-                    if (op & 0o002) { st.readerEnabled = false; return; }                    // PAL: detiene lector
-                    if (op & 0o004) { st.readerEnabled = true; _refreshReader(); return; }   // COL: inicia lector
-                    if (op & 0o010) { st.readReady = 0; }   // LIL: deja el indicador en 0; no re-arma con la cola existente
-                    if (op & 0o020) {
-                        const c = st.inputQueue.length > 0 ? st.inputQueue.shift() : 0;
-                        st.readReg = c;
-                        const s = st.AC + c; st.AC = s & 0xFFF; if (s > 0xFFF) st.EN = 1;
-                        _refreshReader();
-                    }
-                    if ((op & 0o040) && st.readReady === 1) st.CP = m12(st.CP + 1);
-                    return;
-                }
-                if (group === 0o3) {
-                    const sub = instr & 0x3F;
-                    if (sub === 0o10) {
-                        st.indDigitos = 0; st.indFraccion = 0; st.indSigno = 0;
-                        st.indAlmacena = 0; st.indBorrado = 0; st.indRecupera = 0;
-                        st.indOut = 0; st.indMuestreo = 0;
-                    }
-                    return;
-                }
-                if (group === 0o4) {
-                    const sub = instr & 0x3F;
-                    if (sub === 0o11) { st.indFraccion = 0; return; }
-                    if (sub === 0o12) { st.indAlmacena = 0; return; }
-                    if (sub === 0o14) { st.indDigitos = 0; return; }
-                    if (sub === 0o20) {
-                        const s = st.AC + st.RegistroDigito;
-                        st.AC = s & 0xFFF;
-                        if (s > 0xFFF) st.EN = 1;
-                        return;
-                    }
-                    if (sub === 0o34) {                       // TRA LID: suma dígitos y limpia su indicador
-                        const s = st.AC + st.RegistroDigito;
-                        st.AC = s & 0xFFF;
-                        if (s > 0xFFF) st.EN = 1;
-                        st.indDigitos = 0;
-                        return;
-                    }
-                    if (sub === 0o41 && st.indFraccion) { st.CP = m12(st.CP + 1); return; }
-                    if (sub === 0o42 && st.indAlmacena) { st.CP = m12(st.CP + 1); return; }
-                    if (sub === 0o44 && st.indDigitos) { st.CP = m12(st.CP + 1); return; }
-                    return;
-                }
-                if (group === 0o5) {
-                    const sub = instr & 0x3F;
-                    if (sub === 0o00) { st.RegistroSigno = 1; return; }
-                    if (sub === 0o11) { st.indBorrado = 0; return; }
-                    if (sub === 0o12) { st.indSigno = 0; return; }
-                    if (sub === 0o14) { st.indRecupera = 0; return; }
-                    if (sub === 0o21) { st.RegistroFraccion = st.AC & 1; st.AC = 0; return; }
-                    if (sub === 0o22) { st.RegistroTitulos = st.AC & 0xF; st.AC = 0; return; }
-                    if (sub === 0o24) { st.RegistroNumeros = st.AC & 0xFFF; st.AC = 0; return; }
-                    if (sub === 0o41 && st.indBorrado) { st.CP = m12(st.CP + 1); return; }
-                    if (sub === 0o42 && st.indSigno) { st.CP = m12(st.CP + 1); return; }
-                    if (sub === 0o44 && st.indRecupera) { st.CP = m12(st.CP + 1); return; }
-                    return;
-                }
-                if (group === 0o6) {
-                    const sub = instr & 0x3F;
-                    if (sub === 0o11) { st.indOut = 0; return; }            // LIO
-                    if (sub === 0o12) { st.indMuestreo = 0; return; }       // LIM
-                    if (sub === 0o21) { st.AC = m12(st.AC + 0); return; }   // TAU (stub)
-                    if (sub === 0o22) { st.AC = m12(st.AC + 0); return; }   // TAD (stub)
-                    if (sub === 0o41 && st.indOut) { st.CP = m12(st.CP + 1); return; }       // SIO
-                    if (sub === 0o42 && st.indMuestreo) { st.CP = m12(st.CP + 1); return; }  // SIM
-                    return;                                                 // TUA/TDA no implementadas
-                }
-            }
-
-            function _micro(instr) {
-                const op = instr & 0xFFF;
-                if (op & 0o400) {
-                    // Grupo saltos: bits 6,5,4 = condiciones (ver tabla abajo)
-                    // Bit 3 (SLT) distingue grupo OR (0) de AND (1)
-                    // Bit 7 = LAC_S (limpiar AC)
-                    // Bit 2 = ALT
-                    // Bit 1 = ORI
-                    const c1 = (op & 0o100) !== 0;   // SAN (SLT=0) / SAP (SLT=1)
-                    const c2 = (op & 0o040) !== 0;   // SAC (SLT=0) / SAD (SLT=1)
-                    const c3 = (op & 0o020) !== 0;   // SED (SLT=0) / SEC (SLT=1)
-                    const SLT = (op & 0o010) !== 0;
-                    const ALT = (op & 0o004) !== 0;
-                    const ORI = (op & 0o002) !== 0;
-                    const LAC_S = (op & 0o200) !== 0;
-                    // El salto se evalúa ANTES de LAC_S (orden 1 del salto, orden 2 de LAC):
-                    // LAC SAC salta si el AC ANTERIOR == 0; luego 0 → AC.
-                    // LAC SLT salta siempre; LAC SAN/SAP/SAD miran el AC anterior.
-                    let skip = false;
-                    if (SLT) {
-                        // Grupo AND: skip si TODAS las condiciones activas se cumplen
-                        const conds = [];
-                        if (c1) conds.push(st.AC !== 0 && (st.AC & 0o4000) === 0);  // SAP: AC > 0 (positivo estricto; cero NO salta)
-                        if (c2) conds.push(st.AC !== 0);             // SAD: AC != 0
-                        if (c3) conds.push(st.EN === 0);             // SEC: EN == 0
-                        skip = conds.length === 0 ? true : conds.every(Boolean);
-                    } else {
-                        // Grupo OR: skip si ALGUNA condición activa se cumple
-                        let any = false;
-                        if (c1) any = any || (st.AC & 0o4000) !== 0;  // SAN: AC < 0
-                        if (c2) any = any || (st.AC === 0);           // SAC: AC == 0
-                        if (c3) any = any || (st.EN === 1);           // SED: EN == 1
-                        skip = any;
-                    }
-                    if (skip) st.CP = m12(st.CP + 1);
-                    if (LAC_S) st.AC = 0;
-                    if (!skip && ORI) st.AC = m12(st.AC | getSwitchValue());
-                    if (!skip && ALT) {
-                        st.running = false; st.cycle = 3; st.halted = true;
-                        if (cb.onHalt) cb.onHalt();
-                    }
-                    return;
-                }
-                if (op & 0o002) {
-                    const rc = ROTATION_TABLE[op];
-                    if (rc !== undefined) {
-                        let comb = ((st.EN & 1) << 12) | (st.AC & 0xFFF);
-                        const sh = ((rc % 13) + 13) % 13;
-                        comb = ((comb >> sh) | (comb << (13 - sh))) & 0x1FFF;
-                        st.AC = comb & 0xFFF; st.EN = (comb >> 12) & 1;
-                    }
-                    return;
-                }
-                const LAC = (op & 0o200) !== 0, LEN = (op & 0o100) !== 0;
-                const CAC = (op & 0o040) !== 0, CEN = (op & 0o020) !== 0, IAC = (op & 0o010) !== 0;
-                if (LAC) st.AC = 0;
-                if (LEN) st.EN = 0;
-                if (CAC) st.AC = (~st.AC) & 0xFFF;
-                if (CEN) st.EN = st.EN ? 0 : 1;
-                if (IAC) {
-                    const s = st.AC + 1;
-                    st.AC = s & 0xFFF;
-                    if (s > 0xFFF) st.EN = st.EN ? 0 : 1;   // PDP-8: el acarreo complementa EN (no lo pone a 1)
-                }
-            }
-
-            return { state: st, reset, loadWords, setCP, feedInput, executeInstruction, callbacks: cb };
-        })();
 
         /* ══════════════════════════════════════════════════════════════════
         CORE201B — Núcleo de emulación CID 201-B
@@ -11895,9 +11212,9 @@ FIN</pre>
             function printAscii(code) {
                 const ch = (typeof code === 'string') ? code : String.fromCharCode(code);
                 if (ch === '\r' || ch === '\n') {
-                    // CR y LF son dos mitades del mismo salto: LIN emite CR+LF y
-                    // TIT emite LF+CR. El segundo control de un par sobre una
-                    // línea todavía vacía no añade otra línea en blanco.
+                    // CR y LF son dos mitades del mismo salto: LIN emite CR+LF.
+                    // TIT ya no emite salto; solo imprime el texto. El segundo
+                    // control de un par sobre una línea vacía no añade otra.
                     if (st.afterBreak) { st.afterBreak = false; return; }
                     _newLine(true);
                     return;
@@ -11933,9 +11250,9 @@ FIN</pre>
         })();
 
         /* ══════════════════════════════════════════════════════════════════
-        CIDB — utilidades de la fase 0/1: ensamblador LEN-B, programa de
-        demostración y autoprueba del núcleo 201-B. No sustituye al ejecutor
-        de la interfaz, que sigue usando CORE201/TT51 hasta la fase 2.
+        CIDB — utilidades del ensamblador LEN-B, programa de demostración y
+        autoprueba del núcleo 201-B. El ejecutor de la interfaz usa
+        CORE201B/RICOH3000.
         ══════════════════════════════════════════════════════════════════ */
         const CIDB = (function () {
             /* Genera un programa 201-B que imprime `text` con TAP y termina
@@ -11998,7 +11315,7 @@ FIN</pre>
                 return {
                     pass, expected, paper: res.paper, steps: res.steps,
                     altoType: res.altoType, regs: res.regs,
-                    version: '0.1.5', machine: 'CID 201-B',
+                    version: '0.1.7', machine: 'CID 201-B',
                     fields: CORE201B.FIELDS, words: CORE201B.MEM_WORDS
                 };
             }
@@ -12034,86 +11351,6 @@ FIN</pre>
 
         if (typeof globalThis !== 'undefined') globalThis.CIDB = CIDB;
 
-        /* ══════════════════════════════════════════════════════════════════
-            TT51 — Teletipo mínimo (tablas ITA2, papel, cola de entrada)
-            ══════════════════════════════════════════════════════════════════ */
-        const TT51 = (function () {
-            const codeLTRS = [1, 1, 1, 1, 1];
-            const codeFIGS = [1, 1, 0, 1, 1];
-            function _updateModeIndicator() {
-                const el = document.getElementById('runTTMode');
-                if (!el) return;
-                el.textContent = currentMode;
-                el.classList.toggle('figs', currentMode === 'FIGS');
-            }
-            const tableLTRS = {
-                'A': [1, 1, 0, 0, 0], 'B': [1, 0, 0, 1, 1], 'C': [0, 1, 1, 1, 0], 'D': [1, 0, 0, 1, 0],
-                'E': [1, 0, 0, 0, 0], 'F': [1, 0, 1, 1, 0], 'G': [0, 1, 0, 1, 1], 'H': [0, 0, 1, 0, 1],
-                'I': [0, 1, 1, 0, 0], 'J': [1, 1, 0, 1, 0], 'K': [1, 1, 1, 1, 0], 'L': [0, 1, 0, 0, 1],
-                'M': [0, 0, 1, 1, 1], 'N': [0, 0, 1, 1, 0], 'O': [0, 0, 0, 1, 1], 'P': [0, 1, 1, 0, 1],
-                'Q': [1, 1, 1, 0, 1], 'R': [0, 1, 0, 1, 0], 'S': [1, 0, 1, 0, 0], 'T': [0, 0, 0, 0, 1],
-                'U': [1, 1, 1, 0, 0], 'V': [0, 1, 1, 1, 1], 'W': [1, 1, 0, 0, 1], 'X': [1, 0, 1, 1, 1],
-                'Y': [1, 0, 1, 0, 1], 'Z': [1, 0, 0, 0, 1], ' ': [0, 0, 1, 0, 0],
-                'CR': [0, 0, 0, 1, 0], 'LF': [0, 1, 0, 0, 0]
-            };
-            const tableFIGS = {
-                '1': [1, 1, 1, 0, 1], '2': [1, 1, 0, 0, 1], '3': [1, 0, 0, 0, 0], '4': [0, 1, 0, 1, 0],
-                '5': [0, 0, 0, 0, 1], '6': [1, 0, 1, 0, 1], '7': [1, 1, 1, 0, 0], '8': [0, 1, 1, 0, 0],
-                '9': [0, 0, 0, 1, 1], '0': [0, 1, 1, 0, 1], '-': [1, 1, 0, 0, 0], '?': [1, 0, 0, 1, 1],
-                ':': [0, 1, 1, 1, 0], '(': [1, 1, 1, 1, 0], ')': [0, 1, 0, 0, 1], '.': [0, 0, 1, 1, 1],
-                ',': [0, 0, 1, 1, 0], '/': [1, 0, 1, 1, 1], "'": [1, 0, 1, 0, 0], '&': [0, 1, 0, 1, 1],
-                '+': [0, 1, 1, 1, 1], '=': [1, 0, 0, 1, 0], '%': [0, 0, 1, 0, 1], ' ': [0, 0, 1, 0, 0],
-                'CR': [0, 0, 0, 1, 0], 'LF': [0, 1, 0, 0, 0]
-            };
-            const LINE_MAX = 60;
-            let currentMode = 'LTRS';
-            const lines = [''];
-
-            function reset() { currentMode = 'LTRS'; lines.length = 0; lines.push(''); _updateModeIndicator(); }
-            function getText() { return lines.join('\n'); }
-            function _holes(c) { return [(c >> 0) & 1, (c >> 1) & 1, (c >> 2) & 1, (c >> 3) & 1, (c >> 4) & 1]; }
-            function _c5(h) { return ((h[0] & 1) << 0) | ((h[1] & 1) << 1) | ((h[2] & 1) << 2) | ((h[3] & 1) << 3) | ((h[4] & 1) << 4); }
-            function _match(a, b) { return a.length === b.length && a.every((v, i) => v === b[i]); }
-            function _look(t, h) { for (const [ch, c] of Object.entries(t)) if (_match(c, h)) return ch; return null; }
-
-            function receiveCode5(c5) {
-                const h = _holes(c5);
-                if (_match(h, codeLTRS)) { currentMode = 'LTRS'; _updateModeIndicator(); return { char: null }; }
-                if (_match(h, codeFIGS)) { currentMode = 'FIGS'; _updateModeIndicator(); return { char: null }; }
-                if (c5 === 0) return { char: null };
-                const ch = currentMode === 'LTRS' ? _look(tableLTRS, h) : _look(tableFIGS, h);
-                if (!ch) return { char: null };
-                _write(ch);
-                return { char: ch };
-            }
-            function _write(ch) {
-                const last = lines.length - 1;
-                if (ch === 'CR') { lines.push(''); return; }
-                if (ch === 'LF') { if (lines[last].length > 0) lines.push(''); return; }
-                if (lines[last].length >= LINE_MAX) { lines.push(''); }
-                lines[lines.length - 1] += (ch === ' ') ? ' ' : ch;
-            }
-            function charToCode5(ch) {
-                const inL = tableLTRS[ch] !== undefined;
-                const inF = tableFIGS[ch] !== undefined;
-                if (!inL && !inF) return null;
-                const isCommon = (ch === ' ' || ch === 'CR' || ch === 'LF');
-                let target;
-                if (isCommon) target = currentMode;
-                else if (inL && !inF) target = 'LTRS';
-                else if (inF && !inL) target = 'FIGS';
-                else target = /^[A-Z]$/.test(ch) ? 'LTRS' : 'FIGS';
-                const out = [];
-                if (target !== currentMode) {
-                    out.push(target === 'LTRS' ? _c5(codeLTRS) : _c5(codeFIGS));
-                    currentMode = target;
-                }
-                const table = target === 'LTRS' ? tableLTRS : tableFIGS;
-                out.push(_c5(table[ch]));
-                return out;
-            }
-            return { reset, getText, receiveCode5, charToCode5, getMode: () => currentMode, get lines() { return lines; } };
-        })();
 
         /* ══════════════════════════════════════════════════════════════════
             TRACE — resaltado sincronizado LST / LEN1 / editor
@@ -12195,14 +11432,9 @@ FIN</pre>
             const mode = { kind: 'CONT' };
             let entryPoint = null;
 
-            /* La interfaz conserva dos motores durante la migración:
-               LEN-B usa CORE201B/RICOH3000; LEAL sigue emitiendo LEN-1 y
-               ejecutándose en CORE201/TT51 hasta la fase 3. */
-            // Fase 3: LEAL compila a LEN-B y todo se ejecuta en la CID 201-B.
-            function _is201B() { return true; }
-            function _core() { return _is201B() ? CORE201B : CORE201; }
-            function _paper() { return _is201B() ? RICOH3000 : TT51; }
-            function _pc() { return _is201B() ? CORE201B.getPC() : CORE201.state.CP; }
+            /* LEAL y LEN-B se ejecutan en la CID 201-B:
+               CORE201B para el núcleo y RICOH3000 para el teletipo. */
+            const _paper = () => RICOH3000;
 
             const RT_VARS = ['TLO', 'THI', 'RLO', 'RHI', 'TNUM', 'TCH', 'TDIG', 'TFLAG'];
             const rtEls = {};
@@ -12270,45 +11502,27 @@ FIN</pre>
                 if (DOM.runSaveExpBtn) DOM.runSaveExpBtn.disabled = (t.trim() === '');
             }
 
-            const CYCLE_NAMES = ['CD', 'CM', 'CI', 'AD', 'CV', 'CO'];
             function renderRegs() {
-                if (_is201B()) {
-                    const s = CORE201B.state;
-                    const pc = CORE201B.getPC();
-                    DOM.runEN.textContent = s.EN;
-                    DOM.runAC.textContent = oct(s.AC);
-                    DOM.runRM.textContent = oct(s.RM);
-                    DOM.runCP.textContent = oct(pc, 5);
-                    if (DOM.runCPInput && document.activeElement !== DOM.runCPInput) {
-                        DOM.runCPInput.value = oct(pc, 5);
-                        DOM.runCPInput.classList.remove('changed');
-                    }
-                    if (DOM.runFieldWrap) DOM.runFieldWrap.style.display = '';
-                    if (DOM.runFIELD) DOM.runFIELD.textContent = `${s.RCI}/${s.RCD}`;
-                    const c = s.cycle;
-                    DOM.runCycle.textContent = c || '—';
-                    DOM.runCycle.classList.toggle('on', !!s.running && c !== 'CI');
-                    DOM.runCycle.classList.toggle('ad', c === 'CO');
-                    if (DOM.runTTMode) DOM.runTTMode.textContent = 'R3000';
-                    return;
-                }
-                DOM.runEN.textContent = CORE201.state.EN;
-                DOM.runAC.textContent = oct(CORE201.state.AC);
-                DOM.runRM.textContent = oct(CORE201.state.RM);
-                DOM.runCP.textContent = oct(CORE201.state.CP);
+                const s = CORE201B.state;
+                const pc = CORE201B.getPC();
+                DOM.runEN.textContent = s.EN;
+                DOM.runAC.textContent = oct(s.AC);
+                DOM.runRM.textContent = oct(s.RM);
+                DOM.runCP.textContent = oct(pc, 5);
                 if (DOM.runCPInput && document.activeElement !== DOM.runCPInput) {
-                    DOM.runCPInput.value = oct(CORE201.state.CP);
+                    DOM.runCPInput.value = oct(pc, 5);
                     DOM.runCPInput.classList.remove('changed');
                 }
-                if (DOM.runFieldWrap) DOM.runFieldWrap.style.display = 'none';
-                const c = CORE201.state.cycle;
-                DOM.runCycle.textContent = CYCLE_NAMES[c] || '—';
-                DOM.runCycle.classList.toggle('on', c !== 5 && CORE201.state.running);
-                DOM.runCycle.classList.toggle('ad', c === 3);
-                if (DOM.runTTMode) DOM.runTTMode.textContent = (typeof TT51.getMode === 'function') ? TT51.getMode() : 'ITA2';
+                if (DOM.runFieldWrap) DOM.runFieldWrap.style.display = '';
+                if (DOM.runFIELD) DOM.runFIELD.textContent = `${s.RCI}/${s.RCD}`;
+                const c = s.cycle;
+                DOM.runCycle.textContent = c || '—';
+                DOM.runCycle.classList.toggle('on', !!s.running && c !== 'CI');
+                DOM.runCycle.classList.toggle('ad', c === 'CO');
+                if (DOM.runTTMode) DOM.runTTMode.textContent = 'R3000';
 
                 if (state.mode.id === 'LEAL' && DOM.runRegsRt && DOM.runRegsRt.style.display !== 'none') {
-                    const mem = CORE201.state.memory;
+                    const mem = s.memory;
                     const parmAddr = labelMap.get('PARM');
                     if (DOM.runPARM) DOM.runPARM.textContent = (parmAddr !== undefined) ? oct(mem[parmAddr]) : '----';
                     if (DOM.runPARM1) DOM.runPARM1.textContent = (parmAddr !== undefined) ? oct(mem[parmAddr + 1]) : '----';
@@ -12331,12 +11545,7 @@ FIN</pre>
             }
             function setFocusIndicator(on) {
                 if (!DOM.runKBD) return;
-                if (_is201B()) {
-                    DOM.runKBD.textContent = on ? 'PAPEL:ACT' : 'PAPEL:INAC';
-                    DOM.runKBD.classList.toggle('active', !!on);
-                    return;
-                }
-                DOM.runKBD.textContent = on ? 'KBD:ACT' : 'KBD:INAC';
+                DOM.runKBD.textContent = on ? 'PAPEL:ACT' : 'PAPEL:INAC';
                 DOM.runKBD.classList.toggle('active', !!on);
             }
 
@@ -12445,8 +11654,8 @@ FIN</pre>
             }
 
             function _captureOriginalMemory() {
-                originalMemory = new Uint16Array(_core().state.memory);
-                lastRenderedMemory = new Uint16Array(_core().state.memory);
+                originalMemory = new Uint16Array(CORE201B.state.memory);
+                lastRenderedMemory = new Uint16Array(CORE201B.state.memory);
                 lastLSTRefresh = 0;
                 _cacheLSTRows();
             }
@@ -12474,7 +11683,7 @@ FIN</pre>
                 const now = performance.now();
                 if (!force && now - lastLSTRefresh < LST_REFRESH_MS) return;
                 lastLSTRefresh = now;
-                const mem = _core().state.memory;
+                const mem = CORE201B.state.memory;
                 for (const [abs, row] of lstRowCache) {
                     const cur = mem[abs] & 0xFFF;
                     const prev = lastRenderedMemory[abs] & 0xFFF;
@@ -12492,29 +11701,20 @@ FIN</pre>
                     setState('Sin programa compilado', 'Error', 'err');
                     return false;
                 }
-                const isB = (result.dialect === 'LEN-B') || (state.mode.id === 'LEN1');
-                if (isB) {
-                    CORE201B.powerOff();
-                    CORE201B.state.memory.fill(0);
-                    CORE201B.powerOn();
-                    CORE201B.loadWords(result.rows);
-                    RICOH3000.reset();
-                    RICOH3000.attach(CORE201B);
-                    CORE201B.callbacks.onPaper = ascii => RICOH3000.printAscii(ascii);
-                    CORE201B.setCP((typeof result.entryPoint === 'number') ? result.entryPoint : 0);
-                    CORE201B.arm();
-                    CORE201B.state.running = false;
-                } else {
-                    CORE201.reset();
-                    CORE201.state.memory.fill(0);
-                    CORE201.loadWords(result.rows);
-                    CORE201.setCP((typeof result.entryPoint === 'number') ? result.entryPoint : 0);
-                    TT51.reset();
-                }
+                CORE201B.powerOff();
+                CORE201B.state.memory.fill(0);
+                CORE201B.powerOn();
+                CORE201B.loadWords(result.rows);
+                RICOH3000.reset();
+                RICOH3000.attach(CORE201B);
+                CORE201B.callbacks.onPaper = ascii => RICOH3000.printAscii(ascii);
+                CORE201B.setCP((typeof result.entryPoint === 'number') ? result.entryPoint : 0);
+                CORE201B.arm();
+                CORE201B.state.running = false;
                 entryPoint = (typeof result.entryPoint === 'number') ? result.entryPoint : 0;
                 labelMap = _buildLabelMap(result.rows);
                 if (DOM.runCPInput) {
-                    DOM.runCPInput.value = _is201B() ? oct(entryPoint, 5) : oct(entryPoint);
+                    DOM.runCPInput.value = oct(entryPoint, 5);
                     DOM.runCPInput.classList.remove('changed');
                 }
                 const addrToLstRow = new Map();
@@ -12561,16 +11761,9 @@ FIN</pre>
             function isOpen() { return DOM.mainEl.classList.contains('show-exec'); }
 
             function play() {
-                if (_is201B()) {
-                    if (!CORE201B.state.power) CORE201B.powerOn();
-                    if (!CORE201B.state.armed) CORE201B.arm();
-                    CORE201B.state.running = true;
-                } else {
-                    if (!CORE201.state.running) {
-                        CORE201.state.running = true;
-                        CORE201.state.halted = false;
-                    }
-                }
+                if (!CORE201B.state.power) CORE201B.powerOn();
+                if (!CORE201B.state.armed) CORE201B.arm();
+                CORE201B.state.running = true;
                 if (mode.kind === 'CONT') {
                     if (timer) return;
                     lastMs = performance.now(); cpuNs = 0;
@@ -12583,14 +11776,13 @@ FIN</pre>
             }
             function pause() {
                 if (timer) { clearInterval(timer); timer = null; }
-                if (_is201B()) CORE201B.state.running = false;
-                else CORE201.state.running = false;
+                CORE201B.state.running = false;
                 DOM.runPlayBtn.textContent = (mode.kind === 'INSTR') ? 'PASO' : '▶';
                 DOM.runPlayBtn.classList.remove('running');
                 renderRegs();
                 renderPaper();
                 refreshModifiedLST(true);
-                if (!_core().state.halted) setState('En pausa', 'Listo', '');
+                if (!CORE201B.state.halted) setState('En pausa', 'Listo', '');
             }
 
             function armExecution() {
@@ -12599,37 +11791,22 @@ FIN</pre>
             }
 
             function stepOnce() {
-                const s = _core().state;
+                const s = CORE201B.state;
                 if (s.halted) { setState('Alto (ALT)', 'Alto', ''); return; }
-                if (_is201B()) {
-                    if (!CORE201B.state.armed) CORE201B.arm();
-                    CORE201B.state.running = true;
-                    CORE201B.executeInstruction();
-                    CORE201B.state.running = false;
-                    bpArmed = true;
-                    renderRegs();
-                    renderPaper();
-                    TRACE.update(CORE201B.state.lastInstrAbs);
-                    refreshModifiedLST(true);
-                    RUNMEM.refresh();
-                    if (CORE201B.state.halted) {
-                        setState('Alto (ALT) tras ' + CORE201B.state.steps + ' inst.', 'Alto', '');
-                    } else {
-                        setState('Paso ' + CORE201B.state.steps, 'Paso', '');
-                    }
-                    return;
-                }
-                CORE201.executeInstruction();
+                if (!s.armed) CORE201B.arm();
+                s.running = true;
+                CORE201B.executeInstruction();
+                s.running = false;
                 bpArmed = true;
                 renderRegs();
                 renderPaper();
-                TRACE.update(CORE201.state.lastInstr);
+                TRACE.update(s.lastInstrAbs);
                 refreshModifiedLST(true);
                 RUNMEM.refresh();
-                if (CORE201.state.halted) {
-                    setState('Alto (ALT) tras ' + CORE201.state.steps + ' inst.', 'Alto', '');
+                if (s.halted) {
+                    setState('Alto (ALT) tras ' + s.steps + ' inst.', 'Alto', '');
                 } else {
-                    setState('Paso ' + CORE201.state.steps, 'Paso', '');
+                    setState('Paso ' + s.steps, 'Paso', '');
                 }
             }
 
@@ -12637,34 +11814,29 @@ FIN</pre>
                 if (!DOM.runCPInput) return;
                 const raw = DOM.runCPInput.value.trim();
                 if (raw === '') {
-                    DOM.runCPInput.value = _is201B() ? oct(CORE201B.getPC(), 5) : oct(CORE201.state.CP);
+                    DOM.runCPInput.value = oct(CORE201B.getPC(), 5);
                     DOM.runCPInput.classList.remove('changed');
                     return;
                 }
                 const n = parseInt(raw, 8);
-                const max = _is201B() ? 0o77777 : 0o7777;
-                if (!Number.isFinite(n) || n < 0 || n > max) {
-                    DOM.runCPInput.value = _is201B() ? oct(CORE201B.getPC(), 5) : oct(CORE201.state.CP);
+                if (!Number.isFinite(n) || n < 0 || n > 0o77777) {
+                    DOM.runCPInput.value = oct(CORE201B.getPC(), 5);
                     DOM.runCPInput.classList.remove('changed');
                     msg('CP inválido: ' + raw, 'warn');
                     return;
                 }
-                const wasRunning = _is201B() ? CORE201B.state.running : CORE201.state.running;
+                const wasRunning = CORE201B.state.running;
                 if (wasRunning) pause();
-                if (_is201B()) {
-                    CORE201B.setCP(n);
-                    CORE201B.state.halted = false;
-                    CORE201B.arm();
-                    CORE201B.state.running = false;
-                } else {
-                    CORE201.setCP(n);
-                }
+                CORE201B.setCP(n);
+                CORE201B.state.halted = false;
+                CORE201B.arm();
+                CORE201B.state.running = false;
                 bpArmed = false;
                 renderRegs();
                 TRACE.update(n);
                 DOM.runCPInput.classList.remove('changed');
-                setState('CP = ' + oct(n, _is201B() ? 5 : 4) + (wasRunning ? ' (detenido)' : ''), 'Listo', '');
-                msg('CP = ' + oct(n, _is201B() ? 5 : 4), 'info');
+                setState('CP = ' + oct(n, 5) + (wasRunning ? ' (detenido)' : ''), 'Listo', '');
+                msg('CP = ' + oct(n, 5), 'info');
             }
 
             function _bpAtAddress(addr) {
@@ -12679,7 +11851,7 @@ FIN</pre>
             function tick() {
                 const now = performance.now();
                 const dt = now - lastMs; lastMs = now;
-                const s = _core().state;
+                const s = CORE201B.state;
                 if (!s.running || s.halted) {
                     renderRegs();
                     renderPaper();
@@ -12690,7 +11862,7 @@ FIN</pre>
 
                 let n = 0;
                 while (cpuNs > 0 && n < MAX_INST_PER_TICK && s.running && !s.halted) {
-                    const cp = _is201B() ? CORE201B.getPC() : s.CP;
+                    const cp = CORE201B.getPC();
                     if (bpArmed && _bpAtAddress(cp)) {
                         bpArmed = false;
                         pause();
@@ -12698,19 +11870,19 @@ FIN</pre>
                         TRACE.update(cp);
                         renderRegs();
                         renderPaper();
-                        setState('Breakpoint @ ' + oct(cp, _is201B() ? 5 : 4), 'BP', 'run');
+                        setState('Breakpoint @ ' + oct(cp, 5), 'BP', 'run');
                         return;
                     }
                     const instr = s.memory[cp] & 0xFFF;
                     const cost = _cost(instr);
                     if (cost > cpuNs) break;
                     cpuNs -= cost;
-                    _core().executeInstruction();
+                    CORE201B.executeInstruction();
                     bpArmed = true;
                     n++;
                 }
                 if (traceContinuous) {
-                    TRACE.update(_is201B() ? s.lastInstrAbs : s.lastInstr);
+                    TRACE.update(s.lastInstrAbs);
                 }
                 if (now - lastPaperRender > BATCH_RENDER_MS) {
                     renderPaper();
@@ -12734,12 +11906,13 @@ FIN</pre>
                     setState('Sin compilación', 'Error', 'err');
                     return;
                 }
-                const wasRunning = _core().state.running && mode.kind === 'CONT';
+                const wasRunning = CORE201B.state.running && mode.kind === 'CONT';
                 if (timer) { clearInterval(timer); timer = null; }
                 loadFromResult(state.result);
-                if (_is201B()) { CORE201B.arm(); CORE201B.state.running = false; }
+                CORE201B.arm();
+                CORE201B.state.running = false;
                 clr();
-                msg('Ejecutor reiniciado · CP=' + oct(entryPoint, _is201B() ? 5 : 4), 'info');
+                msg('Ejecutor reiniciado · CP=' + oct(entryPoint, 5), 'info');
                 if (wasRunning) {
                     play();
                 } else {
@@ -12752,14 +11925,8 @@ FIN</pre>
                 pause();
                 loaded = false;
                 bpArmed = false;
-                if (_is201B()) {
-                    CORE201B.powerOff();
-                    RICOH3000.reset();
-                } else {
-                    CORE201.reset();
-                    CORE201.state.memory.fill(0);
-                    TT51.reset();
-                }
+                CORE201B.powerOff();
+                RICOH3000.reset();
                 if (DOM.runCPInput) { DOM.runCPInput.value = ''; DOM.runCPInput.classList.remove('changed'); }
                 if (DOM.runFieldWrap) DOM.runFieldWrap.style.display = 'none';
                 renderPaper();
@@ -12784,34 +11951,19 @@ FIN</pre>
 
             function handleKey(e) {
                 if (e.ctrlKey || e.metaKey || e.altKey) return;
-                if (e.key === 'Enter') { e.preventDefault(); _feedChar(_is201B() ? '\r' : '\n'); return; }
+                if (e.key === 'Enter') { e.preventDefault(); _feedChar('\r'); return; }
                 if (e.key === 'Backspace') { e.preventDefault(); return; }
                 if (e.key.length !== 1) return;
                 e.preventDefault();
                 _feedChar(e.key);
             }
             function _feedChar(ch) {
-                if (_is201B()) {
-                    const code = ch === '\r' || ch === '\n' ? 13 : ch.charCodeAt(0);
-                    if (!(code === 13 || (code >= 32 && code <= 126))) {
-                        RUN.msg(`Carácter '${ch === '\r' ? 'CR' : ch}' no válido para el Ricoh 3000`, 'warn');
-                        return;
-                    }
-                    RICOH3000.typeAscii(code);
-                    renderPaper();
+                const code = ch === '\r' || ch === '\n' ? 13 : ch.charCodeAt(0);
+                if (!(code === 13 || (code >= 32 && code <= 126))) {
+                    RUN.msg(`Carácter '${ch === '\r' ? 'CR' : ch}' no válido para el Ricoh 3000`, 'warn');
                     return;
                 }
-                const c0 = ch === '\n' ? 'CR' : ch;
-                const c = (c0.length === 1 && c0 >= 'a' && c0 <= 'z') ? c0.toUpperCase() : c0;
-                const codes = TT51.charToCode5(c);
-                if (!codes) {
-                    RUN.msg(`Carácter '${ch}' no soportado por ITA2 (5 bits)`, 'warn');
-                    return;
-                }
-                for (const code of codes) {
-                    CORE201.feedInput(code);
-                    TT51.receiveCode5(code);
-                }
+                RICOH3000.typeAscii(code);
                 renderPaper();
             }
 
@@ -12834,7 +11986,7 @@ FIN</pre>
                     stepOnce();
                     return;
                 }
-                if (_core().state.running) { pause(); return; }
+                if (CORE201B.state.running) { pause(); return; }
                 if (!loaded && !_prepare()) return;
                 play();
             }
@@ -12868,11 +12020,7 @@ FIN</pre>
             const PAGE_WORDS = 128;
             const TOTAL_PAGES = 32;
 
-            // Fase 3: LEAL compila a LEN-B y todo se ejecuta en la CID 201-B.
-            function _is201B() { return true; }
-            function _core() { return _is201B() ? CORE201B : CORE201; }
-            function _fields() { return _is201B() ? CORE201B.FIELDS : 1; }
-            function _pcAbs() { return _is201B() ? CORE201B.getPC() : (CORE201.state.CP & 0xFFF); }
+            function _pcAbs() { return CORE201B.getPC(); }
 
             let currentPage = 0;
             let currentField = 0;
@@ -12898,7 +12046,6 @@ FIN</pre>
                 els.prev = document.getElementById('runMemPrev');
                 els.next = document.getElementById('runMemNext');
                 els.goCP = document.getElementById('runMemGoCP');
-                els.goExec = document.getElementById('runMemGoExec');
                 els.goExec = document.getElementById('runMemGoExec');
                 traceBtn = document.getElementById('runMemTraceToggle');
                 memToggleBtn = document.getElementById('runMemToggle');
@@ -12928,24 +12075,15 @@ FIN</pre>
                 if (followTrace) goToCurrentExec();
             }
 
-            function syncFieldUi() {
-                const show = _is201B();
-                for (const el of [els.field, els.fieldPrev, els.fieldNext]) {
-                    if (el) el.style.display = show ? '' : 'none';
-                }
-                if (!show) currentField = 0;
-            }
-
             function buildGrid() {
                 if (!els.body) return;
-                syncFieldUi();
                 let html = '<div class="run-mem-head"><span>Dir.abs</span><span>Dir.rel</span><span>Contenido</span></div>';
                 const base = (currentField << 12) | (currentPage * PAGE_WORDS);
                 for (let rel = 0; rel < PAGE_WORDS; rel++) {
                     const abs = base + rel;
-                    const absS = oct(abs, _is201B() ? 5 : 4);
+                    const absS = oct(abs, 5);
                     const relS = rel.toString(8).padStart(3, '0');
-                    const valS = oct(_core().state.memory[abs] & 0xFFF);
+                    const valS = oct(CORE201B.state.memory[abs] & 0xFFF);
                     html += `<div class="run-mem-row" data-abs="${abs}">` +
                         `<span class="run-mem-abs">${absS}</span>` +
                         `<span class="run-mem-rel">${relS}</span>` +
@@ -12963,7 +12101,7 @@ FIN</pre>
                 if (els.field) {
                     els.field.textContent = 'C' + currentField.toString(8);
                 }
-                lastMemory = new Uint16Array(_core().state.memory);
+                lastMemory = new Uint16Array(CORE201B.state.memory);
                 markModifiedRows();
                 markCurrentRow();
                 if (autoCenterOnOpen) {
@@ -12976,7 +12114,7 @@ FIN</pre>
 
             function markModifiedRows() {
                 if (!loadedPageRows || !lastMemory) return;
-                const mem = _core().state.memory;
+                const mem = CORE201B.state.memory;
                 for (const [abs, row] of loadedPageRows) {
                     const valCell = row.querySelector('.run-mem-val');
                     const cur = mem[abs] & 0xFFF;
@@ -13002,10 +12140,10 @@ FIN</pre>
 
             function centerOnAddr(abs) {
                 if (!els.body) return;
-                const target = abs & (_is201B() ? 0x7FFF : 0xFFF);
+                const target = abs & 0x7FFF;
                 const field = (target >> 12) & 0x7;
                 const page = (target >> 7) & 0x1F;
-                if (_is201B() && field !== currentField) {
+                if (field !== currentField) {
                     currentField = field;
                     currentPage = page;
                     buildGrid();
@@ -13054,7 +12192,7 @@ FIN</pre>
                 autoCenterOnOpen = true;
                 // página y campo iniciales = los del CP
                 const pc = _pcAbs();
-                currentField = _is201B() ? ((pc >> 12) & 0x7) : 0;
+                currentField = (pc >> 12) & 0x7;
                 currentPage = (pc >> 7) & 0x1F;
                 if (!panelVisible) { stopAutoRefresh(); return; }
                 buildGrid();
@@ -13074,16 +12212,15 @@ FIN</pre>
             }
 
             function goField(f) {
-                if (!_is201B()) return;
-                f = Math.max(0, Math.min(_fields() - 1, f | 0));
+                f = Math.max(0, Math.min(CORE201B.FIELDS - 1, f | 0));
                 if (f === currentField && loadedPageRows) return;
                 currentField = f;
                 buildGrid();
             }
 
             function goTo(abs) {
-                const target = abs & (_is201B() ? 0x7FFF : 0xFFF);
-                const field = _is201B() ? ((target >> 12) & 0x7) : 0;
+                const target = abs & 0x7FFF;
+                const field = (target >> 12) & 0x7;
                 const page = (target >> 7) & 0x1F;
                 if (field !== currentField || page !== currentPage) {
                     currentField = field;
@@ -13122,7 +12259,7 @@ FIN</pre>
             function followTraceTo(abs) {
                 if (!panelVisible || !active || !followTrace) return;
                 if (!els.body || !loadedPageRows) return;
-                goTo(abs & (_is201B() ? 0x7FFF : 0xFFF));
+                goTo(abs & 0x7FFF);
             }
 
             function toggleFollowTrace() {
@@ -13155,7 +12292,7 @@ FIN</pre>
             const cols = ['minmax(0,1.3fr)'];
             if (isLeal) cols.push('minmax(0,0.9fr)');
             if (showLst) cols.push('minmax(0,1fr)');
-            if (showTape) cols.push('minmax(0,0.35fr)');
+            if (showTape) cols.push('minmax(0,0.55fr)');
             if (showExec) cols.push('minmax(0,1fr)');
             if (infoOpen) cols.push('minmax(0,1fr)');
             DOM.mainEl.style.gridTemplateColumns = cols.join(' ');
@@ -13223,6 +12360,7 @@ FIN</pre>
             syncPanelUi();
         });
         DOM.btnSaveLst.addEventListener("click", () => { if (!state.result || !state.result.lstLines) return; const n = ensExt(baseOut() + ".lstb", ".lstb"); dl(n, state.result.lstLines.join("\n") + "\n"); state.lstModified = false; updOutNames(); addMsg(`Listado guardado como ${n}.`, "ok") });
+        DOM.btnSaveRib.addEventListener("click", () => { if (!state.ribLines.length) return; const n = ensExt(baseOut() + ".rib", ".rib"); dl(n, state.ribLines.join("\n") + "\n"); addMsg(`Cinta guardada como ${n}.`, "ok") });
         DOM.btnSaveLen.addEventListener("click", () => {
             const text = state.mode.id === "LEAL" ? (state.result && state.result.len1Text) : DOM.code.value;
             if (!text) return;
@@ -13230,7 +12368,6 @@ FIN</pre>
             setMod(false); updFileName(); updOutNames();
             addMsg(`${state.mode.id === "LEAL" ? "LEN-B generado" : "Fuente LEN-B"} guardado como ${n}.`, "ok");
         });
-        DOM.btnSaveRib.addEventListener("click", () => { if (!state.ribLines.length) return; const n = ensExt(baseOut() + ".rib", ".rib"); dl(n, state.ribLines.join("\n") + "\n"); state.ribModified = false; updOutNames(); addMsg(`Cinta guardada como ${n}.`, "ok") });
         DOM.code.addEventListener("input", (e) => {
             if (e.inputType === "insertFromPaste" ||
                 e.inputType === "insertLineBreak" ||
@@ -13264,7 +12401,7 @@ FIN</pre>
         DOM.lenSourceScroll.addEventListener("scroll", () => { DOM.lenGutter.scrollTop = DOM.lenSourceScroll.scrollTop });
         DOM.listingScroll.addEventListener("scroll", () => { if (DOM.lstGutter) { syncLstGutterMetrics(); DOM.lstGutter.scrollTop = DOM.listingScroll.scrollTop } });
         window.addEventListener("resize", () => { recomputeLayout(); requestAnimationFrame(measureLstHead) });
-        window.addEventListener("beforeunload", e => { const p = []; if (state.modified) p.push("código"); if (state.lstModified) p.push(".lstb"); if (state.ribModified) p.push(".rib"); if (p.length) { e.preventDefault(); e.returnValue = "" } });
+        window.addEventListener("beforeunload", e => { const p = []; if (state.modified) p.push("código"); if (state.lstModified) p.push(".lstb"); if (p.length) { e.preventDefault(); e.returnValue = "" } });
         setInterval(() => { if (state.dirty) { state.dirty = false; runAna(false) } }, 120);
 
         /* ═══ EJECUTOR — INICIALIZACIÓN ═══ */
@@ -13331,6 +12468,7 @@ FIN</pre>
         DOM.btnToggleTape.addEventListener('click', () => {
             const visible = !DOM.mainEl.classList.contains('hide-tape')
                 && !DOM.mainEl.classList.contains('show-help')
+                && !DOM.mainEl.classList.contains('show-about')
                 && !DOM.mainEl.classList.contains('show-exec');
             if (visible) {
                 DOM.mainEl.classList.add('hide-tape');
@@ -13343,12 +12481,7 @@ FIN</pre>
             syncPanelUi();
         });
 
-        CORE201.callbacks.onPaper = (code5) => {
-            TT51.receiveCode5(code5);
-        };
-        CORE201.callbacks.onHalt = () => {
-            RUN.pause();
-        };
+
 
         DOM.btnRun.addEventListener('click', () => {
             const ok = compileCur(true);
@@ -13403,7 +12536,7 @@ FIN</pre>
                 RUN.setCPFromInput();
             } else if (e.key === 'Escape') {
                 e.preventDefault();
-                DOM.runCPInput.value = oct(CORE201.state.CP);
+                DOM.runCPInput.value = oct(CORE201B.getPC(), 5);
                 DOM.runCPInput.classList.remove('changed');
                 DOM.runCPInput.blur();
             }
@@ -13411,7 +12544,7 @@ FIN</pre>
 
         DOM.runCPInput.addEventListener('blur', () => {
             if (DOM.runCPInput.classList.contains('changed')) {
-                DOM.runCPInput.value = oct(CORE201.state.CP);
+                DOM.runCPInput.value = oct(CORE201B.getPC(), 5);
                 DOM.runCPInput.classList.remove('changed');
             }
         });
@@ -13427,7 +12560,7 @@ FIN</pre>
         /* ═══ INICIALIZACIÓN ═══ */
         DOM.code.value = state.mode.format(SAMPLE_LEN1);
         state.fileName = "";
-        setMod(false); state.lstModified = false; state.ribModified = false;
+        setMod(false); state.lstModified = false;
         document.getElementById('main').appendChild(document.getElementById('helpPane'));
         document.getElementById('main').appendChild(document.getElementById('aboutPane'));
         DOM.aboutBody.innerHTML = ABOUT_HTML;

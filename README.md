@@ -10,7 +10,7 @@ CIDcoder-B continúa el proyecto **CIDcoder-A** para la **CID 201-B**. Conserva 
 
 **[Abrir en GitHub Pages](https://maikelsz.github.io/CIDcoder-B/CIDcoder-B.html)** 
 
-## Estado actual (0.1.5)
+## Estado actual (0.1.7)
 
 | Área | Estado |
 |---|---|
@@ -22,6 +22,20 @@ CIDcoder-B continúa el proyecto **CIDcoder-A** para la **CID 201-B**. Conserva 
 | Ejecutor LEN-B | Implementado sobre `CORE201B`/`RICOH3000`, campo 0, CP de 15 bits y visor de 8 campos |
 | Monitor de teletipo 201-B | Implementado: `MONITOR_TELETIPO_201B`, **176 palabras** en páginas 29/30, comandos `R`/`A`/`C` sobre la Ricoh, eco software y auditoría `LAC` aplicada |
 | Monitor «Última Página» | Implementado: **107 palabras** en la página 31, con **21 libres** para la futura gestión de campos |
+| Cinta perforada | Implementada: **8 canales**; en LEN-B cada palabra de 12 bits ocupa **2 marcos** (8 bits + 5 bits: 4 datos altos + enlace en el canal 5) y en LEAL-B el fuente se perfora en **ISO-8**; guardado `.rib` |
+
+### Novedades de 0.1.7
+
+- **`TIT` recupera el comportamiento original de LEAL:** imprime solo el texto, **sin LF+CR**. Para pasar a otra línea hay que usar **`LIN`** después del `TIT`.
+- La ayuda integrada, el ejemplo de bienvenida y las suites se ajustan a la nueva regla: `TIT HOLA` + `LIN` produce un salto visible; `TIT HOLA` solo deja el cursor tras el texto.
+
+### Novedades de 0.1.6
+
+- Eliminado el código muerto de la CID 201-A: `CORE201`, `TT51`, `compileLen1`/`analyzeLen1` y sus helpers exclusivos. El ejecutor usa solo `CORE201B`/`RICOH3000`.
+- La cinta perforada vuelve como cinta de **8 canales** de la 201-B: en LEN-B cada palabra de 12 bits ocupa **2 marcos** (8 bits + 5 bits con enlace) y en LEAL-B el fuente se perfora como caracteres **ISO-8**. Se restauran el panel, el botón **Tape** y el guardado `.rib`; se elimina la cinta ITA2 de 5 canales de la 201-A.
+- El panel de variables RT de LEAL ahora se actualiza con la memoria de `CORE201B`; en 0.1.5 el bloque existía pero nunca se refrescaba.
+- Ayuda, About y comentarios actualizados a LEN-B/201-B; el indicador del teclado pasa a **PAPEL** y el modo del Ricoh a **R3000**.
+- Las suites de `TEST/` apuntan a `CIDcoder-B_6.html`; resultados sin cambios: **287/304 OK · 17 omitidas · 13/13**.
 
 ## La CID 201-B
 
@@ -49,8 +63,10 @@ ENT A
 FLO B
 REF (1)
 TIT NOMBRE:
+LIN
 LCA A
 TIT HOLA,
+LIN
 PCA A
 LIN
 5 = B
@@ -62,7 +78,7 @@ Diferencias principales respecto de CIDcoder-A:
 
 - **Código interno CI de 6 bits**, terminador **CI 36** (`0o44`). Las cadenas empaquetadas guardan dos caracteres por palabra: el primero en los 6 bits bajos.
 - **`PER` sin relleno por la izquierda**. Entero = signo + dígitos + 2 espacios; flotante = signo + `Entero.Fracción` + 3 espacios. Los positivos llevan `+`; el cero no lleva signo.
-- **`TIT` añade LF + CR** antes del terminador. La Ricoh cuenta el par como un solo salto visible y deja el cursor al inicio de la línea siguiente. `LIN` emite CR + LF con el mismo efecto visible.
+- **`TIT` no añade salto:** imprime solo el texto, como en LEAL original. Para pasar a otra línea use **`LIN`** después del `TIT`; `LIN` emite CR + LF.
 - **`DIG m,n`**: `n` (0…5) fija los decimales; por defecto `DIG 6,3`. La forma `DIG m` se rechaza con `E:DIGEXP`.
 - **`SEP`**: solo se acepta `SEP 7,7` (Ricoh). Otro periférico produce `E:PERIF` y detiene el programa.
 - **`LEC`**: entero de 24 bits con signo; flotante con magnitud menor que 2²³. Una entrada flotante mayor o igual que `8388608` produce `E:DESB`.
@@ -155,7 +171,23 @@ Hitos verificados:
 
 ## Entrega
 
-La última release congelada es la **0.1.5**, en [`DONE/CIDcoder-B_5.html`](DONE/CIDcoder-B_5.html), idéntica byte a byte a `CIDcoder-B_5.html`:
+La última release congelada es la **0.1.7**, en [`DONE/CIDcoder-B_7.html`](DONE/CIDcoder-B_7.html) (`TIT` sin salto), idéntica byte a byte a `CIDcoder-B_7.html`:
+
+| | |
+|---|---|
+| Tamaño | 767 103 bytes |
+| SHA-256 | `C3E8CCD3C6EDCDA99D1C6D3A29ECB705243B4CDA37FDECCE98739E5B3CA77CE9` |
+| Pruebas | **287/304 OK · 17 omitidas · 13/13 suites** |
+
+La entrega anterior, **0.1.6**, está en [`DONE/CIDcoder-B_6.html`](DONE/CIDcoder-B_6.html) (limpieza del motor 201-A y cinta de 8 canales), idéntica byte a byte a `CIDcoder-B_6.html`:
+
+| | |
+|---|---|
+| Tamaño | 766 800 bytes |
+| SHA-256 | `6610C865AA5D69A1F8AF18214162EF9B8BBFAE563BFEAB0AAEAA75F9A3FFBE14` |
+| Pruebas | **287/304 OK · 17 omitidas · 13/13 suites** |
+
+La **0.1.5** está en [`DONE/CIDcoder-B_5.html`](DONE/CIDcoder-B_5.html) (eco del teletipo en software), idéntica byte a byte a `CIDcoder-B_5.html`:
 
 | | |
 |---|---|
@@ -163,7 +195,7 @@ La última release congelada es la **0.1.5**, en [`DONE/CIDcoder-B_5.html`](DONE
 | SHA-256 | `46222F81280A627D7D1672C28C23CFA3E282869F632D4D272D845443219D5719` |
 | Pruebas | **287/304 OK · 17 omitidas · 13/13 suites** |
 
-La entrega anterior, **0.1.4**, está en [`DONE/CIDcoder-B_4.html`](DONE/CIDcoder-B_4.html) (optimización de los dos monitores). La **0.1.3** sigue disponible en [`DONE/CIDcoder-B_3.html`](DONE/CIDcoder-B_3.html) (auditoría `LAC` del compilador). La **0.1.2** se conserva en [`DONE/CIDcoder-B_2.html`](DONE/CIDcoder-B_2.html) (monitor de teletipo y primera auditoría `LAC`); la **0.1.1**, en [`DONE/CIDcoder-B_1.html`](DONE/CIDcoder-B_1.html) (el archivo conserva el rótulo interno `0.2.1` de la numeración inicial). Los pasos de verificación y las limitaciones conocidas están en [`DONE/README.md`](DONE/README.md).
+La **0.1.4** está en [`DONE/CIDcoder-B_4.html`](DONE/CIDcoder-B_4.html) (optimización de los dos monitores). La **0.1.3** sigue disponible en [`DONE/CIDcoder-B_3.html`](DONE/CIDcoder-B_3.html) (auditoría `LAC` del compilador). La **0.1.2** se conserva en [`DONE/CIDcoder-B_2.html`](DONE/CIDcoder-B_2.html) (monitor de teletipo y primera auditoría `LAC`); la **0.1.1**, en [`DONE/CIDcoder-B_1.html`](DONE/CIDcoder-B_1.html) (el archivo conserva el rótulo interno `0.2.1` de la numeración inicial). Los pasos de verificación y las limitaciones conocidas están en [`DONE/README.md`](DONE/README.md).
 
 ## Documentación
 
@@ -178,9 +210,10 @@ La entrega anterior, **0.1.4**, está en [`DONE/CIDcoder-B_4.html`](DONE/CIDcode
 
 ## Hoja de ruta
 
-1. **Monitor de toda la memoria:** versión para los ocho campos y versión del «Última Página» de la consola CODEC. La base de 0.1.5 deja **101 palabras libres** en las páginas 29–31 (42 + 38 + 21); el diseño del núcleo compartido está pendiente de decisión.
+1. **Monitor de toda la memoria:** versión para los ocho campos y versión del «Última Página» de la consola CODEC. La base de 0.1.6 deja **101 palabras libres** en las páginas 29–31 (42 + 38 + 21); el diseño del núcleo compartido está pendiente de decisión.
 2. **Autoíndices:** evaluar su uso cuando el runtime pueda medirse con carga real.
 3. **Capacidad del campo 0:** documentar y, si se decide, reducir el runtime o mover datos para admitir más programas del corpus.
+4. **Lectura de cinta de 8 canales:** interpretar el enlace (bit 13) como fin de palabra y validar el algoritmo de lectura del lector FS-751 y del perforador DT-105.
 
 ## Créditos
 
