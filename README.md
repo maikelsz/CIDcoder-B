@@ -6,7 +6,9 @@ CIDcoder-B continúa el proyecto **CIDcoder-A** para la **CID 201-B**. Conserva 
 
 <p align="center"><img width="1280" src="https://raw.githubusercontent.com/maikelsz/CIDcoder-B/main/CIDcoder-B.png" /></p>
 
+**[Repositorio en GitHub](https://github.com/maikelsz/CIDcoder-B)**
 
+**[Abrir en GitHub Pages](https://maikelsz.github.io/CIDcoder-B/CIDcoder-B.html)** 
 
 ## Estado actual (0.1.5)
 
