@@ -30,7 +30,7 @@ CIDcoder-B continúa el proyecto **CIDcoder-A** para la **CID 201-B**. Conserva 
 - **Página 0 densa y segura:** escalares en `0000`–`0007` y `0020`+; `0010`–`0017` solo para autoíndices y constantes de lectura directa.
 - **Capacidad:** 11 de los 14 programas antes fuera del campo 0 ya compilan.
 - Suites: **299/305 OK · 6 omitidas · 13/13**, sin fallos.
-- Historial completo: [`changelog.md`](changelog.md).
+- Historial completo: [`changelog.md`](https://github.com/maikelsz/CIDcoder-B/blob/main/CHANGELOG.md).
 
 ## La CID 201-B
 
