@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CIDcoder-B (0.1.7)</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CIDcoder-B (0.1.8)</title>
 <style>
 :root{--bg:#0d1117;--panel:#171d24;--border:#2c3946;--text:#d7e6d7;--green:#58d878;--amber:#ffb64d;--lg:#e9ffe9;--lw:#fff;--kw:#00469F;--num:#4C4CC8;--cm:#007000;--er:#ff5c5c;--bt:#43505c;--bb:#212a33;--mn:Consolas,"Cascadia Mono","Courier New",monospace;--lh:20px;--tb:#d9cfb8}
 *{box-sizing:border-box}
@@ -758,6 +758,7 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
         "use strict";
         const LEAL_ALIGN_CYCLES = true;
         const PAGE_SIZE = 0o200, PAGE_MASK = 0o7600, LOW6 = 0o77, HIGH = 0o100, WORD = 0o7777;
+        const START_VECTOR = 0o7776; // 0.1.8: dirección de inicio del programa (7777 queda libre para datos)
         const IRM = { YLO: 0, SUM: 1, ISC: 2, DEL: 3, VAS: 4, VEA: 5 };
         const MICRO = { LAC: 0o7200, LEN: 0o7100, CAC: 0o7040, CEN: 0o7020, IAC: 0o7010, NOP: 0o7000, SAN: 0o7500, SAC: 0o7440, SED: 0o7420, SAP: 0o7510, SAD: 0o7450, SEC: 0o7430, SLT: 0o7410, ALT: 0o7404, ORI: 0o7402 };
         const ROT_RD = { 1: 0o7202, 2: 0o7102, 3: 0o7302, 4: 0o7042, 5: 0o7242, 6: 0o7142, 7: 0o7342, 8: 0o7322, 9: 0o7062, 10: 0o7262, 11: 0o7162, 12: 0o7362 };
@@ -1678,6 +1679,9 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
         /* ═══ COMPILADOR LEAL ═══ */
         const LEALCompiler = (function () {
         const PAGE0_VARS = 0o002, PAGE0_DATA = 0o102, PROG_BASE = 0o4000; // PROG_BASE: base provisional de compilación del cuerpo (se reemite en bodyStart)
+        // 0.1.8: layout denso de página 0. Las escalares usan 0000-0007 y 0020+;
+        // 0010-0017 queda para autoíndices y constantes de solo lectura directa.
+        const PAGE0_LOW = 0o000, PAGE0_LOW_END = 0o010, PAGE0_AI = 0o010, PAGE0_AI_END = 0o020, PAGE0_HIGH = 0o020;
         const RT_PAGES = { RT_GETCHAR: 0o200, RT_IMPRDIG: 0o210, RT_ESP: 0o240, RT_LIN: 0o270, RT_PUTSTR: 0o310, RT_ABS24: 0o400, RT_NEG: 0o440, RT_NEG_FLT: 0o265, RT_PEN: 0o560, RT_EAB: 0o500, RT_LEC_INT: 0o1000, RT_LEC_CORE: 0o1040, RT_LEC_X10: 0o1100, RT_LEC_FF: 0o1070, RT_PER_INT: 0o1200, RT_PER_DIGITS: 0o1740, RT_PER_FLT: 0o1700, RT_PER_DISPATCH: 0o1710, RT_PER_CORE: 0o1720, RT_PER_DIG: 0o1730, RT_LCA_UNPACKED: 0o1400, RT_PCA_UNPACKED: 0o1600, RT_LCA_PACKED: 0o1400, RT_PCA_PACKED: 0o1600, RT_MUL_INT: 0o2000, RT_DIV_INT: 0o2200, RT_MDI_UNPACKED: 0o2300, RT_MDI_PACKED: 0o2300, RT_MID_UNPACKED: 0o2400, RT_MID_PACKED: 0o2400, RT_ADD24: 0o2500, RT_SUB24: 0o2520, RT_ADDT: 0o2540, RT_SUBT: 0o2560, RT_SHIFT_R: 0o2555, RT_SHIFT_L: 0o2575, RT_NORM24: 0o2620, RT_UNPACK_FLT: 0o2700, RT_PACK_FLT: 0o2730, RT_ALIGN_FLT: 0o2770, RT_NOR: 0o3000, RT_FPREP: 0o3020, RT_FADD: 0o3040, RT_FSUB: 0o3100, RT_FMUL: 0o3160, RT_FDIV: 0o3200, RT_FAB: 0o540, RT_FRA: 0o640, RT_F2I: 0o3300, RT_FSGN: 0o3320, RT_EDESB: 0o3340, RT_EDIV0: 0o3360, RT_EPERIF: 0o3370, RT_RAC: 0o3400, RT_EXP: 0o3420, RT_EXP_POLY: 0o3440, RT_LNE: 0o3460, RT_LNE_POLY: 0o3500, RT_INV: 0o3520, RT_LOG: 0o3540, RT_SEN: 0o3560, RT_SEN_POLY: 0o3600, RT_COS: 0o3620, RT_COS_POLY: 0o3640, RT_ACT: 0o3660, RT_ACT_POLY: 0o3700};
             const RT_DEPS = { RT_PER_INT: ["RT_IMPRDIG", "RT_NEG"], RT_PER_FLT: ["RT_UNPACK_FLT", "RT_F2I", "RT_PER_INT", "RT_IMPRDIG", "RT_ADD24", "RT_SHIFT_L", "RT_SHIFT_R"], RT_PER_DISPATCH: ["RT_PER_FLT", "RT_PER_CORE"], RT_PER_CORE: ["RT_UNPACK_FLT", "RT_SHIFT_L", "RT_SHIFT_R", "RT_PER_DIG"], RT_PER_DIG: ["RT_IMPRDIG"], RT_LEC_INT: ["RT_GETCHAR", "RT_NEG"], RT_LEC_CORE: ["RT_GETCHAR"], RT_LEC_X10: [], RT_LEC_FF: ["RT_LEC_CORE", "RT_PACK_FLT", "RT_FDIV", "RT_NEG_FLT", "RT_EDESB"], RT_MUL_INT: ["RT_ABS24", "RT_EDESB", "RT_NEG"], RT_DIV_INT: ["RT_ABS24", "RT_EDIV0", "RT_NEG"], RT_ADDT: ["RT_EDESB"], RT_SUBT: ["RT_EDESB"], RT_EAB: ["RT_NEG"], RT_PEN: ["RT_UNPACK_FLT", "RT_SHIFT_R", "RT_SHIFT_L", "RT_PACK_FLT"], RT_LCA_UNPACKED: ["RT_GETCHAR"], RT_LCA_PACKED: ["RT_GETCHAR"], RT_ALIGN_FLT: ["RT_SHIFT_R"], RT_PACK_FLT: ["RT_NORM24", "RT_EDESB"], RT_EDESB: ["RT_PUTSTR"], RT_EDIV0: ["RT_PUTSTR"], RT_EPERIF: ["RT_PUTSTR"], RT_NOR: ["RT_PACK_FLT"], RT_FPREP: ["RT_UNPACK_FLT"], RT_FADD: ["RT_FPREP", "RT_ALIGN_FLT", "RT_ADD24", "RT_SUB24", "RT_PACK_FLT"], RT_FSUB: ["RT_FADD"], RT_F2I: ["RT_UNPACK_FLT", "RT_SHIFT_R", "RT_EDESB"], RT_FMUL: ["RT_FPREP", "RT_MUL_INT", "RT_ADD24", "RT_SHIFT_L", "RT_SHIFT_R", "RT_PACK_FLT"], RT_FDIV: ["RT_FPREP", "RT_ADD24", "RT_NEG", "RT_PACK_FLT", "RT_EDIV0"], RT_FRA: ["RT_PEN", "RT_FSUB"], RT_RAC: ["RT_UNPACK_FLT", "RT_PACK_FLT", "RT_SHIFT_R", "RT_FDIV", "RT_FADD", "RT_FMUL", "RT_EDESB"], RT_EXP: ["RT_EXP_POLY", "RT_FMUL", "RT_FADD", "RT_FSUB", "RT_PEN", "RT_F2I", "RT_UNPACK_FLT", "RT_PACK_FLT"], RT_EXP_POLY: ["RT_FMUL", "RT_FADD"], RT_LNE: ["RT_LNE_POLY", "RT_SUB24", "RT_UNPACK_FLT", "RT_PACK_FLT", "RT_FADD", "RT_FDIV", "RT_FMUL", "RT_NOR", "RT_EDESB"], RT_LNE_POLY: ["RT_FMUL", "RT_FADD"], RT_INV: ["RT_FDIV"], RT_LOG: ["RT_LNE", "RT_FDIV"], RT_SEN: ["RT_SEN_POLY", "RT_FMUL", "RT_FADD", "RT_FSUB", "RT_PEN", "RT_F2I", "RT_NEG_FLT"], RT_SEN_POLY: ["RT_FMUL", "RT_FADD"], RT_COS: ["RT_COS_POLY", "RT_FMUL", "RT_FADD", "RT_FSUB", "RT_PEN", "RT_F2I", "RT_NEG_FLT"], RT_COS_POLY: ["RT_FMUL", "RT_FADD"], RT_ACT: ["RT_ACT_POLY", "RT_FAB", "RT_UNPACK_FLT", "RT_INV", "RT_FMUL", "RT_FADD", "RT_FSUB", "RT_FDIV", "RT_RAC", "RT_NEG_FLT"], RT_ACT_POLY: ["RT_FMUL", "RT_FADD"],};
         class C {
@@ -1774,16 +1778,32 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
                     if (isChar && typ !== "int") throw new LEALCompileError(`'${name}': usada con LCA/PCA (buffer de caracteres), debe ser ENT, no FLO`, this.curLn);
                     const words = isChar ? (this.strPacked ? Math.ceil((size + 1) / 2) : (size + 1)) : 2 * (size + 1);
                     // Base provisional (orden de declaración); el layout final reubica todos
-                    // los arreglos tras el cuerpo y valida el total contra 0o10000.
+                    // los arreglos tras el cuerpo y valida el total contra 0o7776
+                    // (7776 queda reservado para el vector de arranque; 7777 sigue libre).
                     const base = this.nextArr; this.nextArr += words;
                     if (typ === "int") this.intVars[name] = [base, size]; else this.floatVars[name] = [base, size];
                 }
                 else {
-                    const base = this.nextVar; this.nextVar += 2;
-                    if (this.nextVar > PAGE0_DATA) throw new LEALCompileError(`Demasiadas escalares: página 0 desborda en ${this.o4(this.nextVar)}`, this.curLn);
+                    // 0.1.8: primero el banco bajo 0000-0007 (4 escalares), luego
+                    // el banco alto 0020+. El hueco 0010-0017 no se entrega a
+                    // escalares: solo autoíndices o constantes directas.
+                    let base;
+                    if (this.targetB && this.nextVarLow !== null && this.nextVarLow + 2 <= PAGE0_LOW_END) {
+                        base = this.nextVarLow; this.nextVarLow += 2;
+                    } else {
+                        base = this.nextVar; this.nextVar += 2;
+                        if (this.nextVar > PAGE0_DATA) throw new LEALCompileError(`Demasiadas escalares: página 0 desborda en ${this.o4(this.nextVar)} (0010-0017 reservados para autoíndices; las escalares usan 0000-0007 y 0020+)`, this.curLn);
+                    }
                     if (typ === "int") this.intVars[name] = [base, size];
                     else this.floatVars[name] = [base, size];
                 }
+            }
+            _allocAutoIdx(name) {
+                if (name in this._autoIdx) return this._autoIdx[name];
+                if (this._autoIdxNext >= (PAGE0_AI_END - PAGE0_AI)) throw new LEALCompileError(`Demasiados autoíndices: ${name}`, this.curLn);
+                const addr = PAGE0_AI + this._autoIdxNext++;
+                this._autoIdx[name] = addr;
+                return addr;
             }
             isArr(name) { if (name in this.intVars) return this.intVars[name][1] > 0; if (name in this.floatVars) return this.floatVars[name][1] > 0; return false }
             arrBase(name) { if (name in this.intVars) return this.intVars[name][0]; if (name in this.floatVars) return this.floatVars[name][0]; throw new LEALCompileError(`Variable no declarada: '${name}'`, this.curLn) }
@@ -3134,7 +3154,7 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
                         src.length = _fin + 1;
                     }
                 }
-                this.strPacked = !!strPacked; this.titSavings = 0; this.intVars = {}; this.floatVars = {}; this.nextVar = this.targetB ? 0o020 : PAGE0_VARS; this.nextArr = 0o4000; this.labels = {}; this.refMax = 1; this.usedRt = new Set(); this.lines = []; this.consts = {}; this.cicStack = []; this.subInProg = null; this.subBufs = {}; this.subRec = {}; this.subEmi = {}; this.subDecl = new Set(); this.usedCtrs = new Set(); this.usedK1 = false; this._uid = 0; this.intPtrs = {}; this.userLabels = new Set(); this.intPtrFirstLine = {}; this.warnings = []; this.usesCommonFacility = false;
+                this.strPacked = !!strPacked; this.titSavings = 0; this.intVars = {}; this.floatVars = {}; this.nextVar = this.targetB ? PAGE0_HIGH : PAGE0_VARS; this.nextVarLow = this.targetB ? PAGE0_LOW : null; this.nextArr = 0o4000; this.labels = {}; this.refMax = 1; this.usedRt = new Set(); this.lines = []; this.consts = {}; this.cicStack = []; this.subInProg = null; this.subBufs = {}; this.subRec = {}; this.subEmi = {}; this.subDecl = new Set(); this.usedCtrs = new Set(); this.usedK1 = false; this._uid = 0; this.intPtrs = {}; this.userLabels = new Set(); this.intPtrFirstLine = {}; this.warnings = []; this.usesCommonFacility = false; this._autoIdx = {}; this._autoIdxNext = 0; this._lowConstNames = new Set();
                 if (_finWarnLine) this.warn(_finWarnLine, "FIN detiene el compilador: se ignora el texto que sigue");
                 this._usesLecInt = false;
                 this._usesLecFloat = false;
@@ -3333,12 +3353,12 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
                     }
                     _arrayEnd = _cur;
                 }
-                if (_arrayEnd > 0o10000) {
+                if (_arrayEnd > START_VECTOR) {
                     const _rtWords = Math.max(0, _place.rtEnd - 0o200);
                     throw new LEALCompileError(
                         `Memoria insuficiente: rutinas ${_rtWords} w + tablas ${_place.tableSize} w + ` +
                         `cuerpo ${_bodyWords} w + arreglos ${_arrayEnd - _arrayBase} w = fin 0o${_arrayEnd.toString(8)} ` +
-                        `(limite 0o10000). Acorte el cuerpo o reduzca los arreglos.`,
+                        `(limite 0o7776; 7776 reservado para el vector de arranque). Acorte el cuerpo o reduzca los arreglos.`,
                         this.curLn
                     );
                 }
@@ -3348,23 +3368,22 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
                 // Aquí no se puede decidir: pcEstimate es pre-peephole y aún no se conocen
                 // las páginas definitivas.
                 this.emit("/ " + "=".repeat(58)); this.emit("/ Generado por LEALCompiler - CIDcoder-B (LEN-B/201-B)"); this.emit("/ " + "=".repeat(58)); this.emit("");
-                this.emit("/ --- Bootstrap: reset vector en 0o000 ---");
-                this.emit(`        *0`);
-                this.emit("        VEA I   0001");
-                this.emit("");
-                this.emit(`        *${this.o4(PAGE0_VARS)}`); this.emit("/ --- Pagina 0: variables escalares ---");
+                this.emit("/ --- Pagina 0: variables escalares (0000-0007 y 0020+) ---");
                 this.emitScalars(progBuf.join("\n") + "\n" + Object.values(this.subBufs).flat().join("\n"));
 
                 const _runtimeStart = this.nextVar;
                 this.emit("");
-                this.emit(`        *${this.o4(_runtimeStart)}`); this.emit("/ --- Pagina 0: datos runtime ---");
                 const _beforeDataLen = this.lines.length;
-                this.emitData();
-                let _dataSize = 0;
+                this.emitData(_runtimeStart);
+                // 0.1.8: contar solo las palabras del bloque de datos principal.
+                // emitData() emite antes las constantes bajas en 0010-0017; esas
+                // palabras no forman parte de [runtimeStart, jptrStart).
+                let _dataSize = 0, _inData = false;
                 for (let _i = _beforeDataLen; _i < this.lines.length; _i++) {
                     const _t = this.lines[_i].trim();
-                    if (!_t || _t.startsWith("/") || _t.startsWith("*")) continue;
-                    _dataSize++;
+                    if (!_t || _t.startsWith("/")) continue;
+                    if (_t.startsWith("*")) { _inData = (_t === `*${this.o4(_runtimeStart)}`); continue; }
+                    if (_inData) _dataSize++;
                 }
                 const _jptrStart = _runtimeStart + _dataSize;
                 const _nPtrsF = Object.keys(this.intPtrs).length;
@@ -3377,7 +3396,7 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
                         `Página 0 desborda: la tabla de punteros (0o${_jptrStart.toString(8)}..0o${(_jptrStart + _nPtrsF - 1).toString(8)}) ` +
                         `no cabe antes de 0200, donde empiezan las rutinas de runtime. ` +
                         `Reduzca variables escalares, datos de página 0 o etiquetas/saltos. ` +
-                        `(En CIDcoder-B 0010-0017 están reservados para autoíndices y las escalares comienzan en 0020.)`,
+                        `(En CIDcoder-B 0010-0017 son para autoíndices/constantes directas; las escalares usan 0000-0007 y 0020+.)`,
                         this.curLn
                     );
                 }
@@ -3405,8 +3424,8 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
                 if (nPtrsF > 0) { this.emit(""); this.emit(`        *${this.o4(_jptrStart)}`); this.emit("/ --- Punteros de salto (page 0) ---"); for (const [sym, ptr] of Object.entries(this.intPtrs)) this.emit(`${ptr}, ${sym}`) }
                 this.emit("");
                 this.emit("");
-                this.emit(`        *1`);
-                this.emit("/ --- Bootstrap: entry point (inicio del cuerpo) en 0o001 ---");
+                this.emit(`        *${this.o4(START_VECTOR)}`);
+                this.emit("/ --- Vector de arranque: direccion de inicio del programa ---");
                 this.emit(`        ${this.o4(_bodyStart)}    / bodyStart = 0o${_bodyStart.toString(8)}`);
                 this.emit("");
                 this.emit("$");
@@ -3435,7 +3454,7 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
                         `Página 0 desborda: última palabra de variables/datos en ${this.o4(_maxP0)}, ` +
                         `pero la página 0 termina en 0177 antes de la tabla de punteros. ` +
                         `Reduzca variables escalares, subrutinas anidadas, o use menos VAS/CRU/FRU. ` +
-                        `(En CIDcoder-B 0010-0017 están reservados para autoíndices y las escalares comienzan en 0020.)`,
+                        `(En CIDcoder-B 0010-0017 son para autoíndices/constantes directas; las escalares usan 0000-0007 y 0020+.)`,
                         this.curLn
                     );
                 }
@@ -3466,7 +3485,8 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
                 for (const [nm, [addr, sz]] of Object.entries(this.intVars)) if (sz === 0) all.push({ nm, addr });
                 for (const [nm, [addr, sz]] of Object.entries(this.floatVars)) if (sz === 0) all.push({ nm, addr });
                 all.sort((a, b) => a.addr - b.addr);
-                for (const { nm } of all) {
+                let cursor = -1;
+                for (const { nm, addr } of all) {
                     // Un escalar declarado y nunca referenciado no consume página 0.
                     // El escaneo es textual sobre el cuerpo ya emitido (programa + subrutinas);
                     // el runtime nunca usa nombres de variables del usuario.
@@ -3474,11 +3494,16 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
                         this.emit(`/ ${nm}: escalar declarado y no usado (no se emite)`);
                         continue;
                     }
+                    // 0.1.8: emitir en la dirección asignada. El banco bajo (0000-0007)
+                    // y el alto (0020+) no son contiguos, así que no se puede asumir
+                    // que las escalares se suceden desde 0002.
+                    if (addr !== cursor) { this.emit(`        *${this.o4(addr)}`); cursor = addr; }
                     this.emit(`${nm},     0000`);
                     this.emit("        0000");
+                    cursor += 2;
                 }
             }
-            emitData() {
+            emitData(startAddr) {
                 const u = this.usedRt;
                 let _maxVasArgs = 0;
                 for (const [_n, _recs] of Object.entries(this.subRec)) {
@@ -3493,7 +3518,6 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
                     );
                 }
                 const _parmWords = Math.max(4, 2 * _maxVasArgs);
-                this.emit("/ === Constantes de uso general (solo las usadas) ===");
                 // Fase 2 (_51.2): constantes de un solo consumidor se emiten al final
                 // de su rutina (en su propia página), igual que TD9..TD13/rac_*.
                 const _movedConsts = new Set();
@@ -3538,7 +3562,25 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
                     ["K_6000", 0o6000, "PEN -1.0 hi / literal float", (u.has("RT_PEN") || this.consts["K_6000"] !== undefined)],
                     ["K_7760", 0o7760, "−16 en 12 bits (RAC: corrección de k)", u.has("RT_RAC")],
                 ];
-                for (const [n, v, c, cond] of consts) if (cond && !_movedConsts.has(n)) this.emit(`${n},     ${this.o4(v)}    / ${c}`);
+                // 0.1.8: aprovechar 0010-0017. Primero las celdas de autoíndice
+                // que el compilador haya reservado; el resto, constantes de solo
+                // lectura directa. Nunca variables que se accedan indirectamente.
+                const _lowSlots = (PAGE0_AI_END - PAGE0_AI) - this._autoIdxNext;
+                const _lowSel = [];
+                for (const def of consts) {
+                    if (_lowSel.length >= _lowSlots) break;
+                    if (def[3] && !_movedConsts.has(def[0])) _lowSel.push(def);
+                }
+                if (_lowSel.length) {
+                    this.emit(`        *${this.o4(PAGE0_AI + this._autoIdxNext)}`);
+                    this.emit("/ --- 0010-0017: constantes directas (zona de autoindices) ---");
+                    for (const [n, v, c] of _lowSel) { this.emit(`${n},     ${this.o4(v)}    / ${c}`); this._lowConstNames.add(n); }
+                    this.emit("");
+                }
+                this.emit(`        *${this.o4(startAddr)}`);
+                this.emit("/ --- Pagina 0: datos runtime ---");
+                this.emit("/ === Constantes de uso general (solo las usadas) ===");
+                for (const [n, v, c, cond] of consts) if (cond && !_movedConsts.has(n) && !this._lowConstNames.has(n)) this.emit(`${n},     ${this.o4(v)}    / ${c}`);
                 if (u.has("RT_LEC_INT") || u.has("RT_LEC_CORE")) this.emit("K_TABCODDIG, TABCODDIG   / puntero a tabla código CI → dígito");
                 if (u.has("RT_IMPRDIG") && !this.targetB) this.emit("K_TABDIGCOD, TABDIGCOD   / puntero a tabla dígito → código Murray");
                 if (u.has("RT_PER_INT") || u.has("RT_PER_FLT")) this.emit("K_TABPOW10,  TABPOW10    / puntero a tabla de potencias de 10 (24 bits)");
@@ -8864,7 +8906,7 @@ button.toggle.active{color:#baffd5;background:linear-gradient(180deg,#1f5c37,#0e
                             const opt = _optimizeBPage0Ptrs(textB, placeB);
                             if (opt) textB = opt.text;
                         }
-                        return { ok: true, len1Text: textB, lenBText: textB, peepholeRemoved: 0, peepholeCombined: 0, warnings: c.warnings, entryPoint: 0, titSavings: c.titSavings, placement: placeB, target: "lenb" };
+                        return { ok: true, len1Text: textB, lenBText: textB, peepholeRemoved: 0, peepholeCombined: 0, warnings: c.warnings, entryPoint: (placeB && typeof placeB.bodyStart === "number") ? placeB.bodyStart : 0, titSavings: c.titSavings, placement: placeB, target: "lenb" };
                     }
                     const ph = peephole(raw);
                     return { ok: true, len1Text: ph.text, lenBText: null, peepholeRemoved: ph.removed, peepholeCombined: ph.combined, warnings: c.warnings, entryPoint: 0, titSavings: c.titSavings, placement: c._lastPlacement || null, target: "len1" };
@@ -10386,7 +10428,7 @@ rutinas runtime y stubs (solo las usadas)
 tablas de conversión de dígitos
 cuerpo del programa          [bodyStart, arrayBase)
 arreglos                     [arrayBase, arrayEnd)</pre>
-<p>El cuerpo se emite en <code>bodyStart</code> (múltiplo de 128) y los arreglos en <code>arrayBase = align128(bodyStart + bodyWords)</code>. La ventana real del cuerpo es <code>[bodyStart, arrayBase)</code>; la comprobación de capacidad es del <b>programa completo</b>: <code>arrayEnd ≤ 0o10000</code>. El vector de arranque de la máquina está en <code>0o000</code> (<code>VEA I 0001</code>) y <code>0o001</code> apunta a <code>bodyStart</code>.</p>
+<p>El cuerpo se emite en <code>bodyStart</code> (múltiplo de 128) y los arreglos en <code>arrayBase = align128(bodyStart + bodyWords)</code>. La ventana real del cuerpo es <code>[bodyStart, arrayBase)</code>; la comprobación de capacidad es del <b>programa completo</b>: <code>arrayEnd ≤ 0o7776</code> (la palabra <code>7776</code> queda reservada para el vector de arranque; <code>7777</code> sigue libre para datos). El vector de arranque de la máquina está en <code>0o7776</code> y contiene <code>bodyStart</code>; <code>0o000</code> y <code>0o001</code> quedan libres para datos.</p>
 
 <h4>Qué consume cada cosa</h4>
 <table>
@@ -10438,9 +10480,9 @@ arreglos                     [arrayBase, arrayEnd)</pre>
 <h4>Errores de capacidad y qué hacer</h4>
 <table>
 <tr><th>Mensaje</th><th>Causa</th><th>Solución</th></tr>
-<tr><td><code>Demasiadas escalares: página 0 desborda en 0o…</code></td><td>Las escalares (2 palabras cada una, desde <code>0020</code>) y los datos runtime no caben antes de <code>0177</code>. En CIDcoder-B <code>0010</code>-<code>0017</code> están reservados para autoíndices.</td><td>Reutilice variables, agrupe las poco usadas en un array o mueva datos a páginas altas.</td></tr>
+<tr><td><code>Demasiadas escalares: página 0 desborda en 0o…</code></td><td>Las escalares (2 palabras cada una) usan <code>0000</code>-<code>0007</code> y luego <code>0020</code>+; los datos runtime no caben antes de <code>0177</code>. En CIDcoder-B <code>0010</code>-<code>0017</code> son para autoíndices y constantes directas.</td><td>Reutilice variables, agrupe las poco usadas en un array o mueva datos a páginas altas.</td></tr>
 <tr><td><code>Página 0: la tabla de punteros (…) invade el cuerpo en 0o…</code></td><td>Demasiados punteros de salto/runtime para el espacio que queda antes de <code>bodyStart</code>.</td><td>Reduzca etiquetas, saltos, <code>VAS</code>/<code>CRU</code>/<code>FRU</code> o variables runtime.</td></tr>
-<tr><td><code>Memoria insuficiente: rutinas X w + tablas Y w + cuerpo Z w + arreglos W w = fin 0o… (límite 0o10000)</code></td><td>El programa completo no cabe en 4096 palabras.</td><td>Reduzca arreglos y cuerpo; quite rutinas o funciones que no necesite.</td></tr>
+<tr><td><code>Memoria insuficiente: rutinas X w + tablas Y w + cuerpo Z w + arreglos W w = fin 0o… (límite 0o7776; 7776 reservado…)</code></td><td>El programa completo no cabe en el campo 0: la palabra <code>7776</code> es el vector de arranque (<code>7777</code> queda libre para datos).</td><td>Reduzca arreglos y cuerpo; quite rutinas o funciones que no necesite.</td></tr>
 <tr><td><code>Subrutina con N argumentos excede el máximo de 16 slots (32 palabras PARM)</code></td><td>Más de 16 argumentos en un <code>VAS</code>.</td><td>Empaquete varios valores en un array (por ejemplo <code>J(10)</code>).</td></tr>
 </table>
 <div class="helpNote"><b>Regla práctica:</b> un programa entero pequeño con E/S ronda las 300 palabras; cada array de 100 elementos añade ~200; un programa con flotantes y <code>PER</code> flotante ronda las 1000. Los juegos del corpus tienen cuerpos de 900 a 1838 palabras y terminan en <code>0o4162</code>…<code>0o6002</code>: el mayor deja aún unas 1000 palabras libres.</div>
@@ -10616,7 +10658,7 @@ FIN</pre>
 <h2>CIDcoder-B</h2>
 <div class="about-version">Entorno de desarrollo y simulador para la CID 201-B</div>
 <div class="about-row"><span class="about-lbl">Proyecto</span><span class="about-val">CIDcoder-B</span></div>
-<div class="about-row"><span class="about-lbl">Versión</span><span class="about-val">0.1.7</span></div>
+<div class="about-row"><span class="about-lbl">Versión</span><span class="about-val">0.1.8</span></div>
 
 <div class="about-row"><span class="about-lbl">Fecha</span><span class="about-val">19/Noviembre/2026</span></div>
 <div class="about-row"><span class="about-lbl">Autor</span><span class="about-val">MSZ</span></div>
@@ -10864,6 +10906,9 @@ FIN</pre>
             }
 
             function doINT2() {
+                // 0.1.8: 7776 es también el vector de arranque del programa LEAL.
+                // Los programas compilados no habilitan interrupciones; si lo
+                // hicieran, habría que mover el vector o reservar un salto.
                 st.CP = 0o7776;
                 if (st.armed) scheduleNext();
             }
@@ -11080,12 +11125,12 @@ FIN</pre>
             }
 
             function reset() {
-                st.EN = 0; st.AC = 0; st.RM = 0; st.CP = 0;
+                st.EN = 0; st.AC = 0; st.RM = 0; st.CP = st.memory[START_VECTOR] & MASK12;
                 st.RCD = 0; st.RCI = 0; st.RNI = 0; st.RVI = 0;
                 st.running = false; st.halted = false; st.armed = false;
                 st.cycle = 'CI'; st.altoType = null; st.violMem = false;
                 st.steps = 0; st.timeNs = 0; st.lastInstr = 0; st.lastInstrAbs = 0;
-                st.icp = 0; st.ir = 0; st.eff = null; st.vpp = false;
+                st.icp = st.CP; st.ir = 0; st.eff = null; st.vpp = false;
                 st.interruptPending = false; st.interruptEnable = false;
                 st.IL = false; st.IP = true; st.IF = false; st.IE = false; st.IT = false;
                 st.inBuf.length = 0; st.outBuf.length = 0;
@@ -11315,7 +11360,7 @@ FIN</pre>
                 return {
                     pass, expected, paper: res.paper, steps: res.steps,
                     altoType: res.altoType, regs: res.regs,
-                    version: '0.1.7', machine: 'CID 201-B',
+                    version: '0.1.8', machine: 'CID 201-B',
                     fields: CORE201B.FIELDS, words: CORE201B.MEM_WORDS
                 };
             }
@@ -11708,10 +11753,17 @@ FIN</pre>
                 RICOH3000.reset();
                 RICOH3000.attach(CORE201B);
                 CORE201B.callbacks.onPaper = ascii => RICOH3000.printAscii(ascii);
-                CORE201B.setCP((typeof result.entryPoint === 'number') ? result.entryPoint : 0);
+                // 0.1.8: el vector de arranque vive en 7776. Si está presente y
+                // coincide con entryPoint, manda; si no, se usa entryPoint. Así
+                // los programas escritos a mano que usan 7776 como dato no se
+                // arrancan por error.
+                const _startVec = CORE201B.state.memory[START_VECTOR] & 0xFFF;
+                const _entry = (typeof result.entryPoint === 'number') ? result.entryPoint : 0;
+                const _startAddr = (_startVec && (!_entry || _startVec === _entry)) ? _startVec : _entry;
+                CORE201B.setCP(_startAddr);
                 CORE201B.arm();
                 CORE201B.state.running = false;
-                entryPoint = (typeof result.entryPoint === 'number') ? result.entryPoint : 0;
+                entryPoint = _startAddr;
                 labelMap = _buildLabelMap(result.rows);
                 if (DOM.runCPInput) {
                     DOM.runCPInput.value = oct(entryPoint, 5);

@@ -10,7 +10,7 @@ CIDcoder-B continúa el proyecto **CIDcoder-A** para la **CID 201-B**. Conserva 
 
 **[Abrir en GitHub Pages](https://maikelsz.github.io/CIDcoder-B/CIDcoder-B.html)** 
 
-## Estado actual (0.1.7)
+## Estado actual (0.1.8)
 
 | Área | Estado |
 |---|---|
@@ -24,18 +24,13 @@ CIDcoder-B continúa el proyecto **CIDcoder-A** para la **CID 201-B**. Conserva 
 | Monitor «Última Página» | Implementado: **107 palabras** en la página 31, con **21 libres** para la futura gestión de campos |
 | Cinta perforada | Implementada: **8 canales**; en LEN-B cada palabra de 12 bits ocupa **2 marcos** (8 bits + 5 bits: 4 datos altos + enlace en el canal 5) y en LEAL-B el fuente se perfora en **ISO-8**; guardado `.rib` |
 
-### Novedades de 0.1.7
+### Último cambio (0.1.8)
 
-- **`TIT` recupera el comportamiento original de LEAL:** imprime solo el texto, **sin LF+CR**. Para pasar a otra línea hay que usar **`LIN`** después del `TIT`.
-- La ayuda integrada, el ejemplo de bienvenida y las suites se ajustan a la nueva regla: `TIT HOLA` + `LIN` produce un salto visible; `TIT HOLA` solo deja el cursor tras el texto.
-
-### Novedades de 0.1.6
-
-- Eliminado el código muerto de la CID 201-A: `CORE201`, `TT51`, `compileLen1`/`analyzeLen1` y sus helpers exclusivos. El ejecutor usa solo `CORE201B`/`RICOH3000`.
-- La cinta perforada vuelve como cinta de **8 canales** de la 201-B: en LEN-B cada palabra de 12 bits ocupa **2 marcos** (8 bits + 5 bits con enlace) y en LEAL-B el fuente se perfora como caracteres **ISO-8**. Se restauran el panel, el botón **Tape** y el guardado `.rib`; se elimina la cinta ITA2 de 5 canales de la 201-A.
-- El panel de variables RT de LEAL ahora se actualiza con la memoria de `CORE201B`; en 0.1.5 el bloque existía pero nunca se refrescaba.
-- Ayuda, About y comentarios actualizados a LEN-B/201-B; el indicador del teclado pasa a **PAPEL** y el modo del Ricoh a **R3000**.
-- Las suites de `TEST/` apuntan a `CIDcoder-B_6.html`; resultados sin cambios: **287/304 OK · 17 omitidas · 13/13**.
+- **Vector de arranque en `7776`**; `7777` queda libre para datos y `0000`–`0001` para escalares.
+- **Página 0 densa y segura:** escalares en `0000`–`0007` y `0020`+; `0010`–`0017` solo para autoíndices y constantes de lectura directa.
+- **Capacidad:** 11 de los 14 programas antes fuera del campo 0 ya compilan.
+- Suites: **299/305 OK · 6 omitidas · 13/13**, sin fallos.
+- Historial completo: [`changelog.md`](changelog.md).
 
 ## La CID 201-B
 
@@ -87,9 +82,11 @@ Diferencias principales respecto de CIDcoder-A:
 
 ### Campo 0
 
-La ejecución de LEAL-B vive en el **campo 0**. Las variables escalares comienzan en `0020`; `0010`–`0017` están reservados para autoíndices. La tabla de punteros de salto debe terminar antes de `0200`, donde empiezan las rutinas del runtime.
+La ejecución de LEAL-B vive en el **campo 0**. Las variables escalares usan `0000`–`0007` (hasta 4) y siguen en `0020`; `0010`–`0017` son para autoíndices y constantes de solo lectura directa. **Ninguna variable que se acceda indirectamente puede caer en `0010`–`0017`**: el hardware la incrementaría. La tabla de punteros de salto debe terminar antes de `0200`, donde empiezan las rutinas del runtime.
 
-Ese límite es real: varios programas del corpus heredado no caben en el campo 0 de la 201-B y se informan como **`Página 0 desborda`**, no como un solapamiento interno. Los programas afectados se documentan y se omiten en la paridad; no se fuerza su ajuste reduciendo el runtime.
+El vector de arranque del programa compilado está en **`7776`** y contiene `bodyStart`; `7777` queda libre para datos. La comprobación de capacidad es `arrayEnd ≤ 0o7776`. `CORE201B.reset()` lee `memory[7776]`; el cargador usa el vector solo si coincide con `entryPoint` para no arrancar por error un LEN-B escrito a mano que use esa celda como dato.
+
+Ese límite es real: varios programas del corpus heredado no caben en el campo 0 de la 201-B y se informan como **`Página 0 desborda`**, no como un solapamiento interno. Con el layout denso de 0.1.8, 11 de los 14 programas antes afectados ya compilan; los 3 restantes (`CALENDAR`, `KINEMA`, `MULTMATRIX`) se documentan y se omiten en la paridad. No se fuerza su ajuste reduciendo el runtime.
 
 ## LEN-B
 
@@ -131,8 +128,8 @@ El ejecutor permite `CONT`/`INSTR`, CP de 15 bits, breakpoints, traza y un visor
 |---|---|
 | `.leal` | Fuente LEAL-B; se guarda y se carga en el editor |
 | `.lenb` | Fuente LEN-B; se guarda y se carga en el editor |
-| `.lstb` | Listado ensamblado; directamente cargable en CID201B |
-| `.len1` | Formato legado de texto; se acepta con aviso y se guarda como `.lenb` |
+| `.lstb` | Listado ensamblado; directamente cargable en el emulador de la CID201B |
+
 
 ## Calidad
 
@@ -142,7 +139,7 @@ El ejecutor unificado carga todas las suites en una página, con una pestaña po
 
 | Suite | Cobertura | Resultado |
 |---|---|---|
-| `TEST/lealb.test.js` | LEAL-B de extremo a extremo: `PER`, `TIT`, cadenas, `SEP`, `DIG`, condiciones, ciclos, subrutinas y cadenas de asignación | **51/51** |
+| `TEST/lealb.test.js` | LEAL-B de extremo a extremo: `PER`, `TIT`, cadenas, `SEP`, `DIG`, condiciones, ciclos, subrutinas, cadenas de asignación y vector de arranque en `7776` | **52/52** |
 | `TEST/lenb.test.js` | Ensamblador LEN-B, monitor de 107 palabras, repertorio de 52 codificaciones, cadenas, datos y errores | **7/7** |
 | `TEST/run201b.test.js` | Ensamblador → `CORE201B` → `RICOH3000`, entrada por papel, 8 campos, CP de 15 bits y visor | **7/7** |
 | `TEST/core201b.browser.test.js` | Núcleo, microinstrucciones, E/S y Ricoh | **10/10** |
@@ -154,48 +151,30 @@ El ejecutor unificado carga todas las suites en una página, con una pestaña po
 | `TEST/auditoria.test.js` | Errores, avisos, `SEP`, `DIG`, declaraciones y cadenas | **21/21** |
 | `TEST/rutinas.test.js` | Tamaños reales del runtime en UNPK y PKD | **6/6** |
 | `TEST/monitor.test.js` | Monitor de teletipo `R`/`A`/`C`, 176 palabras, `.lstb` y ejecución en campo 0 | **12/12** |
-| `TEST/corpus.test.js` | Paridad contra `CODE/LEAL/*.out.txt` | **20/37**, 17 omitidas |
+| `TEST/corpus.test.js` | Paridad contra `CODE/LEAL/*.out.txt`; los programas de campo 0 que ahora caben se informan como mejora | **31/37**, 6 omitidas |
 
-Total: **287/304 pruebas OK · 17 omitidas · 13/13 suites**.
+Total: **299/305 pruebas OK · 6 omitidas · 13/13 suites**.
 
 Hitos verificados:
 
 - El monitor `MONITOR_Ultima_Pagina_201B` ensambla **107/107 palabras** y coincide palabra por palabra con la referencia.
-- El monitor `MONITOR_TELETIPO_201B` ocupa **176 palabras** (86 en página 29 y 90 en página 30) tras el eco software de 0.1.5; su `.lstb` carga en `CID201B_17.html` con **0 diferencias**.
+- El monitor `MONITOR_TELETIPO_201B` ocupa **176 palabras** (86 en página 29 y 90 en página 30); su `.lstb` carga en `CID201B_17.html` con **0 diferencias**.
 - El eco es siempre del programa: en el monitor lo hace `ECHO_CH` y en LEAL `RT_GETCHAR`. El Ricoh no imprime localmente lo que se teclea, así que cada carácter aparece una sola vez.
-- La optimización de 0.1.4 redujo los dos monitores de **333 a 272 palabras** (−61): `READ_OCT4` aritmético, despachador por diferencias, `PRINT_DIG` directo, display compacto y `ISC`. El comportamiento se validó con **19 + 10** comparaciones A/B.
 - La suite del monitor verifica `R`, `A` y `C` sobre la Ricoh, incluido el salto indirecto a `ALT` con parada `AP`.
-- La auditoría `LAC` de 0.1.3 recorrió los **66 emisores** del runtime y el cuerpo generado: 19 rutinas bajaron de talla y el runtime perdió **40 palabras** en cada modo.
 - El runtime LEAL-B mide **3296** palabras UNPK y **3308** PKD, contando solo palabras emitidas.
-- El corpus heredado conserva la salida de **20 programas** tras normalizar las diferencias deliberadas de B; **14** no caben en el campo 0 y **3** dependen de códigos ITA2 del 201-A.
+- El corpus heredado conserva la salida de **31 programas** tras normalizar las diferencias deliberadas de B; **3** siguen sin caber en el campo 0 (`CALENDAR`, `KINEMA`, `MULTMATRIX`) y **3** dependen de códigos ITA2 del 201-A.
 
 ## Entrega
 
-La última release congelada es la **0.1.7**, en [`DONE/CIDcoder-B_7.html`](DONE/CIDcoder-B_7.html) (`TIT` sin salto), idéntica byte a byte a `CIDcoder-B_7.html`:
+La última release congelada es la **0.1.8**, en [`DONE/CIDcoder-B_8.html`](DONE/CIDcoder-B_8.html) (vector en `7776` y página 0 densa), idéntica byte a byte a `CIDcoder-B_8.html`:
 
 | | |
 |---|---|
-| Tamaño | 767 103 bytes |
-| SHA-256 | `C3E8CCD3C6EDCDA99D1C6D3A29ECB705243B4CDA37FDECCE98739E5B3CA77CE9` |
-| Pruebas | **287/304 OK · 17 omitidas · 13/13 suites** |
+| Tamaño | 771 518 bytes |
+| SHA-256 | `767B5C3F69604AE33D43CCB3AAF6F027037CC2178839BDBD97C5622F33BC533E` |
+| Pruebas | **299/305 OK · 6 omitidas · 13/13 suites** |
 
-La entrega anterior, **0.1.6**, está en [`DONE/CIDcoder-B_6.html`](DONE/CIDcoder-B_6.html) (limpieza del motor 201-A y cinta de 8 canales), idéntica byte a byte a `CIDcoder-B_6.html`:
-
-| | |
-|---|---|
-| Tamaño | 766 800 bytes |
-| SHA-256 | `6610C865AA5D69A1F8AF18214162EF9B8BBFAE563BFEAB0AAEAA75F9A3FFBE14` |
-| Pruebas | **287/304 OK · 17 omitidas · 13/13 suites** |
-
-La **0.1.5** está en [`DONE/CIDcoder-B_5.html`](DONE/CIDcoder-B_5.html) (eco del teletipo en software), idéntica byte a byte a `CIDcoder-B_5.html`:
-
-| | |
-|---|---|
-| Tamaño | 829 347 bytes |
-| SHA-256 | `46222F81280A627D7D1672C28C23CFA3E282869F632D4D272D845443219D5719` |
-| Pruebas | **287/304 OK · 17 omitidas · 13/13 suites** |
-
-La **0.1.4** está en [`DONE/CIDcoder-B_4.html`](DONE/CIDcoder-B_4.html) (optimización de los dos monitores). La **0.1.3** sigue disponible en [`DONE/CIDcoder-B_3.html`](DONE/CIDcoder-B_3.html) (auditoría `LAC` del compilador). La **0.1.2** se conserva en [`DONE/CIDcoder-B_2.html`](DONE/CIDcoder-B_2.html) (monitor de teletipo y primera auditoría `LAC`); la **0.1.1**, en [`DONE/CIDcoder-B_1.html`](DONE/CIDcoder-B_1.html) (el archivo conserva el rótulo interno `0.2.1` de la numeración inicial). Los pasos de verificación y las limitaciones conocidas están en [`DONE/README.md`](DONE/README.md).
+Entregas anteriores: **0.1.7** ([`DONE/CIDcoder-B_7.html`](DONE/CIDcoder-B_7.html), `TIT` sin salto), **0.1.6** (cinta de 8 canales), **0.1.5** (eco del teletipo), **0.1.4** (optimización de monitores), **0.1.3** (auditoría `LAC`), **0.1.2** (monitor de teletipo) y **0.1.1** (primera entrega; rótulo interno `0.2.1`). Los detalles están en [`changelog.md`](changelog.md) y la verificación en [`DONE/README.md`](DONE/README.md).
 
 ## Documentación
 
@@ -205,15 +184,16 @@ La **0.1.4** está en [`DONE/CIDcoder-B_4.html`](DONE/CIDcoder-B_4.html) (optimi
 - **[Optimización de los monitores](DOC/ANALISIS-OPTIMIZACION-MONITORES.md)** — medición 333→272, comparación con la 201-A y presupuesto para los ocho campos.
 - **[Eco del teletipo](DOC/GUIA-ECO-TELETIPO.md)** — decisión, implementación en monitor y runtime, y validación con las suites.
 - **[Pruebas](TEST/README.md)** — suites, normalización del corpus y cómo ejecutarlas.
-- **[Cambios](DONE/CHANGELOG.md)** — historial de la migración.
+- **[Cambios](changelog.md)** — historial único, del más reciente al más antiguo.
 - **Ayuda integrada** — referencia de LEN-B y LEAL-B en el editor.
 
 ## Hoja de ruta
 
 1. **Monitor de toda la memoria:** versión para los ocho campos y versión del «Última Página» de la consola CODEC. La base de 0.1.6 deja **101 palabras libres** en las páginas 29–31 (42 + 38 + 21); el diseño del núcleo compartido está pendiente de decisión.
-2. **Autoíndices:** evaluar su uso cuando el runtime pueda medirse con carga real.
-3. **Capacidad del campo 0:** documentar y, si se decide, reducir el runtime o mover datos para admitir más programas del corpus.
-4. **Lectura de cinta de 8 canales:** interpretar el enlace (bit 13) como fin de palabra y validar el algoritmo de lectura del lector FS-751 y del perforador DT-105.
+2. **Autoíndices:** convertir solo las rutinas más rentables (`PCA`, `MDI`, `LCA`, `PUTSTR` *packed*); `CIC`/`REP` requiere análisis de flujo. Análisis completo en `DOC/AUTOINDICES-ANALISIS.md`.
+3. **Capacidad del campo 0:** el layout denso de 0.1.8 ya admite 11 de los 14 programas antes imposibles; quedan `CALENDAR`, `KINEMA` y `MULTMATRIX`. Si se decide, reducir el runtime o mover datos.
+4. **Flotantes de 36 bits:** revisar el layout de escalares cuando se defina el formato; no implementar antes.
+5. **Lectura de cinta de 8 canales:** interpretar el enlace (bit 13) como fin de palabra y validar el algoritmo de lectura del lector FS-751 y del perforador DT-105.
 
 ## Créditos
 
